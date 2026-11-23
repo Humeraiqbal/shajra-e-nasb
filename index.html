@@ -157,6 +157,25 @@
   }
   footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
   footer .frow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+
+  .lang-switch{display:flex;gap:8px;justify-content:center;align-items:center;margin:0 0 14px;flex-wrap:wrap}
+  .lang-switch .lang-lbl{color:#d8bc5a;font-size:14px}
+  .lang-switch button.active{background:#c9a227;color:#123f2e;font-weight:700}
+  .tapestry-wrap{position:relative}
+  .tapestry-wrap>img{display:block;width:100%;height:auto}
+  .art-oval{position:absolute;transform:translate(-50%,-50%);background:radial-gradient(ellipse at 50% 35%,#14532d,#0d3325 75%);border:3px double #c9a227;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.2% 1%;color:#f5e7c1;overflow:hidden;z-index:2}
+  .art-oval .cpl{font-weight:700;font-size:clamp(10px,1.45vw,19px);line-height:1.15}
+  .art-oval .odiv{color:#c9a227;font-size:clamp(7px,.9vw,12px);line-height:1;margin:2px 0}
+  .art-oval .akid{font-size:clamp(8px,1.12vw,15px);line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
+  .art-oval .akid svg{height:14px;width:auto;flex:none}
+  .art-centre{position:absolute;transform:translate(-50%,-50%);background:radial-gradient(circle at 50% 35%,#f0e0ac,#d9be78 80%);border:3px double #8a6d1a;border-radius:50%;display:flex;color:#3a2c10;z-index:2;overflow:hidden}
+  .art-centre .chalf{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2%}
+  .art-centre .chalf:first-child{border-right:1.5px solid #8a6d1a}
+  .art-centre .cname{font-weight:700;font-size:clamp(11px,1.55vw,21px);line-height:1.15}
+  .art-centre .cdesc{font-style:italic;font-size:clamp(7px,.92vw,12.5px);line-height:1.25;margin-top:3px}
+  .art-plaque{position:absolute;transform:translate(-50%,-50%);background:linear-gradient(170deg,#eee0b2,#ddc88d);border:2px solid #8a6d1a;border-radius:4px;color:#3a2c10;text-align:center;padding:.6% .8%;z-index:2;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .art-plaque .ptitle{font-weight:700;font-size:clamp(9px,1.3vw,17px);line-height:1.15}
+  .art-plaque .pbody{font-size:clamp(6.5px,.88vw,11.5px);line-height:1.3;margin-top:2px}
   details.backup{margin-top:10px}
   details.backup summary{cursor:pointer;color:#d8bc5a;font-size:12.5px;list-style:none}
   details.backup summary::-webkit-details-marker{display:none}
@@ -246,6 +265,7 @@
   <!-- PREVIEW / LIVING TAPESTRY VIEW (drawn from the live data; grows upward) -->
   <section id="view-preview" class="hidden">
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Tapestry language:</span><button type="button" id="lang-en">English</button><button type="button" id="lang-ur" lang="ur">اردو</button></div>
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
@@ -933,8 +953,56 @@ function childUnitHTML(child,count){
   var maxW = Math.max(140, Math.min(142, Math.floor(566/Math.max(1,count))));
   return '<div class="tunit" data-unit="'+child.id+'" data-band="'+bandRowFor(child)+'" style="max-width:'+maxW+'px">'+childOvalHTML(child,maxW)+'</div>';
 }
+var tapestryLang = (function(){ try{ return localStorage.getItem("shajraLang")||"en"; }catch(e){ return "en"; } })();
+function setTapestryLang(l){ tapestryLang=l; try{ localStorage.setItem("shajraLang",l); }catch(e){} renderPreview(); }
+function langName(p,first){
+  if(!p) return "";
+  var t = (tapestryLang==="ur") ? (p.urdu||toUrdu(p.name)) : p.name;
+  t = String(t||"").trim();
+  return first ? (t.split(/\s+/)[0]||t) : t;
+}
+var DESC_LINES = { en:["Descendant of Mustafa Kamal","Descendant of the Khilji Khandan"],
+  ur:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644 \u06a9\u06cc \u0646\u0633\u0644 \u0633\u06d2","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646 \u06a9\u06cc \u0646\u0633\u0644 \u0633\u06d2"] };
+var PLAQUE_UR = { titles:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646"],
+  bodies:["\u0627\u06cc\u06a9 \u0628\u062d\u0631\u06cc \u062c\u06c1\u0627\u0632 \u06a9\u06d2 \u06a9\u067e\u062a\u0627\u0646\u060c \u062c\u0648 \u0645\u0633\u0644\u0645\u0627\u0646 \u062a\u0627\u062c\u0631\u0648\u06ba \u0627\u0648\u0631 \u0633\u067e\u0627\u06c1\u06cc\u0648\u06ba \u06a9\u0648 \u0639\u0631\u0628 \u0633\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u0644\u0627\u0626\u06d2\u06d4 \u0627\u0646 \u0633\u06d2 \u0627\u0642\u0628\u0627\u0644 \u0627\u062d\u0645\u062f \u062a\u06a9 \u0633\u0627\u062a \u0646\u0633\u0644\u06cc\u06ba \u0622\u062a\u06cc \u06c1\u06cc\u06ba\u06d4",
+          "\u0648\u06c1 \u062e\u0627\u0646\u062f\u0627\u0646 \u062c\u0633 \u0646\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u067e\u0631 \u062a\u0642\u0631\u06cc\u0628\u0627\u064b \u0633\u0648 \u0633\u0627\u0644 \u062d\u06a9\u0648\u0645\u062a \u06a9\u06cc: 1204 \u0633\u06d2 \u0628\u0646\u06af\u0627\u0644\u060c \u067e\u06be\u0631 \u062f\u06c1\u0644\u06cc \u0633\u0644\u0637\u0646\u062a\u060c 1290 \u0633\u06d2 1320 \u062a\u06a9\u06d4"] };
+var ART_POS = { saqib:{x:35.5,y:21.5,w:13.5,h:24}, shoaib:{x:78.5,y:15.5,w:13,h:20},
+  ahmed1:{x:23,y:36,w:16.5,h:25}, ahmed2:{x:23,y:36,w:16.5,h:25},
+  abeer:{x:82.5,y:33.5,w:14.5,h:24}, sumera:{x:36,y:47.5,w:16.5,h:25},
+  sohail:{x:51.5,y:45.5,w:15.5,h:25}, humera:{x:69.5,y:48.5,w:15.5,h:25} };
+var ART_EXTRA = [ {x:11,y:13,w:11,h:17}, {x:50,y:9.5,w:11,h:16}, {x:90,y:12,w:11,h:17}, {x:11,y:60,w:11,h:17} ];
 function renderPreview(){
-  document.getElementById("tapestry-frame").innerHTML = '<img src="approved-tapestry.webp" alt="Shajra-e-Nasb approved tapestry layout" style="display:block;width:100%;height:auto">';
+  var be=document.getElementById("lang-en"), bu=document.getElementById("lang-ur");
+  if(be) be.classList.toggle("active", tapestryLang==="en");
+  if(bu) bu.classList.toggle("active", tapestryLang==="ur");
+  var cpl = centreCouple();
+  var kids = centreChildren();
+  var joiner = (tapestryLang==="ur") ? " \u0648 " : " & ";
+  var extraIdx = 0;
+  var overlays = kids.map(function(ch){
+    var spouse = spouseOf(ch);
+    var pos = ART_POS[ch.id];
+    if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
+    var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
+    var coupleTxt = langName(ch,true) + (spouse ? joiner + langName(spouse,true) : "");
+    var kidsHTML = gkids.map(function(k){
+      return '<div class="akid">'+markerFor(k)+'<span>'+esc(langName(k,true))+'</span></div>';
+    }).join("");
+    var style = 'left:'+pos.x+'%;top:'+pos.y+'%;width:'+pos.w+'%;height:'+pos.h+'%';
+    return '<div class="art-oval" style="'+style+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+
+      '<div class="cpl">'+esc(coupleTxt)+'</div>'+(kidsHTML?'<div class="odiv">\u2022 \u2726 \u2022</div>'+kidsHTML:"")+'</div>';
+  }).join("");
+  var desc = DESC_LINES[tapestryLang] || DESC_LINES.en;
+  var centre = '<div class="art-centre" style="left:50.5%;top:64.5%;width:23.5%;height:23%">'+
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[0],false))+'</div><div class="cdesc">'+esc(desc[0])+'</div></div>'+
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[1],false))+'</div><div class="cdesc">'+esc(desc[1])+'</div></div></div>';
+  var pTitles = (tapestryLang==="ur") ? PLAQUE_UR.titles : ["Mustafa Kamal","The Khilji Khandan"];
+  var pBodies = (tapestryLang==="ur") ? PLAQUE_UR.bodies :
+    [ BLURB_MUSTAFA.split(" \u2014 ")[1] || BLURB_MUSTAFA, BLURB_KHILJI.split(" \u2014 ")[1] || BLURB_KHILJI ];
+  var plaques = '<div class="art-plaque" style="left:24.5%;top:85.5%;width:19.5%;height:11%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[0])+'</div><div class="pbody">'+esc(pBodies[0])+'</div></div>'+
+    '<div class="art-plaque" style="left:76.5%;top:85.5%;width:19.5%;height:11%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[1])+'</div><div class="pbody">'+esc(pBodies[1])+'</div></div>';
+  document.getElementById("tapestry-frame").innerHTML =
+    '<div class="tapestry-wrap"><img src="approved-tapestry.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
   return;
   var c = centreCouple();
   var kids = centreChildren();
@@ -1193,6 +1261,8 @@ if(window && typeof window.addEventListener==="function"){
 }
 document.getElementById("btn-add-top").addEventListener("click",openFormAdd);
 document.getElementById("btn-preview").addEventListener("click",function(){ renderPreview(); show("view-preview"); });
+document.getElementById("lang-en").addEventListener("click",function(){ setTapestryLang("en"); });
+document.getElementById("lang-ur").addEventListener("click",function(){ setTapestryLang("ur"); });
 document.getElementById("person-form").addEventListener("submit",submitForm);
 document.getElementById("form-remove").addEventListener("click",removePerson);
 document.getElementById("f-name").addEventListener("input",function(){
