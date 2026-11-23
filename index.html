@@ -73,9 +73,9 @@
   <!-- MAIN VIEW -->
   <section id="view-main">
     <div class="topbar">
-      <button id="btn-preview" type="button">Preview the Tapestry</button>
+      <button class="primary" id="btn-preview" type="button">Preview the Tapestry</button>
     </div>
-    <button class="primary" id="btn-add-top" type="button">+ Add a New Person</button>
+    <button id="btn-add-top" type="button" style="width:100%">+ Add a New Person</button>
     <div style="height:16px"></div>
     <div class="oval" id="centre-oval"></div>
     <div class="sub">the parents — everyone below is their child</div>
@@ -625,6 +625,7 @@ document.getElementById("import-file").addEventListener("change",function(){
   r.readAsText(f); this.value="";
 });
 renderMain();
+if(location.hash==="#tapestry"){ renderPreview(); show("view-preview"); }
 </script>
 </body>
 </html>
