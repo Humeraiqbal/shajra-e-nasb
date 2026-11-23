@@ -56,6 +56,10 @@
   .plaque p{font-size:13.5px;line-height:1.6;margin:6px 0 0}
   .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
   .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
+  .tapestry-frame{border:3px solid #c9a227;outline:1.5px solid rgba(201,162,39,.55);outline-offset:5px;border-radius:10px;padding:6px;background:#0d3325}
+  .tapestry-frame img{width:100%;height:auto;display:block;border-radius:6px}
+  .preview-children{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+  .chip-oval{border:1.5px solid #c9a227;border-radius:999px;padding:7px 14px;background:#0d3325}
   .tapestry-cols{display:grid;gap:14px}
   @media(min-width:640px){.tapestry-cols{grid-template-columns:1fr 1fr}}
   footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
@@ -145,21 +149,22 @@
   <!-- PREVIEW / TAPESTRY VIEW -->
   <section id="view-preview" class="hidden">
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div class="tapestry-frame">
+      <img src="tapestry.jpg" alt="Shajra-e-Nasb tapestry">
+    </div>
+    <div style="height:14px"></div>
     <div class="tapestry-cols">
       <div class="plaque">
-        <h3>Mustafa Kamal</h3>
-        <div class="chain" id="chain-mustafa"></div>
         <p>Mustafa Kamal — a captain on one of the ships that brought Muslim merchants and soldiers from Arabia to the subcontinent. Seven generations descend from him to Iqbal Ahmed.</p>
       </div>
       <div class="plaque">
-        <h3>The Khilji Khandan</h3>
-        <div class="chain" id="chain-khilji"></div>
         <p>The Khilji Khandan — the family that ruled the subcontinent for about a hundred years: Bengal from 1204, then the Delhi Sultanate, 1290 to 1320.</p>
       </div>
     </div>
-    <div style="height:14px"></div>
+    <div style="height:16px"></div>
     <div class="oval" id="preview-oval"></div>
-    <div class="sub">Iqbal Ahmed's line on the left — Shahida Khatoon's line on the right</div>
+    <div class="sub">the parents — their children are in the gold ovals below</div>
+    <div class="preview-children" id="preview-children"></div>
     <div class="connector">│</div>
     <div class="boxes" id="preview-boxes"></div>
   </section>
@@ -293,37 +298,87 @@ function siblingsOf(p){
 </script>
 <script>
 "use strict";
-/* ---------- Markers (SVG, no emoji) ---------- */
-function flowerSVG(pink,wilted){
-  var petal = wilted ? "#9a8a6a" : (pink ? "#e8a0bf" : "#e8c85a");
-  var centre = wilted ? "#6f6250" : "#c9a227";
-  var transform = wilted ? ' transform="rotate(38 12 12)"' : "";
-  var stem = wilted ? "M12 14 q4 6 1 9" : "M12 14 q0 5 0 9";
-  return '<svg width="18" height="24" viewBox="0 0 24 24" aria-hidden="true"><g'+transform+'>'+
-    '<circle cx="12" cy="6" r="3.2" fill="'+petal+'"/><circle cx="7.5" cy="10" r="3.2" fill="'+petal+'"/>'+
-    '<circle cx="16.5" cy="10" r="3.2" fill="'+petal+'"/><circle cx="12" cy="9" r="2.4" fill="'+centre+'"/></g>'+
-    '<path d="'+stem+'" stroke="#7a9a5a" stroke-width="1.6" fill="none"/></svg>';
+/* ---------- Markers (SVG, embroidered tapestry motifs — no emoji) ---------- */
+/* Colour rules: little girls (16 or under, by birth year) = pink flower;
+   grown women = deep rose-red flower; young boys = light green-gold sprig;
+   grown men = deep antique gold sprig; passed away = wilted/faded;
+   birth year unknown = neutral ivory-gold (never pink by default). */
+var MARK = {
+  girlYoung:{petal:"#e79ec0", stitch:"#b45f8a", centre:"#c9a227"},
+  girlAdult:{petal:"#b03a4b", stitch:"#7e2434", centre:"#c9a227"},
+  boyYoung:{leaf:"#a9b95e", stitch:"#77873a"},
+  boyAdult:{leaf:"#c9a227", stitch:"#8a6d1a"},
+  ivoryFlower:{petal:"#e6d9ae", stitch:"#a68a3f", centre:"#c9a227"},
+  ivorySprig:{leaf:"#d9c98e", stitch:"#a68a3f"},
+  wilted:{petal:"#9a8a6a", leaf:"#9a8a6a", stitch:"#6f6250", centre:"#6f6250"}
+};
+function ageOf(p){
+  if(!p.birthYear) return null;
+  var y = parseInt(p.birthYear,10);
+  if(isNaN(y)) return null;
+  return new Date().getFullYear() - y;
 }
-function leafSVG(wilted){
-  var c = wilted ? "#9a8a6a" : "#c9a227";
-  var transform = wilted ? ' transform="rotate(40 12 12)"' : "";
-  return '<svg width="18" height="24" viewBox="0 0 24 24" aria-hidden="true"><g'+transform+'>'+
-    '<path d="M12 2 q6 6 0 12 q-6 -6 0 -12" fill="'+c+'"/>'+
-    '<path d="M12 14 q5 -1 6 5 q-6 0 -6 -5" fill="'+c+'" opacity=".75"/>'+
-    '<path d="M12 14 q-5 -1 -6 5 q6 0 6 -5" fill="'+c+'" opacity=".55"/></g>'+
-    '<path d="M12 14 L12 22" stroke="#7a9a5a" stroke-width="1.6"/></svg>';
+function flowerSVG(pal,wilted){
+  /* 5 teardrop petals with stitched (dashed) outlines + gold French-knot centre */
+  var petalPath = wilted ? "M11 9.5 C9.6 6.2 9.8 3.4 11 1.6 C12.2 3.4 12.4 6.2 11 9.5 Z"
+                         : "M11 9.5 C7.9 6.4 7.7 3 11 1.2 C14.3 3 14.1 6.4 11 9.5 Z";
+  var hiPath = wilted ? "M11 8.2 C10.3 6 10.4 4.2 11 3.2 C11.6 4.2 11.7 6 11 8.2 Z"
+                      : "M11 8.2 C9.4 6 9.3 4 11 3 C12.7 4 12.6 6 11 8.2 Z";
+  var petals="", i, a;
+  for(i=0;i<5;i++){
+    a = i*72;
+    petals += '<path d="'+petalPath+'" transform="rotate('+a+' 11 9.5)" fill="'+pal.petal+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    petals += '<path d="'+hiPath+'" transform="rotate('+a+' 11 9.5)" fill="#ffffff" opacity="0.20"/>';
+  }
+  var knots = '<circle cx="11" cy="9.5" r="1.5" fill="'+pal.centre+'"/>'+
+    '<circle cx="9.6" cy="8.6" r="0.55" fill="'+pal.centre+'"/><circle cx="12.4" cy="8.6" r="0.55" fill="'+pal.centre+'"/>'+
+    '<circle cx="9.6" cy="10.6" r="0.55" fill="'+pal.centre+'"/><circle cx="12.4" cy="10.6" r="0.55" fill="'+pal.centre+'"/>';
+  var stemPath = wilted ? "M11 13 C13.5 17 14.5 21 12.5 26" : "M11 13 C10.4 17.5 11.4 22 10.8 26.5";
+  var stem = '<path d="'+stemPath+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+
+    '<path d="M11 20 C8.8 19.4 7.2 19.6 5.8 21 C7.4 21.8 9.4 21.6 11 20.8 Z" fill="'+(wilted?pal.leaf:"#7a9a4e")+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="0.6" stroke-dasharray="2.5 1.8"/>'+
+    '<path d="M11.2 23 C13.2 22.2 14.8 22.2 16.2 23.4 C14.6 24.4 12.6 24.2 11.2 23.6 Z" fill="'+(wilted?pal.leaf:"#7a9a4e")+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="0.6" stroke-dasharray="2.5 1.8"/>';
+  var inner = stem + petals + knots;
+  var group = wilted ? '<g transform="rotate(42 11 12) translate(0 2)">'+inner+'</g>' : '<g>'+inner+'</g>';
+  return '<svg width="20" height="26" viewBox="0 0 22 28" aria-hidden="true">'+group+'</svg>';
+}
+function leafSVG(pal,wilted){
+  /* Vine sprig: central stem with 3 pairs of stitched leaflets + a top leaf */
+  var ys=[20,14.5,9], parts="", i, y;
+  var stemPath = wilted ? "M11 27 C10 21 10.6 14 11.6 7" : "M11 27 C11.4 20 10.6 12 11 4.5";
+  parts += '<path d="'+stemPath+'" stroke="'+(wilted?pal.stitch:"#8a6d1a")+'" stroke-width="1.3" fill="none" stroke-linecap="round"/>';
+  for(i=0;i<ys.length;i++){
+    y=ys[i];
+    var leafR = "M11 "+y+" C13.2 "+(y-3.4)+" 16.4 "+(y-4.2)+" 19.6 "+(y-3.4)+" C18.9 "+(y+0.4)+" 15.2 "+(y+1)+" 11 "+y+" Z";
+    var veinR = "M11.4 "+(y-0.4)+" C14 "+(y-2)+" 16.6 "+(y-2.7)+" 19 "+(y-2.9);
+    parts += '<path d="'+leafR+'" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    parts += '<path d="'+leafR+'" transform="translate(22 0) scale(-1 1)" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    parts += '<path d="'+veinR+'" stroke="#ffffff" stroke-width="0.6" fill="none" opacity="0.28"/>';
+    parts += '<path d="'+veinR+'" transform="translate(22 0) scale(-1 1)" stroke="#ffffff" stroke-width="0.6" fill="none" opacity="0.28"/>';
+  }
+  parts += '<path d="M11 9.5 C9.2 6.8 9.2 3.8 11 1.8 C12.8 3.8 12.8 6.8 11 9.5 Z" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+  parts += '<path d="M11 8 C10.2 6.2 10.2 4.4 11 3.2 C11.8 4.4 11.8 6.2 11 8 Z" fill="#ffffff" opacity="0.20"/>';
+  var group = wilted ? '<g transform="rotate(42 11 14) translate(0 2)">'+parts+'</g>' : '<g>'+parts+'</g>';
+  return '<svg width="20" height="26" viewBox="0 0 22 28" aria-hidden="true">'+group+'</svg>';
 }
 function markerFor(p){
   var wilted = p.status==="passed";
-  if(p.gender==="M") return leafSVG(wilted);
-  var age = p.birthYear ? (new Date().getFullYear() - parseInt(p.birthYear,10)) : null;
-  var pink = (age===null || age<17);
-  return flowerSVG(pink,wilted);
+  var age = ageOf(p);
+  var young = (age!==null && age<=16);
+  if(p.gender==="M"){
+    if(wilted) return leafSVG(MARK.wilted,true);
+    if(age===null) return leafSVG(MARK.ivorySprig,false);
+    return leafSVG(young ? MARK.boyYoung : MARK.boyAdult,false);
+  }
+  if(wilted) return flowerSVG(MARK.wilted,true);
+  if(age===null) return flowerSVG(MARK.ivoryFlower,false);
+  return flowerSVG(young ? MARK.girlYoung : MARK.girlAdult,false);
 }
 function markerNote(p){
-  if(p.status==="passed") return "wilted flower — passed away";
-  if(p.gender==="M") return "gold leaf sprig — boy";
-  return "pink flower — little girl";
+  var age = ageOf(p);
+  if(p.status==="passed") return p.gender==="M" ? "wilted leaf sprig — passed away" : "wilted flower — passed away";
+  if(age===null) return (p.gender==="M" ? "ivory-gold leaf sprig" : "ivory-gold flower")+" — birth year not recorded; add a birth year for the age colour";
+  if(p.gender==="M") return age<=16 ? "light green-gold leaf sprig — young boy" : "deep gold leaf sprig — grown-up";
+  return age<=16 ? "pink flower — little girl" : "deep rose-red flower — grown-up";
 }
 
 /* ---------- Views ---------- */
@@ -365,9 +420,9 @@ function renderMain(){
 }
 function renderPreview(){
   document.getElementById("preview-oval").innerHTML = ovalHTML();
-  var blocks=""; for(var i=0;i<7;i++) blocks += '<div class="block" aria-label="empty generation block"></div>';
-  document.getElementById("chain-mustafa").innerHTML = blocks;
-  document.getElementById("chain-khilji").innerHTML = blocks;
+  document.getElementById("preview-children").innerHTML = centreChildren().map(function(ch){
+    return '<span class="kid chip-oval" data-person="'+ch.id+'">'+markerFor(ch)+esc(ch.name)+'</span>';
+  }).join("");
   document.getElementById("preview-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,true); }).join("");
 }
 function openFamily(childId){
