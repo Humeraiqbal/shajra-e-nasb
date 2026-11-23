@@ -56,12 +56,38 @@
   .plaque p{font-size:13.5px;line-height:1.6;margin:6px 0 0}
   .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
   .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
-  .tapestry-frame{border:3px solid #c9a227;outline:1.5px solid rgba(201,162,39,.55);outline-offset:5px;border-radius:10px;padding:6px;background:#0d3325}
-  .tapestry-frame img{width:100%;height:auto;display:block;border-radius:6px}
-  .preview-children{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
-  .chip-oval{border:1.5px solid #c9a227;border-radius:999px;padding:7px 14px;background:#0d3325}
-  .tapestry-cols{display:grid;gap:14px}
-  @media(min-width:640px){.tapestry-cols{grid-template-columns:1fr 1fr}}
+  .tapestry-frame{position:relative;border:3px solid #c9a227;outline:1.5px solid rgba(201,162,39,.55);outline-offset:5px;border-radius:10px;padding:26px 16px 24px;
+    background:
+      radial-gradient(ellipse at 50% 42%,rgba(232,200,90,.10),rgba(0,0,0,0) 62%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 2px,rgba(0,0,0,0) 2px 5px),
+      repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,rgba(0,0,0,0) 2px 5px),
+      linear-gradient(160deg,#14532d 0%,#0d3325 55%,#092a1d 100%)}
+  .tcorner{position:absolute;width:34px;height:34px;pointer-events:none}
+  .tcorner.tl{top:6px;left:6px}
+  .tcorner.tr{top:6px;right:6px;transform:scaleX(-1)}
+  .tcorner.bl{bottom:6px;left:6px;transform:scaleY(-1)}
+  .tcorner.br{bottom:6px;right:6px;transform:scale(-1,-1)}
+  .tapestry-title{text-align:center;margin-bottom:4px}
+  .tapestry-title .ur{font-size:32px;color:#e8c85a;line-height:1.3}
+  .tapestry-title .en{font-size:13px;letter-spacing:.22em;color:#d8bc5a;margin-top:2px}
+  .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 150px;min-width:138px;max-width:340px}
+  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 10px;justify-content:center;align-items:flex-start;width:100%}
+  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;max-width:230px;padding:4px 2px}
+  .tleaf-chip{font-size:12.5px;padding:3px 9px}
+  .toval{border:2.5px solid #c9a227;border-radius:999px;background:rgba(9,42,29,.88);width:100%;max-width:300px;padding:10px 6px;display:flex;text-align:center;overflow:hidden;box-shadow:0 0 0 1.5px rgba(201,162,39,.35),inset 0 0 14px rgba(201,162,39,.14)}
+  .toval .half{flex:1;padding:2px 6px;min-width:0}
+  .toval .half:first-child{border-right:1.5px solid #c9a227}
+  .toval .half:only-child{border-right:none}
+  .toval .nm{font-size:15px;font-weight:700}
+  .toval .urdu-nm{font-size:14px}
+  .toval.trunk-oval{max-width:540px;padding:16px 10px;border-width:3.5px}
+  .toval.trunk-oval .nm{font-size:20px}
+  .toval.trunk-oval .urdu-nm{font-size:18px}
+  .tvine{display:block;margin:1px auto}
+  .roots{display:grid;gap:16px;margin-top:4px}
+  @media(min-width:640px){.roots{grid-template-columns:1fr 1fr}}
+  .root-side .plaque{height:100%}
+  .root-gap{min-height:288px}
   footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
   footer .frow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
   .backrow{margin-bottom:12px}
@@ -146,27 +172,10 @@
     </div>
   </section>
 
-  <!-- PREVIEW / TAPESTRY VIEW -->
+  <!-- PREVIEW / LIVING TAPESTRY VIEW (drawn from the live data; grows upward) -->
   <section id="view-preview" class="hidden">
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
-    <div class="tapestry-frame">
-      <img src="tapestry.jpg" alt="Shajra-e-Nasb tapestry">
-    </div>
-    <div style="height:14px"></div>
-    <div class="tapestry-cols">
-      <div class="plaque">
-        <p>Mustafa Kamal — a captain on one of the ships that brought Muslim merchants and soldiers from Arabia to the subcontinent. Seven generations descend from him to Iqbal Ahmed.</p>
-      </div>
-      <div class="plaque">
-        <p>The Khilji Khandan — the family that ruled the subcontinent for about a hundred years: Bengal from 1204, then the Delhi Sultanate, 1290 to 1320.</p>
-      </div>
-    </div>
-    <div style="height:16px"></div>
-    <div class="oval" id="preview-oval"></div>
-    <div class="sub">the parents — their children are in the gold ovals below</div>
-    <div class="preview-children" id="preview-children"></div>
-    <div class="connector">│</div>
-    <div class="boxes" id="preview-boxes"></div>
+    <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
 <footer>
@@ -418,12 +427,99 @@ function renderMain(){
   document.getElementById("centre-oval").innerHTML = ovalHTML();
   document.getElementById("family-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,false); }).join("");
 }
+/* ---------- Living Tapestry (Preview drawn from the live data) ----------
+   The tree grows UPWARD: roots (ancestral lines) at the bottom, the centre
+   couple as the trunk, their children as couple ovals above, and each new
+   generation rendered recursively above its parents — so the tapestry grows
+   by itself whenever a spouse or child is added to the data. */
+var BLURB_MUSTAFA = "Mustafa Kamal — a captain on one of the ships that brought Muslim merchants and soldiers from Arabia to the subcontinent. Seven generations descend from him to Iqbal Ahmed.";
+var BLURB_KHILJI = "The Khilji Khandan — the family that ruled the subcontinent for about a hundred years: Bengal from 1204, then the Delhi Sultanate, 1290 to 1320.";
+function spouseOf(p){ return (p && p.spouseId) ? byId(p.spouseId) : null; }
+function unitKids(person,spouse){ return spouse ? kidsOfCouple(person,spouse) : kidsOfCouple(person,null); }
+function isBranchUnit(p){
+  if(spouseOf(p)) return true;
+  return unitKids(p,null).length>0;
+}
+function cornerSVG(cls){
+  return '<span class="tcorner '+cls+'" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M5 29 C5 15 15 5 29 5" fill="none" stroke="#c9a227" stroke-width="2"/><path d="M5 21 C5 12 12 5 21 5" fill="none" stroke="#c9a227" stroke-width="1.2" opacity=".65"/><circle cx="10" cy="10" r="2.4" fill="#c9a227"/></svg></span>';
+}
+function vineSVG(){
+  return '<svg class="tvine" width="220" height="34" viewBox="0 0 300 36" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="M150 36 C148 20 70 18 34 3" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M150 36 C152 20 230 18 266 3" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M150 36 C150 24 150 12 150 2" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M96 12 q-9 -6 -16 -4 q5 7 16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<path d="M204 12 q9 -6 16 -4 q-5 7 -16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<circle cx="34" cy="3" r="2.6" fill="#c9a227"/><circle cx="266" cy="3" r="2.6" fill="#c9a227"/><circle cx="150" cy="2" r="2.6" fill="#c9a227"/></svg>';
+}
+function rootVineSVG(){
+  return '<svg class="tvine" width="220" height="30" viewBox="0 0 300 32" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="M150 0 C148 14 80 16 44 29" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M150 0 C152 14 220 16 256 29" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M104 13 q-9 5 -17 3 q6 -7 17 -3" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<path d="M196 13 q9 5 17 3 q-6 -7 -17 -3" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/></svg>';
+}
+function coupleOvalHTML(person,spouse,big){
+  var h='<div class="toval'+(big?" trunk-oval":"")+'"><div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
+  if(spouse) h+='<div class="half"><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div></div>';
+  return h+'</div>';
+}
+function leafChipHTML(k){
+  return '<span class="kid tleaf-chip" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span>';
+}
+/* One unit = a person (with spouse if any). Its descendants are rendered in a
+   row ABOVE its oval: children with no spouse/children of their own appear as
+   marker chips clustered above the oval; children who have a spouse or
+   children become units themselves, recursively. */
+function unitHTML(person,seen){
+  seen = seen || {};
+  if(seen[person.id]) return "";
+  seen[person.id]=1;
+  var spouse = spouseOf(person);
+  if(spouse) seen[spouse.id]=1;
+  var kids = unitKids(person,spouse);
+  var branches=[], leaves=[];
+  kids.forEach(function(k){
+    if(seen[k.id]) return;
+    if(isBranchUnit(k)) branches.push(k); else leaves.push(k);
+  });
+  var above="";
+  if(leaves.length || branches.length){
+    var items="";
+    if(leaves.length) items += '<div class="tleaf-cluster" data-for="'+person.id+'">'+leaves.map(leafChipHTML).join("")+'</div>';
+    branches.forEach(function(b){ items += unitHTML(b,seen); });
+    above = '<div class="tunit-row">'+items+'</div>'+vineSVG();
+  }
+  return '<div class="tunit" data-unit="'+person.id+'">'+above+coupleOvalHTML(person,spouse,false)+'</div>';
+}
 function renderPreview(){
-  document.getElementById("preview-oval").innerHTML = ovalHTML();
-  document.getElementById("preview-children").innerHTML = centreChildren().map(function(ch){
-    return '<span class="kid chip-oval" data-person="'+ch.id+'">'+markerFor(ch)+esc(ch.name)+'</span>';
-  }).join("");
-  document.getElementById("preview-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,true); }).join("");
+  var c = centreCouple();
+  var kids = centreChildren();
+  var seen = {}; seen[c[0].id]=1; seen[c[1].id]=1;
+  var units = kids.map(function(ch){ return unitHTML(ch,seen); }).join("");
+  var chain = "";
+  for(var i=0;i<7;i++) chain += '<div class="block gen-block" role="img" aria-label="empty generation block"></div>';
+  var html =
+    cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
+    '<div class="tapestry-title"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
+    '<div class="sub" style="margin:2px 0 10px">the youngest leaves are at the top — the tree grows upward as the family grows</div>'+
+    '<div class="tunit-row">'+units+'</div>'+
+    vineSVG()+
+    '<div style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
+    '<div class="sub">the parents — the trunk of the tree</div>'+
+    rootVineSVG()+
+    '<div class="roots">'+
+      '<div class="root-side" id="root-mustafa">'+
+        '<div class="plaque"><h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
+        '<div class="chain">'+chain+'</div>'+
+        '<div class="sub">seven generations descend from him to Iqbal Ahmed</div>'+
+      '</div>'+
+      '<div class="root-side" id="root-khilji">'+
+        '<div class="plaque"><h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p></div>'+
+        '<div class="root-gap" aria-hidden="true"></div>'+
+      '</div>'+
+    '</div>';
+  document.getElementById("tapestry-frame").innerHTML = html;
 }
 function openFamily(childId){
   var child=byId(childId); if(!child) return;
