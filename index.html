@@ -996,7 +996,8 @@ var PLAQUE_UR = { titles:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u06
 var ART_POS = { saqib:{x:33.9,y:18.2,w:10,h:16.2}, shoaib:{x:71.7,y:13.3,w:8.9,h:12.7},
   ahmed1:{x:22.7,y:30.5,w:12.9,h:15.1}, ahmed2:{x:22.7,y:30.5,w:12.9,h:15.1},
   abeer:{x:77.7,y:30.3,w:12.8,h:15.5}, sumera:{x:34.7,y:43.5,w:13.5,h:16.2},
-  sohail:{x:50,y:40.2,w:12.6,h:15.1}, humera:{x:65.9,y:44.3,w:12.9,h:16.2} };
+  sohail:{x:50,y:40.2,w:12.6,h:15.1}, humera:{x:65.9,y:47,w:9.8,h:11.5} };
+var ART_CHILD_POS = { humera:[{x:60.1,y:36.8,w:8.6,h:5.2},{x:71.8,y:37.6,w:8.6,h:5.2}] };
 var ART_EXTRA = [ {x:11,y:13,w:11,h:17}, {x:50,y:9.5,w:11,h:16}, {x:90,y:12,w:11,h:17}, {x:11,y:60,w:11,h:17} ];
 function renderPreview(){
   var be=document.getElementById("lang-en"), bu=document.getElementById("lang-ur");
@@ -1014,22 +1015,20 @@ function renderPreview(){
     if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
     var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
     var branchHTML = "";
-    if(ch.id==="humera" && gkids.length>=2){
-      var tips = [{x:61.5,y:29.4},{x:68,y:29.4}];
-      var branchSVG = '<svg class="art-branch-svg" style="left:57%;top:28%;width:16%;height:9%" viewBox="0 0 160 90" preserveAspectRatio="none" aria-hidden="true">'+
-        '<path d="M89 84 C80 60 60 45 45 36" fill="none" stroke="#8a6d1c" stroke-width="4.5" stroke-linecap="round"/>'+
-        '<path d="M89 84 C95 60 102 45 110 36" fill="none" stroke="#8a6d1c" stroke-width="4.5" stroke-linecap="round"/>'+
-        '<path d="M89 84 C80 60 60 45 45 36" fill="none" stroke="#d9b64a" stroke-width="2.6" stroke-dasharray="5 3.4" stroke-linecap="round"/>'+
-        '<path d="M89 84 C95 60 102 45 110 36" fill="none" stroke="#d9b64a" stroke-width="2.6" stroke-dasharray="5 3.4" stroke-linecap="round"/>'+
-        '<circle cx="45" cy="35" r="4.6" fill="#c95d7a" stroke="#e8c85a" stroke-width="1.2"/>'+
-        '<ellipse cx="111" cy="34" rx="5.4" ry="2.8" fill="#7d9b3a" stroke="#e8c85a" stroke-width="1" transform="rotate(-32 111 34)"/></svg>';
-      branchHTML = branchSVG + gkids.slice(0,2).map(function(k,i){
-        return '<div class="art-branch" style="left:'+tips[i].x+'%;top:'+tips[i].y+'%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+esc(langName(k,true))+'</div>';
+    var childPos = ART_CHILD_POS[ch.id];
+    if(childPos && gkids.length){
+      var placed = gkids.slice(0, childPos.length);
+      branchHTML = placed.map(function(k,i){
+        var kp = childPos[i];
+        var kFull = !!spouseOf(k) || kidsOfCouple(k,null).length>0;
+        var kstyle = 'left:'+kp.x+'%;top:'+kp.y+'%;width:'+kp.w+'%;height:'+kp.h+'%';
+        return '<div class="art-oval" style="'+kstyle+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cpl">'+esc(langName(k,!kFull))+'</div></div>';
       }).join("");
-      gkids = gkids.slice(2);
+      gkids = gkids.slice(placed.length);
     }
-    var wrapBr = (tapestryLang==="ur" && tapestryTextSize>=2) ? "<br>" : "";
-    var coupleHTML = esc(langName(ch,true)) + (spouse ? joinerHTML + wrapBr + esc(langName(spouse,true)) : "");
+    var chFull = !!spouse || (spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null)).length>0;
+    var wrapBr = spouse ? "<br>" : "";
+    var coupleHTML = esc(langName(ch,!chFull)) + (spouse ? joinerHTML + wrapBr + esc(langName(spouse,false)) : "");
     var kidsHTML = gkids.map(function(k){
       return '<div class="akid"><span>'+esc(langName(k,true))+'</span></div>';
     }).join("");
