@@ -51,12 +51,12 @@
   .urdukb button{padding:5px 8px;font-size:16px;border-radius:6px}
   fieldset{border:1px dashed #c9a227;border-radius:10px;margin-top:16px;padding:10px 12px 14px}
   legend{color:#d8bc5a;padding:0 6px;font-size:14px}
-  .plaque{border:2px solid #c9a227;border-radius:10px;background:#0d3325;padding:12px;text-align:center}
+  .plaque{border:2px solid #c9a227;border-radius:10px;background:#0d3325;padding:10px 12px;text-align:center}
   .plaque h3{margin:0 0 6px;color:#e8c85a;font-size:17px}
-  .plaque p{font-size:13.5px;line-height:1.6;margin:6px 0 0}
+  .plaque p{font-size:13.5px;line-height:1.5;margin:6px 0 0}
   .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
   .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
-  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:42px 32px 36px;
+  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:26px 32px 16px;
     box-shadow:0 0 0 10px #0a2417,0 0 0 11.5px rgba(201,162,39,.45),inset 0 0 64px rgba(0,0,0,.55);
     background:
       radial-gradient(ellipse at 50% 38%,rgba(232,200,90,.13),rgba(0,0,0,0) 55%),
@@ -74,13 +74,15 @@
   .ttree{display:block;width:100%;margin:0 auto;pointer-events:none}
   .ttree-branches{max-width:1120px}
   .ttree-roots{max-width:1120px}
+  .ttree-measured{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .tcontent{position:relative;z-index:1}
   .tcorner{position:absolute;width:34px;height:34px;pointer-events:none}
   .tcorner.tl{top:6px;left:6px}
   .tcorner.tr{top:6px;right:6px;transform:scaleX(-1)}
   .tcorner.bl{bottom:6px;left:6px;transform:scaleY(-1)}
   .tcorner.br{bottom:6px;right:6px;transform:scale(-1,-1)}
-  .tapestry-title{text-align:center;margin-bottom:4px}
-  .tapestry-title .ur{font-size:32px;color:#e8c85a;line-height:1.3}
+  .tapestry-title{text-align:center;margin-bottom:0}
+  .tapestry-title .ur{font-size:24px;color:#e8c85a;line-height:1.25}
   .tapestry-title .en{font-size:13px;letter-spacing:.22em;color:#d8bc5a;margin-top:2px}
   .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
   .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:stretch;width:100%}
@@ -91,20 +93,20 @@
   .medallion-name{font-size:11px;color:#f3e5bb;text-align:center;line-height:1.25;overflow-wrap:break-word;text-shadow:0 1px 3px rgba(0,0,0,.75)}
   .medallion:hover .medallion-ring{background:radial-gradient(circle at 50% 32%,rgba(232,200,90,.42),rgba(201,162,39,.28) 78%)}
   .tunit .toval{padding:8px 4px}
-  .tunit .toval .nm{font-size:12.5px;overflow-wrap:break-word}
-  .tunit .toval .urdu-nm{font-size:11.5px;overflow-wrap:break-word}
+  .tunit .toval .nm{font-size:12px;overflow-wrap:break-word}
+  .tunit .toval .urdu-nm{font-size:11px;overflow-wrap:break-word}
   #tapestry-frame{width:min(1020px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
-  .band-rows{position:relative;padding:4px 0 0}
+  .band-rows{position:relative;padding:0}
   .ttree-bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
-  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:12px 0}
+  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:4px 0}
   .band-row .tunit{flex:1 1 0;min-width:0;display:block}
-  .toval.child-oval{flex-direction:column;align-items:center;max-width:none;width:100%;padding:17px 10px 14px;border-radius:999px}
+  .toval.child-oval{flex-direction:column;align-items:center;justify-content:center;max-width:none;width:100%;padding:12px 8px 10px;border-radius:50%;aspect-ratio:5/8}
   .toval .cpl{display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;min-width:0}
-  .toval .amp{color:#c9a227;font-size:12px;line-height:1.1}
-  .oval-divider{line-height:0;margin:5px 0 1px}
-  .oval-kids{margin-top:6px;display:flex;flex-direction:column;gap:3px;width:100%}
-  .oval-kid{display:flex;align-items:center;justify-content:center;gap:5px;font-size:12.5px;color:#f3e5bb;text-align:center;line-height:1.3}
-  .oval-kid svg{flex:none}
+  .toval .amp{color:#c9a227;font-size:11px;line-height:1.1}
+  .oval-divider{line-height:0;margin:3px 0 0}
+  .oval-kids{margin-top:4px;display:flex;flex-direction:column;gap:2px;width:100%}
+  .oval-kid{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11.5px;color:#f3e5bb;text-align:center;line-height:1.25}
+  .oval-kid svg{flex:none;height:20px;width:auto}
   .oval-kid.subkid{font-size:11px;color:#d8bc5a;margin-left:16px}
   .oval-wilt{position:absolute;top:-13px;left:8px;line-height:0;z-index:3;transform:rotate(-8deg)}
   .toval.deceased{border-color:#a68a3f}
@@ -116,18 +118,18 @@
   .oval-sprig{position:absolute;left:50%;transform:translateX(-50%);line-height:0;pointer-events:none;z-index:2}
   .oval-sprig.top{top:-12px}
   .oval-sprig.bottom{bottom:-12px;transform:translateX(-50%) scaleY(-1)}
-  .toval.trunk-oval{max-width:540px;padding:16px 10px;border-width:3.5px}
+  .toval.trunk-oval{max-width:460px;padding:10px 10px;border-width:3.5px}
   .toval.trunk-oval .nm{font-size:20px}
   .toval.trunk-oval .urdu-nm{font-size:18px}
   .tvine{display:block;margin:1px auto}
-  .roots{display:grid;gap:16px;margin-top:4px;align-items:stretch}
+  .roots{display:grid;gap:16px;margin-top:2px;align-items:stretch}
   @media(min-width:640px){.roots{grid-template-columns:1fr 1fr}}
   .root-side{display:flex;flex-direction:column}
   .root-plaque{flex:1;display:flex;flex-direction:column}
   .root-plaque .chain{margin:12px 0 4px}
   .root-gap{flex:1;min-height:150px}
   .parchment{background:radial-gradient(ellipse at 32% 16%,rgba(255,252,225,.55),rgba(0,0,0,0) 58%),linear-gradient(165deg,#f0e0ac 0%,#e4cf8f 46%,#d4ba6f 82%,#c3a457 100%);color:#4a3418;border:2px solid #8a6d1a;border-radius:16px 5px 16px 5px;box-shadow:inset 0 0 0 3px rgba(138,109,26,.30),inset 0 0 30px rgba(122,84,20,.38),0 5px 16px rgba(0,0,0,.4)}
-  .parchment h3{color:#6b4e12;letter-spacing:.16em;font-variant:small-caps;font-size:19px;text-shadow:0 1px 0 rgba(255,248,214,.65)}
+  .parchment h3{color:#6b4e12;letter-spacing:.16em;font-variant:small-caps;font-size:17px;text-shadow:0 1px 0 rgba(255,248,214,.65)}
   .parchment p{color:#4a3418}
   .parchment .sub{color:#7a5c1e}
   .parchment .hang-chain{display:block;margin:0 auto 2px;line-height:0}
@@ -459,6 +461,12 @@ function show(id){
   var footer=document.getElementById("page-footer");
   if(footer) footer.classList.toggle("hidden", id==="view-preview");
   window.scrollTo(0,0);
+  if(id==="view-preview"){
+    /* The tree's branches/roots are drawn from measured layout, which only
+       exists once this view is visible — draw after the next frame. */
+    if(window.requestAnimationFrame) window.requestAnimationFrame(function(){ drawTree(); });
+    else drawTree();
+  }
 }
 function centreCouple(){
   var a=byId("iqbal"), b=byId("shahida");
@@ -509,7 +517,7 @@ function cornerSVG(cls){
 }
 function vineSVG(){
   /* One clean HORIZONTAL gold vine divider between levels — no diagonals. */
-  return '<svg class="tvine" width="220" height="18" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">'+
+  return '<svg class="tvine tcontent" width="220" height="18" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">'+
     '<path d="M2 9 C40 3 80 15 120 9 C160 3 200 15 240 9 C265 5 285 12 298 9" fill="none" stroke="#c9a227" stroke-width="2"/>'+
     '<path d="M60 8 q-9 -6 -16 -4 q5 7 16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
     '<path d="M240 8 q9 -6 16 -4 q-5 7 -16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
@@ -591,13 +599,137 @@ function treeRootsSVG(){
     '<g stroke="#c9a227" stroke-width="4" opacity=".95" stroke-linecap="round">'+all+'</g>'+
     '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+all+'</g></svg>';
 }
+function treeFallbackInner(rowsMeta){
+  /* Fallback tree in a 1000x1000 space: what the tapestry shows until
+     drawTree() can measure the real layout and redraw with true geometry
+     (and what non-DOM test harnesses see). Canopy branches converge at
+     (500,620); roots fan from (500,705) to the bottom edge (y=985). */
+  var limbs="", buds="", fillers="", i, j;
+  var R = rowsMeta.length;
+  for(i=0;i<R;i++){
+    var n = rowsMeta[i].count;
+    var y = (R===1) ? 330 : Math.round(500 - i*(430/Math.max(1,R-1)));
+    for(j=0;j<n;j++){
+      var x = Math.round((j+0.5)*(1000/n));
+      var c1 = Math.round(500+(x-500)*0.25), c2 = Math.round(500+(x-500)*0.65);
+      limbs += '<path data-part="branch" d="M500 620 C '+c1+' '+(y+150)+', '+c2+' '+(y+55)+', '+x+' '+(y+28)+'" fill="none"/>';
+      buds += '<circle cx="'+x+'" cy="'+(y+24)+'" r="3.4" fill="#e8c85a"/>';
+    }
+  }
+  var fxs=[70,300,700,930,180,820];
+  for(i=0;i<fxs.length;i++){
+    var fx=fxs[i], fy=110+((i*83)%300);
+    var fc1=Math.round(500+(fx-500)*0.3), fc2=Math.round(500+(fx-500)*0.7);
+    fillers += '<path data-part="filler" d="M500 620 C '+fc1+' '+(fy+170)+', '+fc2+' '+(fy+60)+', '+fx+' '+fy+'" fill="none"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c -12 -4 -20 -12 -24 -24 c 12 2 20 10 24 24 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c 12 -4 20 -12 24 -24 c -12 2 -20 10 -24 24 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<circle cx="'+fx+'" cy="'+(fy-4)+'" r="3" fill="#c9a227"/>';
+  }
+  var canopy = limbs + '<path data-part="trunk" d="M500 620 C494 586 506 560 500 532" fill="none"/>';
+  var xs=[80,240,390,470,530,610,760,920], roots="", x, rc1, rc2;
+  for(i=0;i<xs.length;i++){
+    x=xs[i];
+    rc1=Math.round(500+(x-500)*0.15); rc2=Math.round(500+(x-500)*0.55);
+    roots+='<path data-part="root" d="M500 705 C '+rc1+' 800, '+rc2+' 890, '+x+' 985" fill="none"/>';
+  }
+  var lower = '<path data-part="trunk" d="M500 640 C506 662 494 682 500 705" fill="none"/>'+roots;
+  function layers(paths){
+    return '<g stroke="#8a6d1a" stroke-width="10" opacity=".45" stroke-linecap="round">'+paths+'</g>'+
+           '<g stroke="#c9a227" stroke-width="4.5" opacity=".95" stroke-linecap="round">'+paths+'</g>'+
+           '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+paths+'</g>';
+  }
+  return layers(canopy)+'<g stroke="#c9a227" stroke-width="2.4" opacity=".8" stroke-linecap="round">'+fillers+'</g>'+layers(lower)+buds;
+}
+function drawTree(){
+  /* Measured tree: run AFTER the tapestry is laid out (show() calls it via
+     requestAnimationFrame, and on window resize). One smooth gold branch
+     from the trunk crown — the top centre of the centre oval — to the
+     BOTTOM TIP of each child oval; filler sprays ending in leaf clusters
+     in the gaps between ovals (never oval-to-oval, never out to the frame
+     edges, never under a row); roots fanning from the trunk bottom to the
+     frame's bottom inner edge, spread between the two plaques. Because it
+     measures the live DOM, it redraws itself correctly after every data
+     change. No-ops where layout cannot be measured (hidden view, stubs).
+     Branch paths carry data-part="branch" on the main gold layer only;
+     the shadow layer uses branch-under, the stitch layer branch-stitch. */
+  var frameEl = document.getElementById("tapestry-frame");
+  if(!frameEl || typeof frameEl.querySelector!=="function" || typeof frameEl.getBoundingClientRect!=="function") return;
+  var svg = frameEl.querySelector("[data-tree-svg]");
+  if(!svg || typeof svg.getBoundingClientRect!=="function" || typeof svg.setAttribute!=="function") return;
+  var sr = svg.getBoundingClientRect();
+  if(!sr || !sr.width || !sr.height) return;
+  var trunkEl = frameEl.querySelector("[data-trunk-oval]");
+  if(!trunkEl || typeof trunkEl.getBoundingClientRect!=="function") return;
+  var ovalEls = frameEl.querySelectorAll("[data-child-oval]");
+  if(!ovalEls || !ovalEls.length) return;
+  function n(v){ return Math.round(v*10)/10; }
+  function rel(r){ return {x:r.left-sr.left, y:r.top-sr.top, w:r.width, h:r.height, cx:r.left-sr.left+r.width/2, b:r.bottom-sr.top}; }
+  var tr = rel(trunkEl.getBoundingClientRect());
+  var crownX = tr.cx, crownY = tr.y, trunkBotY = tr.b;
+  var W = sr.width, H = sr.height;
+  var tips = [], branches = "", branchesU = "", branchesS = "", buds = "", i, r;
+  for(i=0;i<ovalEls.length;i++){
+    if(typeof ovalEls[i].getBoundingClientRect!=="function") return;
+    r = rel(ovalEls[i].getBoundingClientRect());
+    tips.push(r);
+    var my = (crownY + r.b)/2;
+    var d = 'M'+n(crownX)+' '+n(crownY)+' C '+n(crownX)+' '+n(my)+', '+n(r.cx)+' '+n(my)+', '+n(r.cx)+' '+n(r.b);
+    branches  += '<path data-part="branch" d="'+d+'"/>';
+    branchesU += '<path data-part="branch-under" d="'+d+'"/>';
+    branchesS += '<path data-part="branch-stitch" d="'+d+'"/>';
+    buds += '<circle cx="'+n(r.cx)+'" cy="'+n(r.b)+'" r="3.2" fill="#e8c85a"/>';
+  }
+  var trunkD = 'M'+n(crownX)+' '+n(crownY)+' C '+n(crownX-7)+' '+n(crownY+(trunkBotY-crownY)*0.35)+', '+n(crownX+7)+' '+n(crownY+(trunkBotY-crownY)*0.7)+', '+n(crownX)+' '+n(trunkBotY);
+  var trunk = '<path data-part="trunk" d="'+trunkD+'"/>';
+  /* Roots: trunk bottom -> bottom inner edge of the frame (8px above the
+     measured bottom), fanned across the gap between the two plaques. */
+  var x0 = W*0.16, x1 = W*0.84;
+  var pl = frameEl.querySelector("[data-plaque-left]"), pr = frameEl.querySelector("[data-plaque-right]");
+  if(pl && pr && typeof pl.getBoundingClientRect==="function" && typeof pr.getBoundingClientRect==="function"){
+    var lr = rel(pl.getBoundingClientRect()), rr = rel(pr.getBoundingClientRect());
+    if(rr.x - (lr.x + lr.w) > 60){ x0 = lr.x + lr.w + 10; x1 = rr.x - 10; }
+  }
+  var rootY = H - 8, roots = "", nR = 8;
+  for(i=0;i<nR;i++){
+    var rx = x0 + (x1-x0)*(i/(nR-1));
+    roots += '<path data-part="root" d="M'+n(crownX)+' '+n(trunkBotY)+' C '+n(crownX+(rx-crownX)*0.15)+' '+n(trunkBotY+(rootY-trunkBotY)*0.45)+', '+n(crownX+(rx-crownX)*0.55)+' '+n(trunkBotY+(rootY-trunkBotY)*0.78)+', '+n(rx)+' '+n(rootY)+'"/>';
+  }
+  /* Filler sprays: start part-way along the crown's fan, end in a leaf
+     cluster in the gap between neighbouring ovals (or just outside the
+     outermost ovals) — inside the canopy, never joining two ovals. */
+  var sorted = tips.slice().sort(function(a,b){ return a.cx-b.cx; });
+  var fillers = "";
+  function spray(sx,sy,ex,ey){
+    ex = Math.max(18, Math.min(W-18, ex)); ey = Math.max(10, ey);
+    return '<path data-part="filler" d="M'+n(sx)+' '+n(sy)+' Q '+n((sx+ex)/2)+' '+n(Math.min(sy,ey)-20)+' '+n(ex)+' '+n(ey)+'"/>'+
+      '<g transform="translate('+n(ex)+' '+n(ey)+')"><path d="M0 0 c -11 -3 -18 -10 -21 -21 c 11 2 18 9 21 21 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/><path d="M0 0 c 11 -3 18 -10 21 -21 c -11 2 -18 9 -21 21 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/><circle cx="0" cy="-3" r="2.8" fill="#c9a227"/></g>';
+  }
+  for(i=0;i+1<sorted.length;i++){
+    var a = sorted[i], b = sorted[i+1];
+    if(Math.abs(a.y-b.y) > H*0.25) continue;
+    var ex2 = (a.cx+b.cx)/2, ey2 = Math.min(a.y,b.y) - 12;
+    fillers += spray(crownX+(ex2-crownX)*0.45, crownY+(ey2-crownY)*0.45, ex2, ey2);
+  }
+  if(sorted.length){
+    var first = sorted[0], last = sorted[sorted.length-1];
+    fillers += spray(crownX+(first.cx-46-crownX)*0.4, crownY+(first.y-crownY)*0.4, first.cx-46, first.y+10);
+    fillers += spray(crownX+(last.cx+46-crownX)*0.4, crownY+(last.y-crownY)*0.4, last.cx+46, last.y+10);
+  }
+  svg.setAttribute("viewBox", "0 0 "+Math.round(W)+" "+Math.round(H));
+  svg.innerHTML =
+    '<g fill="none" stroke="#8a6d1a" stroke-width="9" opacity=".45" stroke-linecap="round">'+branchesU+trunk+roots+'</g>'+
+    '<g fill="none" stroke="#c9a227" stroke-width="4.2" opacity=".95" stroke-linecap="round">'+branches+trunk+roots+'</g>'+
+    '<g fill="none" stroke="#e8c85a" stroke-width="1.1" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+branchesS+trunk+roots+'</g>'+
+    '<g fill="none" stroke="#c9a227" stroke-width="2.2" opacity=".85" stroke-linecap="round">'+fillers+'</g>'+
+    buds;
+}
 function hangChainSVG(){
   /* Three little chain links a parchment plaque hangs from. */
   return '<span class="hang-chain" aria-hidden="true"><svg width="60" height="16" viewBox="0 0 60 16"><path d="M8 1 v6 M30 1 v6 M52 1 v6" stroke="#8a6d1a" stroke-width="2"/><circle cx="8" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="30" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="52" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/></svg></span>';
 }
 function coupleOvalHTML(person,spouse,big){
   var sprigW = big?58:40;
-  var h='<div class="toval ornate-oval'+(big?" trunk-oval":"")+'">'+sprigSVG("top",sprigW)+'<div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
+  var h='<div class="toval ornate-oval'+(big?" trunk-oval":"")+'"'+(big?' data-trunk-oval="1"':"")+'>'+sprigSVG("top",sprigW)+'<div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
   if(spouse) h+='<div class="half"><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div></div>';
   return h+sprigSVG("bottom",sprigW)+'</div>';
 }
@@ -638,8 +770,10 @@ function childOvalHTML(child){
   return '<div class="toval ornate-oval child-oval'+(child.status==="passed"?" deceased":"")+'" data-child-oval="'+child.id+'">'+sprigSVG("top",40)+wilt+names+(kids.length?dividerSVG():"")+kidsHTML+sprigSVG("bottom",40)+'</div>';
 }
 function childUnitHTML(child,count){
-  /* Oval width shrinks as its row fills, so a row always stays balanced. */
-  var maxW = Math.max(138, Math.min(290, Math.floor(940/Math.max(1,count))));
+  /* Oval width shrinks as its row fills, so a row always stays balanced.
+     The cap is sized so that, at the oval aspect (5/8), four band rows plus
+     the trunk and plaques fit the near-square frame — see drawTree notes. */
+  var maxW = Math.max(100, Math.min(124, Math.floor(460/Math.max(1,count))));
   return '<div class="tunit" data-unit="'+child.id+'" data-band="'+bandRowFor(child)+'" style="max-width:'+maxW+'px">'+childOvalHTML(child)+'</div>';
 }
 function renderPreview(){
@@ -665,22 +799,22 @@ function renderPreview(){
   var html =
     cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
     borderVineHTML()+
-    '<div class="tapestry-title"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
-    '<div class="band-rows">'+treeBgSVG(rowsMeta)+rowsHTML+'</div>'+
+    '<svg class="ttree-measured" data-tree-svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">'+treeFallbackInner(rowsMeta)+'</svg>'+
+    '<div class="tapestry-title tcontent"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
+    '<div class="band-rows tcontent">'+rowsHTML+'</div>'+
     vineSVG()+
-    '<div style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
-    '<div class="sub">the parents — the trunk of the tree</div>'+
-    treeRootsSVG()+
-    rootVineSVG()+
-    '<div class="roots">'+
-      '<div class="root-side" id="root-mustafa">'+
+    '<div class="tcontent" style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
+    '<div class="sub tcontent">the parents — the trunk of the tree</div>'+
+    '<div class="roots tcontent">'+
+      '<div class="root-side" id="root-mustafa" data-plaque-left="1">'+
         '<div class="plaque root-plaque parchment">'+hangChainSVG()+'<h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
       '</div>'+
-      '<div class="root-side" id="root-khilji">'+
+      '<div class="root-side" id="root-khilji" data-plaque-right="1">'+
         '<div class="plaque root-plaque parchment khilji-plaque">'+hangChainSVG()+'<h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p></div>'+
       '</div>'+
     '</div>';
   document.getElementById("tapestry-frame").innerHTML = html;
+  drawTree();
 }
 function openFamily(childId){
   var child=byId(childId); if(!child) return;
@@ -888,6 +1022,12 @@ document.addEventListener("click",function(e){
     if(t.classList.contains("tap")){ openPerson(t.getAttribute("data-person")); return; }
   }
 });
+if(window && typeof window.addEventListener==="function"){
+  window.addEventListener("resize",function(){
+    var pv=document.getElementById("view-preview");
+    if(pv && pv.classList && typeof pv.classList.contains==="function" && !pv.classList.contains("hidden")) drawTree();
+  });
+}
 document.getElementById("btn-add-top").addEventListener("click",openFormAdd);
 document.getElementById("btn-preview").addEventListener("click",function(){ renderPreview(); show("view-preview"); });
 document.getElementById("person-form").addEventListener("submit",submitForm);
