@@ -70,10 +70,14 @@
   .tapestry-title{text-align:center;margin-bottom:4px}
   .tapestry-title .ur{font-size:32px;color:#e8c85a;line-height:1.3}
   .tapestry-title .en{font-size:13px;letter-spacing:.22em;color:#d8bc5a;margin-top:2px}
-  .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 150px;min-width:138px;max-width:340px}
-  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 10px;justify-content:center;align-items:flex-start;width:100%}
-  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;max-width:230px;padding:4px 2px}
-  .tleaf-chip{font-size:12.5px;padding:3px 9px}
+  .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
+  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:flex-start;width:100%}
+  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;max-width:100%;padding:4px 2px}
+  .tleaf-chip{font-size:11px;padding:2px 7px}
+  .tunit .toval{padding:8px 4px}
+  .tunit .toval .nm{font-size:12.5px;overflow-wrap:break-word}
+  .tunit .toval .urdu-nm{font-size:11.5px;overflow-wrap:break-word}
+  #tapestry-frame{width:min(1180px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
   .toval{border:2.5px solid #c9a227;border-radius:999px;background:rgba(9,42,29,.88);width:100%;max-width:300px;padding:10px 6px;display:flex;text-align:center;overflow:hidden;box-shadow:0 0 0 1.5px rgba(201,162,39,.35),inset 0 0 14px rgba(201,162,39,.14)}
   .toval .half{flex:1;padding:2px 6px;min-width:0}
   .toval .half:first-child{border-right:1.5px solid #c9a227}
@@ -84,12 +88,25 @@
   .toval.trunk-oval .nm{font-size:20px}
   .toval.trunk-oval .urdu-nm{font-size:18px}
   .tvine{display:block;margin:1px auto}
-  .roots{display:grid;gap:16px;margin-top:4px}
+  .roots{display:grid;gap:16px;margin-top:4px;align-items:stretch}
   @media(min-width:640px){.roots{grid-template-columns:1fr 1fr}}
-  .root-side .plaque{height:100%}
-  .root-gap{min-height:288px}
+  .root-side{display:flex;flex-direction:column}
+  .root-plaque{flex:1;display:flex;flex-direction:column}
+  .root-plaque .chain{margin:12px 0 4px}
+  .root-gap{flex:1;min-height:150px}
+  @media(max-width:520px){
+    .tapestry-frame{padding:20px 10px 18px}
+    .toval.trunk-oval .nm{font-size:17px}
+    .toval.trunk-oval .urdu-nm{font-size:15px}
+    .block{width:104px}
+    .tunit{min-width:118px}
+  }
   footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
   footer .frow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+  details.backup{margin-top:10px}
+  details.backup summary{cursor:pointer;color:#d8bc5a;font-size:12.5px;list-style:none}
+  details.backup summary::-webkit-details-marker{display:none}
+  details.backup .frow{margin-top:10px}
   .backrow{margin-bottom:12px}
 </style>
 </head>
@@ -178,13 +195,17 @@
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
-<footer>
-  <div class="frow">
-    <button class="small" id="btn-export" type="button">Export JSON (backup)</button>
-    <button class="small" id="btn-import" type="button">Import JSON</button>
-    <input type="file" id="import-file" accept="application/json" class="hidden">
-  </div>
-  <div>Entries are saved on this device for now. Use Export JSON to keep a backup or move your entries.</div>
+<footer id="page-footer">
+  <div>Entries are saved on this device for now.</div>
+  <details class="backup" id="backup-details">
+    <summary>Backup copies (only Humera needs this)</summary>
+    <div class="frow">
+      <button class="small" id="btn-export" type="button">Save a backup copy of the family list</button>
+      <button class="small" id="btn-import" type="button">Load a backup copy</button>
+      <input type="file" id="import-file" accept="application/json" class="hidden">
+    </div>
+    <div>Use a backup copy to keep your entries safe or move them to another device.</div>
+  </details>
 </footer>
 <script>
 "use strict";
@@ -394,6 +415,8 @@ function markerNote(p){
 var views=["view-main","view-family","view-person","view-form","view-preview"];
 function show(id){
   views.forEach(function(v){ document.getElementById(v).classList.toggle("hidden", v!==id); });
+  var footer=document.getElementById("page-footer");
+  if(footer) footer.classList.toggle("hidden", id==="view-preview");
   window.scrollTo(0,0);
 }
 function centreCouple(){
@@ -510,13 +533,13 @@ function renderPreview(){
     rootVineSVG()+
     '<div class="roots">'+
       '<div class="root-side" id="root-mustafa">'+
-        '<div class="plaque"><h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
+        '<div class="plaque root-plaque"><h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p>'+
         '<div class="chain">'+chain+'</div>'+
-        '<div class="sub">seven generations descend from him to Iqbal Ahmed</div>'+
+        '<div class="sub">seven generations descend from him to Iqbal Ahmed</div></div>'+
       '</div>'+
       '<div class="root-side" id="root-khilji">'+
-        '<div class="plaque"><h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p></div>'+
-        '<div class="root-gap" aria-hidden="true"></div>'+
+        '<div class="plaque root-plaque"><h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p>'+
+        '<div class="root-gap" aria-hidden="true"></div></div>'+
       '</div>'+
     '</div>';
   document.getElementById("tapestry-frame").innerHTML = html;
