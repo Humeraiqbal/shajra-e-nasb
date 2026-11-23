@@ -56,7 +56,7 @@
   .plaque p{font-size:13.5px;line-height:1.5;margin:6px 0 0}
   .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
   .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
-  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:26px 32px 16px;
+  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:18px 32px 10px;
     box-shadow:0 0 0 10px #0a2417,0 0 0 11.5px rgba(201,162,39,.45),inset 0 0 64px rgba(0,0,0,.55);
     background:
       radial-gradient(ellipse at 50% 38%,rgba(232,200,90,.13),rgba(0,0,0,0) 55%),
@@ -82,8 +82,8 @@
   .tcorner.bl{bottom:6px;left:6px;transform:scaleY(-1)}
   .tcorner.br{bottom:6px;right:6px;transform:scale(-1,-1)}
   .tapestry-title{text-align:center;margin-bottom:0}
-  .tapestry-title .ur{font-size:24px;color:#e8c85a;line-height:1.25}
-  .tapestry-title .en{font-size:13px;letter-spacing:.22em;color:#d8bc5a;margin-top:2px}
+  .tapestry-title .ur{font-size:22px;color:#e8c85a;line-height:1.25}
+  .tapestry-title .en{font-size:12px;letter-spacing:.22em;color:#d8bc5a;margin-top:1px}
   .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
   .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:stretch;width:100%}
   .tcluster{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:stretch;width:100%}
@@ -95,17 +95,20 @@
   .tunit .toval{padding:8px 4px}
   .tunit .toval .nm{font-size:12px;overflow-wrap:break-word}
   .tunit .toval .urdu-nm{font-size:11px;overflow-wrap:break-word}
-  #tapestry-frame{width:min(1020px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
+  #tapestry-frame{width:min(1300px,calc(100vw - 24px));margin-left:50%;transform:translateX(-50%)}
   .band-rows{position:relative;padding:0}
   .ttree-bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
-  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:4px 0}
+  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:2px 0}
+  .band-row.single-left{justify-content:flex-start;padding-left:12%}
+  .band-row.single-right{justify-content:flex-end;padding-right:12%}
   .band-row .tunit{flex:1 1 0;min-width:0;display:block}
-  .toval.child-oval{flex-direction:column;align-items:center;justify-content:center;max-width:none;width:100%;padding:12px 8px 10px;border-radius:50%;aspect-ratio:5/8}
+  .toval.child-oval{flex-direction:column;align-items:center;justify-content:center;max-width:none;width:100%;padding:12px 6px 10px;border-radius:50%;aspect-ratio:5/8;overflow:hidden}
   .toval .cpl{display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;min-width:0}
   .toval .amp{color:#c9a227;font-size:11px;line-height:1.1}
   .oval-divider{line-height:0;margin:3px 0 0}
   .oval-kids{margin-top:4px;display:flex;flex-direction:column;gap:2px;width:100%}
-  .oval-kid{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11.5px;color:#f3e5bb;text-align:center;line-height:1.25}
+  .oval-kid{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;color:#f3e5bb;text-align:center;line-height:1.2}
+  .oval-kid span{overflow-wrap:break-word;min-width:0}
   .oval-kid svg{flex:none;height:20px;width:auto}
   .oval-kid.subkid{font-size:11px;color:#d8bc5a;margin-left:16px}
   .oval-wilt{position:absolute;top:-13px;left:8px;line-height:0;z-index:3;transform:rotate(-8deg)}
@@ -118,14 +121,17 @@
   .oval-sprig{position:absolute;left:50%;transform:translateX(-50%);line-height:0;pointer-events:none;z-index:2}
   .oval-sprig.top{top:-12px}
   .oval-sprig.bottom{bottom:-12px;transform:translateX(-50%) scaleY(-1)}
-  .toval.trunk-oval{max-width:460px;padding:10px 10px;border-width:3.5px}
+  .toval.trunk-oval{width:340px;max-width:340px;aspect-ratio:1/1.05;border-radius:50%;padding:16px 24px;border-width:3.5px;align-items:center}
+  .trunk-caption{margin-bottom:10px}
   .toval.trunk-oval .nm{font-size:20px}
   .toval.trunk-oval .urdu-nm{font-size:18px}
   .tvine{display:block;margin:1px auto}
   .roots{display:grid;gap:16px;margin-top:2px;align-items:stretch}
   @media(min-width:640px){.roots{grid-template-columns:1fr 1fr}}
   .root-side{display:flex;flex-direction:column}
-  .root-plaque{flex:1;display:flex;flex-direction:column}
+  .root-side{align-items:flex-start}
+  #root-khilji{align-items:flex-end}
+  .root-plaque{flex:1;display:flex;flex-direction:column;max-width:300px;width:100%}
   .root-plaque .chain{margin:12px 0 4px}
   .root-gap{flex:1;min-height:150px}
   .parchment{background:radial-gradient(ellipse at 32% 16%,rgba(255,252,225,.55),rgba(0,0,0,0) 58%),linear-gradient(165deg,#f0e0ac 0%,#e4cf8f 46%,#d4ba6f 82%,#c3a457 100%);color:#4a3418;border:2px solid #8a6d1a;border-radius:16px 5px 16px 5px;box-shadow:inset 0 0 0 3px rgba(138,109,26,.30),inset 0 0 30px rgba(122,84,20,.38),0 5px 16px rgba(0,0,0,.4)}
@@ -644,10 +650,12 @@ function drawTree(){
   /* Measured tree: run AFTER the tapestry is laid out (show() calls it via
      requestAnimationFrame, and on window resize). One smooth gold branch
      from the trunk crown — the top centre of the centre oval — to the
-     BOTTOM TIP of each child oval; filler sprays ending in leaf clusters
-     in the gaps between ovals (never oval-to-oval, never out to the frame
-     edges, never under a row); roots fanning from the trunk bottom to the
-     frame's bottom inner edge, spread between the two plaques. Because it
+     BOTTOM TIP of each child oval, staying in that oval's x-corridor;
+     filler sprays sprouting from points on real branches, ending in leaf
+     clusters in the gaps between ovals (never oval-to-oval, never out to
+     the frame edges, never under a row); roots fanning from below the
+     trunk caption to the frame's bottom inner edge, spread between the
+     two plaques. Because it
      measures the live DOM, it redraws itself correctly after every data
      change. No-ops where layout cannot be measured (hidden view, stubs).
      Branch paths carry data-part="branch" on the main gold layer only;
@@ -667,22 +675,51 @@ function drawTree(){
   var tr = rel(trunkEl.getBoundingClientRect());
   var crownX = tr.cx, crownY = tr.y, trunkBotY = tr.b;
   var W = sr.width, H = sr.height;
+  /* One branch per child oval: a gentle near-vertical curve that stays
+     within the oval's own x-corridor — BOTH control points sit at the
+     oval's centre-x, so the branch leaves the crown, settles into the
+     oval's column and arrives at its bottom tip without sweeping wide
+     (no hammock under a row) and without ever ending at another oval's
+     edge. The SVG layer sits BEHIND the ovals, so any stretch passing
+     behind another oval is hidden by it. Branch endpoints are only ever
+     the trunk crown or an oval's bottom tip. The curve params are kept
+     per tip so filler sprays can sprout from a point ON a branch. */
   var tips = [], branches = "", branchesU = "", branchesS = "", buds = "", i, r;
   for(i=0;i<ovalEls.length;i++){
     if(typeof ovalEls[i].getBoundingClientRect!=="function") return;
     r = rel(ovalEls[i].getBoundingClientRect());
-    tips.push(r);
-    var my = (crownY + r.b)/2;
-    var d = 'M'+n(crownX)+' '+n(crownY)+' C '+n(crownX)+' '+n(my)+', '+n(r.cx)+' '+n(my)+', '+n(r.cx)+' '+n(r.b);
+    var dy = r.b - crownY;
+    var bp = { r: r,
+      p1: { x: r.cx, y: crownY + dy*0.35 },
+      p2: { x: r.cx, y: r.b - dy*0.30 } };
+    tips.push(bp);
+    var d = 'M'+n(crownX)+' '+n(crownY)+' C '+n(bp.p1.x)+' '+n(bp.p1.y)+', '+n(bp.p2.x)+' '+n(bp.p2.y)+', '+n(r.cx)+' '+n(r.b);
     branches  += '<path data-part="branch" d="'+d+'"/>';
     branchesU += '<path data-part="branch-under" d="'+d+'"/>';
     branchesS += '<path data-part="branch-stitch" d="'+d+'"/>';
     buds += '<circle cx="'+n(r.cx)+'" cy="'+n(r.b)+'" r="3.2" fill="#e8c85a"/>';
   }
-  var trunkD = 'M'+n(crownX)+' '+n(crownY)+' C '+n(crownX-7)+' '+n(crownY+(trunkBotY-crownY)*0.35)+', '+n(crownX+7)+' '+n(crownY+(trunkBotY-crownY)*0.7)+', '+n(crownX)+' '+n(trunkBotY);
+  function cubicAt(bp,t){
+    var u = 1-t, p0 = {x:crownX, y:crownY}, p3 = {x:bp.r.cx, y:bp.r.b};
+    return {
+      x: u*u*u*p0.x + 3*u*u*t*bp.p1.x + 3*u*t*t*bp.p2.x + t*t*t*p3.x,
+      y: u*u*u*p0.y + 3*u*u*t*bp.p1.y + 3*u*t*t*bp.p2.y + t*t*t*p3.y
+    };
+  }
+  /* Roots begin BELOW the trunk caption, so the fan never crosses it:
+     the caption sits directly under the disc with clear space, and the
+     trunk line continues from the disc's bottom to the roots' start. */
+  var rootsY0 = trunkBotY;
+  var capEl = frameEl.querySelector("[data-trunk-caption]");
+  if(capEl && typeof capEl.getBoundingClientRect==="function"){
+    var capR = rel(capEl.getBoundingClientRect());
+    if(capR.b + 6 > rootsY0) rootsY0 = capR.b + 6;
+  }
+  var trunkD = 'M'+n(crownX)+' '+n(crownY)+' C '+n(crownX-7)+' '+n(crownY+(rootsY0-crownY)*0.35)+', '+n(crownX+7)+' '+n(crownY+(rootsY0-crownY)*0.7)+', '+n(crownX)+' '+n(rootsY0);
   var trunk = '<path data-part="trunk" d="'+trunkD+'"/>';
-  /* Roots: trunk bottom -> bottom inner edge of the frame (8px above the
-     measured bottom), fanned across the gap between the two plaques. */
+  /* Roots: roots' start (below the caption) -> bottom inner edge of the
+     frame (8px above the measured bottom), fanned across the gap
+     between the two plaques only. */
   var x0 = W*0.16, x1 = W*0.84;
   var pl = frameEl.querySelector("[data-plaque-left]"), pr = frameEl.querySelector("[data-plaque-right]");
   if(pl && pr && typeof pl.getBoundingClientRect==="function" && typeof pr.getBoundingClientRect==="function"){
@@ -692,12 +729,14 @@ function drawTree(){
   var rootY = H - 8, roots = "", nR = 8;
   for(i=0;i<nR;i++){
     var rx = x0 + (x1-x0)*(i/(nR-1));
-    roots += '<path data-part="root" d="M'+n(crownX)+' '+n(trunkBotY)+' C '+n(crownX+(rx-crownX)*0.15)+' '+n(trunkBotY+(rootY-trunkBotY)*0.45)+', '+n(crownX+(rx-crownX)*0.55)+' '+n(trunkBotY+(rootY-trunkBotY)*0.78)+', '+n(rx)+' '+n(rootY)+'"/>';
+    roots += '<path data-part="root" d="M'+n(crownX)+' '+n(rootsY0)+' C '+n(crownX+(rx-crownX)*0.15)+' '+n(rootsY0+(rootY-rootsY0)*0.45)+', '+n(crownX+(rx-crownX)*0.55)+' '+n(rootsY0+(rootY-rootsY0)*0.78)+', '+n(rx)+' '+n(rootY)+'"/>';
   }
-  /* Filler sprays: start part-way along the crown's fan, end in a leaf
-     cluster in the gap between neighbouring ovals (or just outside the
-     outermost ovals) — inside the canopy, never joining two ovals. */
-  var sorted = tips.slice().sort(function(a,b){ return a.cx-b.cx; });
+  /* Filler sprays: each one sprouts from a point ON a real branch
+     (evaluated on that branch's own curve) and ends in a leaf cluster in
+     the gap between neighbouring ovals (or just outside the outermost
+     ovals) — inside the canopy, never joining two ovals, never floating
+     unattached. */
+  var sorted = tips.slice().sort(function(a,b){ return a.r.cx-b.r.cx; });
   var fillers = "";
   function spray(sx,sy,ex,ey){
     ex = Math.max(18, Math.min(W-18, ex)); ey = Math.max(10, ey);
@@ -706,14 +745,16 @@ function drawTree(){
   }
   for(i=0;i+1<sorted.length;i++){
     var a = sorted[i], b = sorted[i+1];
-    if(Math.abs(a.y-b.y) > H*0.25) continue;
-    var ex2 = (a.cx+b.cx)/2, ey2 = Math.min(a.y,b.y) - 12;
-    fillers += spray(crownX+(ex2-crownX)*0.45, crownY+(ey2-crownY)*0.45, ex2, ey2);
+    if(Math.abs(a.r.y-b.r.y) > H*0.25) continue;
+    var ex2 = (a.r.cx+b.r.cx)/2, ey2 = Math.min(a.r.y,b.r.y) - 12;
+    var st = cubicAt(a, 0.55);
+    fillers += spray(st.x, st.y, ex2, ey2);
   }
   if(sorted.length){
     var first = sorted[0], last = sorted[sorted.length-1];
-    fillers += spray(crownX+(first.cx-46-crownX)*0.4, crownY+(first.y-crownY)*0.4, first.cx-46, first.y+10);
-    fillers += spray(crownX+(last.cx+46-crownX)*0.4, crownY+(last.y-crownY)*0.4, last.cx+46, last.y+10);
+    var stF = cubicAt(first, 0.5), stL = cubicAt(last, 0.5);
+    fillers += spray(stF.x, stF.y, first.r.cx-46, first.r.y+10);
+    fillers += spray(stL.x, stL.y, last.r.cx+46, last.r.y+10);
   }
   svg.setAttribute("viewBox", "0 0 "+Math.round(W)+" "+Math.round(H));
   svg.innerHTML =
@@ -773,7 +814,7 @@ function childUnitHTML(child,count){
   /* Oval width shrinks as its row fills, so a row always stays balanced.
      The cap is sized so that, at the oval aspect (5/8), four band rows plus
      the trunk and plaques fit the near-square frame — see drawTree notes. */
-  var maxW = Math.max(100, Math.min(124, Math.floor(460/Math.max(1,count))));
+  var maxW = Math.max(100, Math.min(118, Math.floor(460/Math.max(1,count))));
   return '<div class="tunit" data-unit="'+child.id+'" data-band="'+bandRowFor(child)+'" style="max-width:'+maxW+'px">'+childOvalHTML(child)+'</div>';
 }
 function renderPreview(){
@@ -794,7 +835,13 @@ function renderPreview(){
   var rowsHTML = bandsDesc.map(function(b){
     var row = byBand[b];
     var units = row.map(function(ch){ return childUnitHTML(ch,row.length); }).join("");
-    return '<div class="band-row" data-band-row="'+b+'" data-count="'+row.length+'">'+units+'</div>';
+    /* A row holding a SINGLE oval is staggered off-centre, alternating by
+       band (row 2 left, row 3 right), so its branch gets its own visible
+       corridor instead of hiding on the shared centre line. Multi-oval
+       rows stay centred. */
+    var stagger = "";
+    if(row.length===1) stagger = (b%2===0) ? "left" : "right";
+    return '<div class="band-row'+(stagger?" single-"+stagger:"")+'" data-band-row="'+b+'" data-count="'+row.length+'" data-band-stagger="'+stagger+'">'+units+'</div>';
   }).join("");
   var html =
     cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
@@ -804,7 +851,7 @@ function renderPreview(){
     '<div class="band-rows tcontent">'+rowsHTML+'</div>'+
     vineSVG()+
     '<div class="tcontent" style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
-    '<div class="sub tcontent">the parents — the trunk of the tree</div>'+
+    '<div class="sub tcontent trunk-caption" data-trunk-caption="1">the parents — the trunk of the tree</div>'+
     '<div class="roots tcontent">'+
       '<div class="root-side" id="root-mustafa" data-plaque-left="1">'+
         '<div class="plaque root-plaque parchment">'+hangChainSVG()+'<h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
