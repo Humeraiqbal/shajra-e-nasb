@@ -56,12 +56,24 @@
   .plaque p{font-size:13.5px;line-height:1.6;margin:6px 0 0}
   .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
   .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
-  .tapestry-frame{position:relative;border:3px solid #c9a227;outline:1.5px solid rgba(201,162,39,.55);outline-offset:5px;border-radius:10px;padding:26px 16px 24px;
+  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:42px 32px 36px;
+    box-shadow:0 0 0 10px #0a2417,0 0 0 11.5px rgba(201,162,39,.45),inset 0 0 64px rgba(0,0,0,.55);
     background:
-      radial-gradient(ellipse at 50% 42%,rgba(232,200,90,.10),rgba(0,0,0,0) 62%),
-      repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 2px,rgba(0,0,0,0) 2px 5px),
-      repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 2px,rgba(0,0,0,0) 2px 5px),
-      linear-gradient(160deg,#14532d 0%,#0d3325 55%,#092a1d 100%)}
+      radial-gradient(ellipse at 50% 38%,rgba(232,200,90,.13),rgba(0,0,0,0) 55%),
+      radial-gradient(ellipse at center,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,rgba(0,0,0,0) 1px 3px),
+      repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,rgba(0,0,0,0) 1px 3px),
+      repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 2px,rgba(0,0,0,0) 2px 4px),
+      repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 2px,rgba(0,0,0,0) 2px 4px),
+      linear-gradient(165deg,#17452c 0%,#0c3122 52%,#061f14 100%)}
+  .tvine-border{position:absolute;pointer-events:none;opacity:.95;z-index:3}
+  .tvine-border.tvb-t{top:10px;left:22px;right:22px;height:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='15' viewBox='0 0 30 15'%3E%3Cpath d='M1 11 Q8 3 15 11 T29 11' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M15 11 q-1 -6 -6 -7 q1 6 6 7' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='15' cy='11' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-x left center/auto 15px}
+  .tvine-border.tvb-b{bottom:10px;left:22px;right:22px;height:15px;transform:scaleY(-1);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='15' viewBox='0 0 30 15'%3E%3Cpath d='M1 11 Q8 3 15 11 T29 11' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M15 11 q-1 -6 -6 -7 q1 6 6 7' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='15' cy='11' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-x left center/auto 15px}
+  .tvine-border.tvb-l{left:10px;top:22px;bottom:22px;width:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='30' viewBox='0 0 15 30'%3E%3Cpath d='M11 1 Q3 8 11 15 T11 29' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M11 15 q-6 -1 -7 -6 q6 1 7 6' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='11' cy='15' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-y center top/15px auto}
+  .tvine-border.tvb-r{right:10px;top:22px;bottom:22px;width:15px;transform:scaleX(-1);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='30' viewBox='0 0 15 30'%3E%3Cpath d='M11 1 Q3 8 11 15 T11 29' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M11 15 q-6 -1 -7 -6 q6 1 7 6' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='11' cy='15' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-y center top/15px auto}
+  .ttree{display:block;width:100%;margin:0 auto;pointer-events:none}
+  .ttree-branches{max-width:1120px}
+  .ttree-roots{max-width:1120px}
   .tcorner{position:absolute;width:34px;height:34px;pointer-events:none}
   .tcorner.tl{top:6px;left:6px}
   .tcorner.tr{top:6px;right:6px;transform:scaleX(-1)}
@@ -73,18 +85,37 @@
   .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
   .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:stretch;width:100%}
   .tcluster{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:stretch;width:100%}
-  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;max-width:100%;padding:4px 2px}
-  .tleaf-chip{font-size:11px;padding:2px 7px}
+  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:9px 7px;justify-content:center;align-items:flex-start;max-width:100%;padding:4px 2px}
+  .medallion{display:inline-flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:2px 3px;max-width:88px;background:none;border:none}
+  .medallion-ring{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:3px double #c9a227;background:radial-gradient(circle at 50% 32%,rgba(232,200,90,.22),rgba(9,42,29,.92) 72%);box-shadow:0 0 0 1.5px rgba(138,109,26,.85),inset 0 0 9px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.4)}
+  .medallion-name{font-size:11px;color:#f3e5bb;text-align:center;line-height:1.25;overflow-wrap:break-word;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+  .medallion:hover .medallion-ring{background:radial-gradient(circle at 50% 32%,rgba(232,200,90,.42),rgba(201,162,39,.28) 78%)}
   .tunit .toval{padding:8px 4px}
   .tunit .toval .nm{font-size:12.5px;overflow-wrap:break-word}
   .tunit .toval .urdu-nm{font-size:11.5px;overflow-wrap:break-word}
-  #tapestry-frame{width:min(1180px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
-  .toval{border:2.5px solid #c9a227;border-radius:999px;background:rgba(9,42,29,.88);width:100%;max-width:300px;padding:10px 6px;display:flex;text-align:center;overflow:hidden;box-shadow:0 0 0 1.5px rgba(201,162,39,.35),inset 0 0 14px rgba(201,162,39,.14)}
+  #tapestry-frame{width:min(1020px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
+  .band-rows{position:relative;padding:4px 0 0}
+  .ttree-bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:12px 0}
+  .band-row .tunit{flex:1 1 0;min-width:0;display:block}
+  .toval.child-oval{flex-direction:column;align-items:center;max-width:none;width:100%;padding:17px 10px 14px;border-radius:999px}
+  .toval .cpl{display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;min-width:0}
+  .toval .amp{color:#c9a227;font-size:12px;line-height:1.1}
+  .oval-divider{line-height:0;margin:5px 0 1px}
+  .oval-kids{margin-top:6px;display:flex;flex-direction:column;gap:3px;width:100%}
+  .oval-kid{display:flex;align-items:center;justify-content:center;gap:5px;font-size:12.5px;color:#f3e5bb;text-align:center;line-height:1.3}
+  .oval-kid svg{flex:none}
+  .oval-kid.subkid{font-size:11px;color:#d8bc5a;margin-left:16px}
+  .oval-wilt{position:absolute;top:-13px;left:8px;line-height:0;z-index:3;transform:rotate(-8deg)}
+  .toval.deceased{border-color:#a68a3f}
+  .toval{position:relative;border:4px double #c9a227;border-radius:999px;background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.15),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(17,60,39,.97),rgba(7,32,21,.97));width:100%;max-width:300px;padding:13px 8px;display:flex;text-align:center;overflow:visible;box-shadow:0 0 0 2px rgba(138,109,26,.85),0 0 0 5px rgba(201,162,39,.32),inset 0 0 20px rgba(0,0,0,.55),inset 0 0 9px rgba(201,162,39,.22),0 4px 12px rgba(0,0,0,.35)}
   .toval .half{flex:1;padding:2px 6px;min-width:0}
-  .toval .half:first-child{border-right:1.5px solid #c9a227}
-  .toval .half:only-child{border-right:none}
-  .toval .nm{font-size:15px;font-weight:700}
-  .toval .urdu-nm{font-size:14px}
+  .toval .half + .half{border-left:1.5px solid rgba(201,162,39,.75)}
+  .toval .nm{font-size:15px;font-weight:700;color:#f8eed2;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .toval .urdu-nm{font-size:14px;color:#e8c85a}
+  .oval-sprig{position:absolute;left:50%;transform:translateX(-50%);line-height:0;pointer-events:none;z-index:2}
+  .oval-sprig.top{top:-12px}
+  .oval-sprig.bottom{bottom:-12px;transform:translateX(-50%) scaleY(-1)}
   .toval.trunk-oval{max-width:540px;padding:16px 10px;border-width:3.5px}
   .toval.trunk-oval .nm{font-size:20px}
   .toval.trunk-oval .urdu-nm{font-size:18px}
@@ -95,6 +126,15 @@
   .root-plaque{flex:1;display:flex;flex-direction:column}
   .root-plaque .chain{margin:12px 0 4px}
   .root-gap{flex:1;min-height:150px}
+  .parchment{background:radial-gradient(ellipse at 32% 16%,rgba(255,252,225,.55),rgba(0,0,0,0) 58%),linear-gradient(165deg,#f0e0ac 0%,#e4cf8f 46%,#d4ba6f 82%,#c3a457 100%);color:#4a3418;border:2px solid #8a6d1a;border-radius:16px 5px 16px 5px;box-shadow:inset 0 0 0 3px rgba(138,109,26,.30),inset 0 0 30px rgba(122,84,20,.38),0 5px 16px rgba(0,0,0,.4)}
+  .parchment h3{color:#6b4e12;letter-spacing:.16em;font-variant:small-caps;font-size:19px;text-shadow:0 1px 0 rgba(255,248,214,.65)}
+  .parchment p{color:#4a3418}
+  .parchment .sub{color:#7a5c1e}
+  .parchment .hang-chain{display:block;margin:0 auto 2px;line-height:0}
+  .khilji-plaque{flex:0 1 auto}
+  .gen-block{background:linear-gradient(170deg,#ecd99e,#d9bf74 70%,#c9ab5c);border:1.5px dashed #8a6d1a;box-shadow:inset 0 0 8px rgba(122,84,20,.35),0 1px 3px rgba(0,0,0,.3)}
+  .tapestry-title .en{font-variant:small-caps;text-shadow:0 2px 7px rgba(0,0,0,.55)}
+  .tapestry-title .ur{text-shadow:0 2px 8px rgba(0,0,0,.5)}
   @media(max-width:520px){
     .tapestry-frame{padding:20px 10px 18px}
     .toval.trunk-oval .nm{font-size:17px}
@@ -253,12 +293,12 @@ var SEED = [
   P("shahida","Shahida Khatoon","شاہدہ خاتون","F","","",null,null,"iqbal"),
   P("sumera","Sumera Iqbal","سمیرہ اقبال","F",1975,"Karachi","iqbal","shahida","jibran"),
   P("sohail","Sohail Iqbal","سہیل اقبال","M",1977,"","iqbal","shahida","shehla"),
-  P("humera","Humera Iqbal","حمیرا اقبال","F","","","iqbal","shahida",null),
+  P("humera","Humera Iqbal","حمیرا اقبال","F",1979,"","iqbal","shahida",null),
   P("saqib","Saqib Iqbal","ثاقب اقبال","M",1984,"Saudi Arabia","iqbal","shahida","faiza"),
   P("shoaib","Shoaib Iqbal","شعیب اقبال","M","","","iqbal","shahida",null),
-  P("ahmed1","Ahmed Iqbal","احمد اقبال","M","","","iqbal","shahida",null),
-  P("ahmed2","Ahmed Iqbal","احمد اقبال","M","","","iqbal","shahida",null),
-  P("abeer","Abeer Iqbal","عبیر اقبال","F","","","iqbal","shahida","adeel"),
+  P("ahmed1","Ahmed Iqbal","احمد اقبال","M",1993,"","iqbal","shahida",null),
+  P("ahmed2","Ahmed Iqbal","احمد اقبال","M",1993,"","iqbal","shahida",null),
+  P("abeer","Abeer Iqbal","عبیر اقبال","F",1995,"","iqbal","shahida","adeel"),
   P("jibran","Jibran Baig","جبران بیگ","M","","",null,null,"sumera"),
   P("saifan","Saifan Zubair","سیفان زبیر","M","","","jibran","sumera",null),
   P("yusha","Yusha Biag","یوشا بیاگ","M","","","jibran","sumera",null),
@@ -478,65 +518,166 @@ function vineSVG(){
 function rootVineSVG(){
   return vineSVG();
 }
+function borderVineHTML(){
+  /* Embroidered floral vine running along all four inner edges of the frame. */
+  return '<span class="tvine-border tvb-t" aria-hidden="true"></span><span class="tvine-border tvb-b" aria-hidden="true"></span><span class="tvine-border tvb-l" aria-hidden="true"></span><span class="tvine-border tvb-r" aria-hidden="true"></span>';
+}
+function sprigSVG(cls,w){
+  /* Small gold leaf sprig ornament pinned to the top / bottom of an oval frame. */
+  return '<span class="oval-sprig '+cls+'" aria-hidden="true"><svg width="'+w+'" height="14" viewBox="0 0 48 14"><path d="M24 13 C24 8 24 5 24 2" stroke="#c9a227" stroke-width="1.6" fill="none"/><path d="M24 10 C18 10 14 7 12 2 C18 2 22 5 24 10 Z" fill="#c9a227"/><path d="M24 10 C30 10 34 7 36 2 C30 2 26 5 24 10 Z" fill="#c9a227"/><path d="M24 7 C21 5 20 3 20 1 C23 2 24 4 24 7 Z" fill="#e8c85a"/><path d="M24 7 C27 5 28 3 28 1 C25 2 24 4 24 7 Z" fill="#e8c85a"/></svg></span>';
+}
+/* Age band -> row for a child of the centre couple. The band sets ONLY the
+   height of the oval (its branch length); no band number or age is ever
+   written on the tapestry. Row 1 = lowest (just above the centre oval),
+   row 4 = highest. Ages under 30 join the top band (row 4). A child with no
+   recorded birth year sits in the middle (row 3) — a year is never invented. */
+function bandRowFor(p){
+  var a = ageOf(p);
+  if(a===null) return 3;
+  if(a>=45) return 1;
+  if(a>=40) return 2;
+  if(a>=35) return 3;
+  return 4;
+}
+function treeBgSVG(rowsMeta){
+  /* The golden tree behind the children rows: one distinct branch from the
+     trunk crown (bottom centre) to EACH child oval, plus decorative filler
+     branches ending in leaves/buds that weave between the ovals so the
+     canopy looks full. Drawn from the current rows, so it redraws and
+     rebalances itself whenever the family grows. Three stitch layers. */
+  var W=1000,H=600, limbs="", buds="", fillers="", i, j;
+  var R = rowsMeta.length;
+  for(i=0;i<R;i++){
+    var n = rowsMeta[i].count;
+    var y = (R===1) ? 300 : Math.round(470 - i*(400/Math.max(1,R-1)));
+    for(j=0;j<n;j++){
+      var x = Math.round((j+0.5)*(W/n));
+      var c1 = Math.round(500+(x-500)*0.25), c2 = Math.round(500+(x-500)*0.65);
+      limbs += '<path data-part="branch" d="M500 600 C '+c1+' '+(y+150)+', '+c2+' '+(y+55)+', '+x+' '+(y+28)+'" fill="none"/>';
+      buds += '<circle cx="'+x+'" cy="'+(y+24)+'" r="3.4" fill="#e8c85a"/>';
+    }
+  }
+  var fxs=[70,300,700,930,180,820];
+  for(i=0;i<fxs.length;i++){
+    var fx=fxs[i], fy=110+((i*83)%300);
+    var fc1=Math.round(500+(fx-500)*0.3), fc2=Math.round(500+(fx-500)*0.7);
+    fillers += '<path data-part="filler" d="M500 600 C '+fc1+' '+(fy+170)+', '+fc2+' '+(fy+60)+', '+fx+' '+fy+'" fill="none"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c -12 -4 -20 -12 -24 -24 c 12 2 20 10 24 24 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c 12 -4 20 -12 24 -24 c -12 2 -20 10 -24 24 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<circle cx="'+fx+'" cy="'+(fy-4)+'" r="3" fill="#c9a227"/>';
+  }
+  var all = limbs + '<path data-part="trunk" d="M500 600 C494 566 506 540 500 512" fill="none"/>';
+  return '<svg class="ttree-bg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">'+
+    '<g stroke="#8a6d1a" stroke-width="10" opacity=".45" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="4.5" opacity=".95" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="2.4" opacity=".8" stroke-linecap="round">'+fillers+'</g>'+
+    buds+'</svg>';
+}
+function treeRootsSVG(){
+  /* The golden tree, lower half: the trunk continues down from the centre
+     oval and splits into roots that spread wide and reach the very bottom
+     of the frame, toward both root plaques. */
+  var xs=[60,210,350,470,730,850,990,1140];
+  var roots="", i, x, c1, c2;
+  for(i=0;i<xs.length;i++){
+    x=xs[i];
+    c1=Math.round(600+(x-600)*0.15); c2=Math.round(600+(x-600)*0.55);
+    roots+='<path data-part="root" d="M600 46 C '+c1+' 84, '+c2+' 116, '+x+' 155" fill="none"/>';
+  }
+  var all='<path data-part="trunk" d="M600 0 C606 16 594 30 600 50" fill="none"/>'+roots;
+  return '<svg class="ttree ttree-roots" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true" style="height:118px;margin-bottom:-6px">'+
+    '<g stroke="#8a6d1a" stroke-width="9" opacity=".5" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="4" opacity=".95" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+all+'</g></svg>';
+}
+function hangChainSVG(){
+  /* Three little chain links a parchment plaque hangs from. */
+  return '<span class="hang-chain" aria-hidden="true"><svg width="60" height="16" viewBox="0 0 60 16"><path d="M8 1 v6 M30 1 v6 M52 1 v6" stroke="#8a6d1a" stroke-width="2"/><circle cx="8" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="30" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="52" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/></svg></span>';
+}
 function coupleOvalHTML(person,spouse,big){
-  var h='<div class="toval'+(big?" trunk-oval":"")+'"><div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
+  var sprigW = big?58:40;
+  var h='<div class="toval ornate-oval'+(big?" trunk-oval":"")+'">'+sprigSVG("top",sprigW)+'<div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
   if(spouse) h+='<div class="half"><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div></div>';
-  return h+'</div>';
+  return h+sprigSVG("bottom",sprigW)+'</div>';
 }
-function leafChipHTML(k){
-  return '<span class="kid tleaf-chip" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span>';
+function dividerSVG(){
+  /* Small horizontal gold vine divider inside a child oval, between the
+     couple's names and their children's names. */
+  return '<span class="oval-divider" aria-hidden="true"><svg width="92" height="10" viewBox="0 0 92 10"><path d="M2 5 C20 1 34 9 46 5 C58 1 72 9 90 5" fill="none" stroke="#c9a227" stroke-width="1.4"/><circle cx="46" cy="5" r="1.8" fill="#e8c85a"/><path d="M20 5 q-6 -4 -11 -3 q3 5 11 3" fill="#7a9a4e"/><path d="M72 5 q6 -4 11 -3 q-3 5 -11 3" fill="#7a9a4e"/></svg></span>';
 }
-/* One unit = a person (with spouse if any). Its descendants are rendered in a
-   row ABOVE its oval: children with no spouse/children of their own appear as
-   marker chips clustered above the oval; children who have a spouse or
-   children become units themselves, recursively. */
-function unitHTML(person,seen){
-  seen = seen || {};
-  if(seen[person.id]) return "";
-  seen[person.id]=1;
-  var spouse = spouseOf(person);
-  if(spouse) seen[spouse.id]=1;
-  var kids = unitKids(person,spouse);
-  var branches=[], leaves=[];
-  kids.forEach(function(k){
-    if(seen[k.id]) return;
-    if(isBranchUnit(k)) branches.push(k); else leaves.push(k);
-  });
-  var items="";
-  if(leaves.length) items += '<div class="tleaf-cluster" data-for="'+person.id+'">'+leaves.map(leafChipHTML).join("")+'</div>';
-  branches.forEach(function(b){ items += unitHTML(b,seen); });
-  /* The cluster area is ALWAYS present (empty for childless units) and is
-     flex:1, so it absorbs height differences ABOVE the oval; the couple
-     oval is the LAST element of the column, so every oval in a row shares
-     one baseline. */
-  var above = '<div class="tcluster">'+items+'</div>';
-  return '<div class="tunit" data-unit="'+person.id+'">'+above+coupleOvalHTML(person,spouse,false)+'</div>';
+/* One line inside a child oval: a grandchild, with their embroidered marker.
+   If the grandchild has a spouse, the spouse's name rides on the same line;
+   the grandchild's own children follow as smaller lines beneath — so the
+   oval simply grows longer as the family grows. */
+function kidLineHTML(k,seen,depth){
+  if(seen[k.id]) return "";
+  seen[k.id]=1;
+  var spouse = spouseOf(k);
+  var label = esc(k.name);
+  if(spouse){ seen[spouse.id]=1; label += ' <span style="color:#c9a227">♥</span> '+esc(spouse.name); }
+  var h = '<div class="oval-kid'+(depth>0?" subkid":"")+'" data-kid="'+k.id+'">'+markerFor(k)+'<span data-person="'+k.id+'">'+label+'</span></div>';
+  var kids = unitKids(k,spouse);
+  kids.forEach(function(g){ h += kidLineHTML(g,seen,depth+1); });
+  return h;
+}
+/* One child of the centre couple = ONE narrow vertical ornate oval:
+   the child (+ spouse) at the top, a vine divider, then their children
+   listed INSIDE the oval. A child with no spouse still gets their own
+   named oval — there are NO blank or nameless ovals. A child who has
+   passed away keeps their oval, marked with a wilted ornament. */
+function childOvalHTML(child){
+  var spouse = spouseOf(child);
+  var seen = {}; seen[child.id]=1; if(spouse) seen[spouse.id]=1;
+  var kids = unitKids(child,spouse);
+  var kidsHTML = kids.length ? '<div class="oval-kids">'+kids.map(function(k){ return kidLineHTML(k,seen,0); }).join("")+'</div>' : "";
+  var wilt = (child.status==="passed") ? '<span class="oval-wilt" data-wilted="1" aria-hidden="true">'+markerFor(child)+'</span>' : "";
+  var names = '<div class="cpl"><div class="nm tap-name" data-person="'+child.id+'">'+esc(child.name)+'</div><div class="urdu-nm" lang="ur">'+esc(child.urdu)+'</div>';
+  if(spouse) names += '<div class="amp">♥</div><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div>';
+  names += '</div>';
+  return '<div class="toval ornate-oval child-oval'+(child.status==="passed"?" deceased":"")+'" data-child-oval="'+child.id+'">'+sprigSVG("top",40)+wilt+names+(kids.length?dividerSVG():"")+kidsHTML+sprigSVG("bottom",40)+'</div>';
+}
+function childUnitHTML(child,count){
+  /* Oval width shrinks as its row fills, so a row always stays balanced. */
+  var maxW = Math.max(138, Math.min(290, Math.floor(940/Math.max(1,count))));
+  return '<div class="tunit" data-unit="'+child.id+'" data-band="'+bandRowFor(child)+'" style="max-width:'+maxW+'px">'+childOvalHTML(child)+'</div>';
 }
 function renderPreview(){
   var c = centreCouple();
   var kids = centreChildren();
-  var seen = {}; seen[c[0].id]=1; seen[c[1].id]=1;
-  var units = kids.map(function(ch){ return unitHTML(ch,seen); }).join("");
-  var chain = "";
-  for(var i=0;i<7;i++) chain += '<div class="block gen-block" role="img" aria-label="empty generation block"></div>';
+  /* Group the centre couple's children into age-band rows. Row 1 (oldest)
+     sits LOWEST, just above the centre oval; row 4 (youngest) is HIGHEST.
+     DOM order is top row first, so rows render 4,3,2,1. Everything —
+     grouping, row widths, branches — derives from the data right now. */
+  var byBand = {};
+  kids.forEach(function(ch){
+    var b = bandRowFor(ch);
+    if(!byBand[b]) byBand[b]=[];
+    byBand[b].push(ch);
+  });
+  var bandsDesc = Object.keys(byBand).map(Number).sort(function(a,b){ return b-a; });
+  var rowsMeta = bandsDesc.map(function(b){ return {band:b, count:byBand[b].length}; });
+  var rowsHTML = bandsDesc.map(function(b){
+    var row = byBand[b];
+    var units = row.map(function(ch){ return childUnitHTML(ch,row.length); }).join("");
+    return '<div class="band-row" data-band-row="'+b+'" data-count="'+row.length+'">'+units+'</div>';
+  }).join("");
   var html =
     cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
+    borderVineHTML()+
     '<div class="tapestry-title"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
-    '<div class="sub" style="margin:2px 0 10px">the youngest leaves are at the top — the tree grows upward as the family grows</div>'+
-    '<div class="tunit-row">'+units+'</div>'+
+    '<div class="band-rows">'+treeBgSVG(rowsMeta)+rowsHTML+'</div>'+
     vineSVG()+
     '<div style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
     '<div class="sub">the parents — the trunk of the tree</div>'+
+    treeRootsSVG()+
     rootVineSVG()+
     '<div class="roots">'+
       '<div class="root-side" id="root-mustafa">'+
-        '<div class="plaque root-plaque"><h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p>'+
-        '<div class="chain">'+chain+'</div>'+
-        '<div class="sub">seven generations descend from him to Iqbal Ahmed</div></div>'+
+        '<div class="plaque root-plaque parchment">'+hangChainSVG()+'<h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
       '</div>'+
       '<div class="root-side" id="root-khilji">'+
-        '<div class="plaque root-plaque"><h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p>'+
-        '<div class="root-gap" aria-hidden="true"></div></div>'+
+        '<div class="plaque root-plaque parchment khilji-plaque">'+hangChainSVG()+'<h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p></div>'+
       '</div>'+
     '</div>';
   document.getElementById("tapestry-frame").innerHTML = html;
