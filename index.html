@@ -658,19 +658,23 @@ function drawTree(){
        - THREE-ish SHORT BRANCHES in the zone between the disc and the
          bottom row: the crown (top centre of the centre disc) to each
          bottom-row oval's bottom tip, near-vertical.
-       - TWO MAIN LIMBS leave the crown, dive outward BEHIND the disc
-         (the SVG layer sits under the content, so that stretch is hidden),
-         emerge outside the bottom row — left of its leftmost oval, right
-         of its rightmost — and rise along the sides to the top region.
-       - Every UPPER oval is reached by a TWIG branching off the nearest
-         limb at roughly the oval's own height, ending at its bottom tip.
-         Twigs stay in the upper region; no limb or twig segment crosses
-         the band between the bottom row's bottom edge and the disc top
-         (only the short branches and the trunk live there).
+       - TWO MAIN LIMBS originate at the disc's LEFT and RIGHT edge
+         midpoints, travel outward at disc height, rise in a straight
+         vertical run OUTSIDE the bottom row's horizontal span, and
+         curve inward only once above the bottom row's top edge — so
+         no arc shows in the open zone between the disc top and the
+         bottom row (no smile under the row).
+       - Every UPPER oval is reached by a TWIG that starts on the
+         nearest limb BELOW the oval and bends up to arrive at the
+         oval's bottom tip VERTICALLY (final control point directly
+         below the tip) — never horizontally at an oval's side.
+       - NOTHING is drawn above the heading block's bottom edge (+8):
+         limbs, twigs and filler sprays are all clamped below it.
        - The TRUNK starts at the disc's BOTTOM edge (never crossing the
          disc) and runs to the roots, which fan from its foot to the
-         frame's bottom inner edge, endpoints strictly inside the gap
-         between the two plaques.
+         frame's bottom inner edge, endpoints within the MIDDLE 60%
+         of the gap between the two plaques, each root's x staying
+         inside the gap corridor for its whole descent.
      The stitch/shadow layers reuse the SAME path geometry (a wider stroke
      underneath, a dashed stitch on top) — never translated copies, so no
      doubled lines. Branch paths carry data-part on the main gold layer
@@ -690,6 +694,15 @@ function drawTree(){
   function n(v){ return Math.round(v*10)/10; }
   function rel(r){ return {x:r.left-sr.left, y:r.top-sr.top, w:r.width, h:r.height, cx:r.left-sr.left+r.width/2, b:r.bottom-sr.top, r:r.right-sr.left}; }
   var tr = rel(trunkEl.getBoundingClientRect());
+  /* The heading block: NO tree geometry may rise above its bottom edge
+     (+8px) — no limb or filler ever crosses behind the شجرہ نسب
+     calligraphy. topLim is the ceiling every path point must respect. */
+  var headLim = -Infinity;
+  var headEl = frameEl.querySelector("[data-tapestry-title]");
+  if(headEl && typeof headEl.getBoundingClientRect==="function"){
+    headLim = rel(headEl.getBoundingClientRect()).b + 8;
+  }
+  var topLim = (headLim===-Infinity) ? 10 : headLim;
   var crownX = tr.cx, crownY = tr.y, discBotY = tr.b;
   var W = sr.width, H = sr.height;
   var ovals = [], i;
@@ -722,26 +735,42 @@ function drawTree(){
     paths.branch.push({d: dOf(cubic({x:crownX,y:crownY},{x:o.cx,y:crownY+dy*0.35},{x:o.cx,y:o.b-dy*0.30},{x:o.cx,y:o.b}))});
     bud(o.cx, o.b);
   });
-  /* (b) Two main limbs: crown -> outward behind the disc -> up the sides. */
+  /* (b) Two main limbs. Each ORIGINATES at the disc's side-edge
+     midpoint (its start sits on the disc's rim), travels OUTWARD at
+     disc height, then rises in a straight vertical run OUTSIDE the
+     bottom row's horizontal span, and only curves inward toward the
+     upper ovals once it is ABOVE the bottom row's top edge. So for
+     every point above the disc's top edge and below the bottom row's
+     top, the limb is outside the row's span — no arc ever shows in
+     the open zone between the disc top and the bottom row, and there
+     is no smile under the row. */
   var limbs = {left:null, right:null};
   if(upper.length){
     var bl = Math.min.apply(null, bottomRow.map(function(o){ return o.x; }));
     var br = Math.max.apply(null, bottomRow.map(function(o){ return o.r; }));
-    var rowTop = Math.min.apply(null, bottomRow.map(function(o){ return o.y; }));
-    var sideY = (rowTop + maxB)/2;
     var topY = Math.min.apply(null, upper.map(function(o){ return o.y; }));
+    var discCY = (crownY + discBotY)/2;
+    var botTop = Math.min.apply(null, bottomRow.map(function(o){ return o.y; }));
     function makeLimb(sign){
+      var edgeX = sign<0 ? tr.x : tr.r;
       var sideX = sign<0 ? bl-64 : br+64;
-      var endX = sideX + sign*8, endY = topY + 24;
-      var seg1 = cubic({x:crownX,y:crownY},
-        {x:crownX+sign*190, y:crownY+26},
-        {x:sideX+sign*10, y:crownY+48},
-        {x:sideX, y:sideY});
-      var seg2 = cubic({x:sideX,y:sideY},
-        {x:sideX-sign*8, y:sideY-(sideY-endY)*0.45},
-        {x:endX+sign*6, y:endY+(sideY-endY)*0.30},
+      var joinY = botTop - 30;
+      var endX = sideX + sign*10;
+      var endY = Math.max(topY + 24, topLim);
+      var dx = Math.abs(sideX - edgeX);
+      var seg1 = cubic({x:edgeX, y:discCY},
+        {x:edgeX + sign*dx*0.35, y:discCY},
+        {x:edgeX + sign*dx*0.75, y:discCY},
+        {x:sideX, y:discCY});
+      var seg2 = cubic({x:sideX, y:discCY},
+        {x:sideX, y:discCY - (discCY-joinY)*0.40},
+        {x:sideX, y:joinY + (discCY-joinY)*0.35},
+        {x:sideX, y:joinY});
+      var seg3 = cubic({x:sideX, y:joinY},
+        {x:sideX, y:joinY - (joinY-endY)*0.45},
+        {x:endX, y:endY + (joinY-endY)*0.30},
         {x:endX, y:endY});
-      return {segs:[seg1,seg2], d: 'M'+n(seg1.p0.x)+' '+n(seg1.p0.y)+' '+dSeg(seg1)+' '+dSeg(seg2)};
+      return {segs:[seg1,seg2,seg3], d: 'M'+n(seg1.p0.x)+' '+n(seg1.p0.y)+' '+dSeg(seg1)+' '+dSeg(seg2)+' '+dSeg(seg3)};
     }
     limbs.left = makeLimb(-1);
     limbs.right = makeLimb(1);
@@ -758,13 +787,16 @@ function drawTree(){
     }
     return best;
   }
-  /* (c) Twigs: off the nearest limb at ~the oval's height, to its tip. */
+  /* (c) Twigs: each starts on the nearest limb at a point BELOW the
+     oval's tip, then bends up so its final approach is VERTICAL — the
+     last control point sits directly below the tip (same x, 45px
+     lower) — so a twig always meets its oval at the bottom tip,
+     never horizontally at the oval's side. */
   upper.forEach(function(o){
     var L = (o.cx <= crownX) ? limbs.left : limbs.right;
     if(!L) return;
-    var s = pointOnLimb(L, o.b);
-    var midX = s.x + (o.cx - s.x)*0.5;
-    var d = 'M'+n(s.x)+' '+n(s.y)+' C '+n(midX)+' '+n(s.y)+', '+n(o.cx)+' '+n(s.y+(o.b-s.y)*0.6)+', '+n(o.cx)+' '+n(o.b);
+    var s = pointOnLimb(L, o.b + 45);
+    var d = 'M'+n(s.x)+' '+n(s.y)+' C '+n(s.x)+' '+n(o.b+45)+', '+n(o.cx)+' '+n(o.b+45)+', '+n(o.cx)+' '+n(o.b);
     paths.twig.push({d:d});
     bud(o.cx, o.b);
   });
@@ -779,9 +811,15 @@ function drawTree(){
     var lr = rel(pl.getBoundingClientRect()), rr = rel(pr.getBoundingClientRect());
     if(rr.x - (lr.x + lr.w) > 60){ x0 = lr.x + lr.w + 12; x1 = rr.x - 12; }
   }
+  /* Narrow fan: endpoints within the MIDDLE 60% of the gap, and every
+     control point interpolates between the trunk foot and an endpoint,
+     so each root's x stays inside the gap corridor for its whole
+     descent — the lines never cross the plaques' inner top corners. */
+  var gapW = x1 - x0;
+  var fx0 = x0 + gapW*0.2, fx1 = x1 - gapW*0.2;
   var rootY = H - 8, nR = 8;
   for(i=0;i<nR;i++){
-    var rx = x0 + (x1-x0)*(i/(nR-1));
+    var rx = fx0 + (fx1-fx0)*(i/(nR-1));
     paths.root.push({d: dOf(cubic({x:crownX,y:trunkEndY},
       {x:crownX+(rx-crownX)*0.15, y:trunkEndY+(rootY-trunkEndY)*0.45},
       {x:crownX+(rx-crownX)*0.55, y:trunkEndY+(rootY-trunkEndY)*0.78},
@@ -792,8 +830,13 @@ function drawTree(){
      outermost ones) — inside the canopy, never joining two ovals, never
      floating unattached, never entering the band under the bottom row. */
   function spray(sx,sy,ex,ey){
-    ex = Math.max(18, Math.min(W-18, ex)); ey = Math.max(10, ey);
-    var d = 'M'+n(sx)+' '+n(sy)+' Q '+n((sx+ex)/2)+' '+n(Math.min(sy,ey)-20)+' '+n(ex)+' '+n(ey);
+    ex = Math.max(18, Math.min(W-18, ex));
+    /* Heading ceiling: the endpoint stays 22px below topLim (the leaf
+       glyphs reach ~21px above it) and the curve's control point never
+       rises above topLim either — nothing crosses behind the heading. */
+    ey = Math.max(topLim + 22, ey);
+    var qy = Math.max(topLim, Math.min(sy,ey)-20);
+    var d = 'M'+n(sx)+' '+n(sy)+' Q '+n((sx+ex)/2)+' '+n(qy)+' '+n(ex)+' '+n(ey);
     var leaves = '<g transform="translate('+n(ex)+' '+n(ey)+')"><path d="M0 0 c -11 -3 -18 -10 -21 -21 c 11 2 18 9 21 21 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/><path d="M0 0 c 11 -3 18 -10 21 -21 c -11 2 -18 9 -21 21 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/><circle cx="0" cy="-3" r="2.8" fill="#c9a227"/></g>';
     paths.filler.push({d:d, leaves:leaves});
   }
@@ -920,9 +963,8 @@ function renderPreview(){
     cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
     borderVineHTML()+
     '<svg class="ttree-measured" data-tree-svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">'+treeFallbackInner(rowsMeta)+'</svg>'+
-    '<div class="tapestry-title tcontent"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
+    '<div class="tapestry-title tcontent" data-tapestry-title="1"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
     '<div class="band-rows tcontent">'+rowsHTML+'</div>'+
-    vineSVG()+
     '<div class="tcontent" style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
     '<div class="roots tcontent">'+
       '<div class="root-side" id="root-mustafa" data-plaque-left="1">'+
