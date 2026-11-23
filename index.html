@@ -164,18 +164,27 @@
   .tapestry-wrap{position:relative}
   .tapestry-wrap>img{display:block;width:100%;height:auto}
   .art-oval{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0;color:#f8edc9;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 7px rgba(0,0,0,.5);overflow:visible;z-index:2}
-  .art-oval .cpl{font-weight:700;font-size:clamp(9px,1.22vw,15.5px);line-height:1.15}
+  .couple-heart{height:13px;width:auto;vertical-align:-2px}
+  .art-oval .cpl{font-weight:700;font-size:calc(clamp(10px,1.35vw,17px)*var(--tfs,1));line-height:1.15;width:100%;text-align:center}
+  .art-oval .akid{width:100%}
   .art-oval .odiv{color:#c9a227;font-size:clamp(7px,.9vw,12px);line-height:1;margin:2px 0}
-  .art-oval .akid{font-size:clamp(8px,1.12vw,15px);line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
+  .art-oval .akid{font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
   .art-oval .akid svg{height:14px;width:auto;flex:none}
   .art-centre{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;color:#3a2c10;z-index:2;overflow:visible}
   .art-centre .chalf{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2%}
   .art-centre .chalf:first-child{border-right:none}
-  .art-centre .cname{font-weight:700;font-size:clamp(11px,1.55vw,21px);line-height:1.15}
-  .art-centre .cdesc{font-style:italic;font-size:clamp(7px,.92vw,12.5px);line-height:1.25;margin-top:3px}
+  .art-centre .cname{font-weight:700;font-size:calc(clamp(12px,1.7vw,22px)*var(--tfs,1));line-height:1.15;width:100%;text-align:center}
+  .art-centre .cdesc{width:100%;text-align:center}
+  .art-centre .cdesc{font-style:italic;font-size:calc(clamp(7.5px,1vw,13px)*var(--tfs,1));line-height:1.25;margin-top:3px}
   .art-plaque{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;color:#3a2c10;text-align:center;padding:0;z-index:2;overflow:visible;display:flex;flex-direction:column;justify-content:center}
-  .art-plaque .ptitle{font-weight:700;font-size:clamp(9px,1.3vw,17px);line-height:1.15}
-  .art-plaque .pbody{font-size:clamp(6px,.72vw,9.8px);line-height:1.25;margin-top:2px}
+  .art-plaque .ptitle{font-weight:700;font-size:calc(clamp(10px,1.4vw,18px)*var(--tfs,1));line-height:1.15}
+  .art-plaque .pbody{font-size:calc(clamp(6px,.72vw,9.8px)*var(--tfs,1));line-height:1.25;margin-top:2px}
+  .art-oval[lang="ur"] .cpl{font-size:calc(clamp(12px,1.65vw,21px)*var(--tfs,1))}
+  .art-oval[lang="ur"] .akid{font-size:calc(clamp(10.5px,1.45vw,18px)*var(--tfs,1))}
+  .art-centre .chalf[lang="ur"] .cname{font-size:calc(clamp(14px,2vw,26px)*var(--tfs,1))}
+  .art-centre .chalf[lang="ur"] .cdesc{font-size:calc(clamp(9px,1.15vw,15px)*var(--tfs,1))}
+  .art-plaque[lang="ur"] .ptitle{font-size:calc(clamp(12px,1.6vw,20px)*var(--tfs,1))}
+  .art-plaque[lang="ur"] .pbody{font-size:calc(clamp(7.5px,.9vw,11.5px)*var(--tfs,1))}
   details.backup{margin-top:10px}
   details.backup summary{cursor:pointer;color:#d8bc5a;font-size:12.5px;list-style:none}
   details.backup summary::-webkit-details-marker{display:none}
@@ -266,6 +275,7 @@
   <section id="view-preview" class="hidden">
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
     <div class="lang-switch"><span class="lang-lbl">Tapestry language:</span><button type="button" id="lang-en">English</button><button type="button" id="lang-ur" lang="ur">اردو</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Text size:</span><button type="button" id="ts-1">A</button><button type="button" id="ts-2">A+</button><button type="button" id="ts-3">A++</button></div>
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
@@ -955,6 +965,9 @@ function childUnitHTML(child,count){
 }
 var tapestryLang = (function(){ try{ return localStorage.getItem("shajraLang")||"en"; }catch(e){ return "en"; } })();
 function setTapestryLang(l){ tapestryLang=l; try{ localStorage.setItem("shajraLang",l); }catch(e){} renderPreview(); }
+var tapestryTextSize = (function(){ try{ return parseInt(localStorage.getItem("shajraTextSize")||"1",10)||1; }catch(e){ return 1; } })();
+var TFS_STEPS = [1,1.2,1.45];
+function setTextSize(n){ tapestryTextSize=n; try{ localStorage.setItem("shajraTextSize",String(n)); }catch(e){} renderPreview(); }
 function langName(p,first){
   if(!p) return "";
   var t = (tapestryLang==="ur") ? (p.urdu||toUrdu(p.name)) : p.name;
@@ -973,31 +986,33 @@ var DESC_LINES = { en:["Descendant of Mustafa Kamal","Descendant of the Khilji K
 var PLAQUE_UR = { titles:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646"],
   bodies:["\u0627\u06cc\u06a9 \u0628\u062d\u0631\u06cc \u062c\u06c1\u0627\u0632 \u06a9\u06d2 \u06a9\u067e\u062a\u0627\u0646\u060c \u062c\u0648 \u0645\u0633\u0644\u0645\u0627\u0646 \u062a\u0627\u062c\u0631\u0648\u06ba \u0627\u0648\u0631 \u0633\u067e\u0627\u06c1\u06cc\u0648\u06ba \u06a9\u0648 \u0639\u0631\u0628 \u0633\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u0644\u0627\u0626\u06d2\u06d4 \u0627\u0646 \u0633\u06d2 \u0627\u0642\u0628\u0627\u0644 \u0627\u062d\u0645\u062f \u062a\u06a9 \u0633\u0627\u062a \u0646\u0633\u0644\u06cc\u06ba \u0622\u062a\u06cc \u06c1\u06cc\u06ba\u06d4",
           "\u0648\u06c1 \u062e\u0627\u0646\u062f\u0627\u0646 \u062c\u0633 \u0646\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u067e\u0631 \u062a\u0642\u0631\u06cc\u0628\u0627\u064b \u0633\u0648 \u0633\u0627\u0644 \u062d\u06a9\u0648\u0645\u062a \u06a9\u06cc: 1204 \u0633\u06d2 \u0628\u0646\u06af\u0627\u0644\u060c \u067e\u06be\u0631 \u062f\u06c1\u0644\u06cc \u0633\u0644\u0637\u0646\u062a\u060c 1290 \u0633\u06d2 1320 \u062a\u06a9\u06d4"] };
-var ART_POS = { saqib:{x:34.3,y:17.3,w:9.8,h:18.2}, shoaib:{x:71.8,y:13.5,w:9.5,h:15.2},
-  ahmed1:{x:22.7,y:30.7,w:11.4,h:18.4}, ahmed2:{x:22.7,y:30.7,w:11.4,h:18.4},
-  abeer:{x:77.9,y:30.7,w:11.7,h:18.8}, sumera:{x:34.7,y:44.4,w:12.2,h:18.9},
-  sohail:{x:50,y:40.4,w:11.1,h:18.7}, humera:{x:65.9,y:44.7,w:11.5,h:19.4} };
+var ART_POS = { saqib:{x:34.3,y:17.3,w:11,h:18.2}, shoaib:{x:71.8,y:13.5,w:10.7,h:15.2},
+  ahmed1:{x:22.7,y:30.7,w:12.8,h:18.4}, ahmed2:{x:22.7,y:30.7,w:12.8,h:18.4},
+  abeer:{x:77.9,y:30.7,w:13.1,h:18.8}, sumera:{x:34.7,y:44.4,w:13.8,h:18.9},
+  sohail:{x:50,y:40.4,w:12.5,h:18.7}, humera:{x:65.9,y:44.7,w:13,h:19.4} };
 var ART_EXTRA = [ {x:11,y:13,w:11,h:17}, {x:50,y:9.5,w:11,h:16}, {x:90,y:12,w:11,h:17}, {x:11,y:60,w:11,h:17} ];
 function renderPreview(){
   var be=document.getElementById("lang-en"), bu=document.getElementById("lang-ur");
   if(be) be.classList.toggle("active", tapestryLang==="en");
   if(bu) bu.classList.toggle("active", tapestryLang==="ur");
+  [1,2,3].forEach(function(n){ var b=document.getElementById("ts-"+n); if(b) b.classList.toggle("active", tapestryTextSize===n); });
   var cpl = centreCouple();
   var kids = centreChildren();
-  var joiner = (tapestryLang==="ur") ? " \u0648 " : " & ";
+  var heartSVG = '<svg class="couple-heart" viewBox="0 0 20 18" aria-hidden="true"><path d="M10 16.2 C4.2 11.4 2 8.2 2 5.6 C2 3.2 3.9 1.6 6 1.6 C7.9 1.6 9.4 2.8 10 4.2 C10.6 2.8 12.1 1.6 14 1.6 C16.1 1.6 18 3.2 18 5.6 C18 8.2 15.8 11.4 10 16.2Z" fill="#b03a4b" stroke="#e8c85a" stroke-width="1.1" stroke-dasharray="2.2 1.3"/></svg>';
+  var joinerHTML = (tapestryLang==="ur") ? " "+heartSVG+" " : " &amp; ";
   var extraIdx = 0;
   var overlays = kids.map(function(ch){
     var spouse = spouseOf(ch);
     var pos = ART_POS[ch.id];
     if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
     var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
-    var coupleTxt = langName(ch,true) + (spouse ? joiner + langName(spouse,true) : "");
+    var coupleHTML = esc(langName(ch,true)) + (spouse ? joinerHTML + esc(langName(spouse,true)) : "");
     var kidsHTML = gkids.map(function(k){
-      return '<div class="akid">'+markerFor(k)+'<span>'+esc(langName(k,true))+'</span></div>';
+      return '<div class="akid"><span>'+esc(langName(k,true))+'</span></div>';
     }).join("");
     var style = 'left:'+pos.x+'%;top:'+pos.y+'%;width:'+pos.w+'%;height:'+pos.h+'%';
     return '<div class="art-oval" style="'+style+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+
-      '<div class="cpl">'+esc(coupleTxt)+'</div>'+(kidsHTML?'<div class="odiv">\u2022 \u2726 \u2022</div>'+kidsHTML:"")+'</div>';
+      '<div class="cpl">'+coupleHTML+'</div>'+(kidsHTML?'<div style="height:4px"></div>'+kidsHTML:"")+'</div>';
   }).join("");
   var desc = DESC_LINES[tapestryLang] || DESC_LINES.en;
   var centre = '<div class="art-centre" style="left:49.8%;top:62.3%;width:19%;height:20.3%">'+
@@ -1009,7 +1024,7 @@ function renderPreview(){
   var plaques = '<div class="art-plaque" style="left:24.2%;top:80.4%;width:15.6%;height:8.8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[0])+'</div><div class="pbody">'+esc(pBodies[0])+'</div></div>'+
     '<div class="art-plaque" style="left:75.4%;top:80.7%;width:16.2%;height:8.8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[1])+'</div><div class="pbody">'+esc(pBodies[1])+'</div></div>';
   document.getElementById("tapestry-frame").innerHTML =
-    '<div class="tapestry-wrap"><img src="blank-tapestry.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
+    '<div class="tapestry-wrap" style="--tfs:'+(TFS_STEPS[tapestryTextSize-1]||1)+'"><img src="blank-tapestry.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
   return;
   var c = centreCouple();
   var kids = centreChildren();
@@ -1270,6 +1285,7 @@ document.getElementById("btn-add-top").addEventListener("click",openFormAdd);
 document.getElementById("btn-preview").addEventListener("click",function(){ renderPreview(); show("view-preview"); });
 document.getElementById("lang-en").addEventListener("click",function(){ setTapestryLang("en"); });
 document.getElementById("lang-ur").addEventListener("click",function(){ setTapestryLang("ur"); });
+[1,2,3].forEach(function(n){ document.getElementById("ts-"+n).addEventListener("click",function(){ setTextSize(n); }); });
 document.getElementById("person-form").addEventListener("submit",submitForm);
 document.getElementById("form-remove").addEventListener("click",removePerson);
 document.getElementById("f-name").addEventListener("input",function(){
