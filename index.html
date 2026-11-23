@@ -170,6 +170,8 @@
   .art-oval .odiv{color:#c9a227;font-size:clamp(7px,.9vw,12px);line-height:1;margin:2px 0}
   .art-oval .akid{font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
   .art-oval .akid svg{height:14px;width:auto;flex:none}
+  .art-branch{position:absolute;transform:translate(-50%,-50%);color:#f8edc9;font-weight:600;text-align:center;white-space:nowrap;z-index:3;font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));text-shadow:0 1px 0 rgba(0,0,0,.5),0 -1px 0 rgba(255,244,200,.22),1px 0 0 rgba(0,0,0,.26),-1px 0 0 rgba(0,0,0,.16),0 2px 4px rgba(0,0,0,.35)}
+  .art-branch[lang="ur"]{font-size:calc(clamp(10.5px,1.45vw,18px)*var(--tfs,1))}
   .art-centre{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;color:#3a2c10;z-index:2;overflow:visible;text-shadow:0 1px 0 rgba(255,248,214,.55),0 -1px 1px rgba(96,64,0,.38),0 2px 3px rgba(96,64,0,.22)}
   .art-centre .chalf{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2%}
   .art-centre .chalf:first-child{border-right:none}
@@ -1010,6 +1012,14 @@ function renderPreview(){
     var pos = ART_POS[ch.id];
     if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
     var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
+    var branchHTML = "";
+    if(ch.id==="humera" && gkids.length>=2){
+      var tips = [{x:60.2,y:31.2},{x:71.2,y:31.2}];
+      branchHTML = gkids.slice(0,2).map(function(k,i){
+        return '<div class="art-branch" style="left:'+tips[i].x+'%;top:'+tips[i].y+'%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+esc(langName(k,true))+'</div>';
+      }).join("");
+      gkids = gkids.slice(2);
+    }
     var wrapBr = (tapestryLang==="ur" && tapestryTextSize>=2) ? "<br>" : "";
     var coupleHTML = esc(langName(ch,true)) + (spouse ? joinerHTML + wrapBr + esc(langName(spouse,true)) : "");
     var kidsHTML = gkids.map(function(k){
@@ -1017,12 +1027,11 @@ function renderPreview(){
     }).join("");
     var style = 'left:'+pos.x+'%;top:'+pos.y+'%;width:'+pos.w+'%;height:'+pos.h+'%';
     return '<div class="art-oval" style="'+style+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+
-      '<div class="cpl">'+coupleHTML+'</div>'+(kidsHTML?'<div style="height:4px"></div>'+kidsHTML:"")+'</div>';
+      '<div class="cpl">'+coupleHTML+'</div>'+(kidsHTML?'<div style="height:4px"></div>'+kidsHTML:"")+'</div>'+branchHTML;
   }).join("");
-  var desc = DESC_LINES[tapestryLang] || DESC_LINES.en;
   var centre = '<div class="art-centre" style="left:49.8%;top:62.3%;width:19%;height:20.3%">'+
-    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[0],false))+'</div><div class="cdesc">'+esc(desc[0])+'</div></div>'+
-    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[1],false))+'</div><div class="cdesc">'+esc(desc[1])+'</div></div></div>';
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[0],false))+'</div></div>'+
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[1],false))+'</div></div></div>';
   var pTitles = (tapestryLang==="ur") ? PLAQUE_UR.titles : ["Mustafa Kamal","The Khilji Khandan"];
   var pBodies = (tapestryLang==="ur") ? PLAQUE_UR.bodies :
     [ BLURB_MUSTAFA.split(" \u2014 ")[1] || BLURB_MUSTAFA, BLURB_KHILJI.split(" \u2014 ")[1] || BLURB_KHILJI ];
