@@ -177,14 +177,14 @@
   .art-centre .cdesc{width:100%;text-align:center}
   .art-centre .cdesc{font-style:italic;font-size:calc(clamp(7.5px,1vw,13px)*var(--tfs,1));line-height:1.25;margin-top:3px}
   .art-plaque{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;color:#3a2c10;text-align:center;padding:0;z-index:2;overflow:visible;display:flex;flex-direction:column;justify-content:center}
-  .art-plaque .ptitle{font-weight:700;font-size:calc(clamp(10px,1.4vw,18px)*var(--tfs,1));line-height:1.15}
-  .art-plaque .pbody{font-size:calc(clamp(6px,.72vw,9.8px)*var(--tfs,1));line-height:1.25;margin-top:2px}
+  .art-plaque .ptitle{font-weight:700;font-size:clamp(10px,1.4vw,18px);line-height:1.15}
+  .art-plaque .pbody{font-size:clamp(6px,.72vw,9.8px);line-height:1.25;margin-top:2px}
   .art-oval[lang="ur"] .cpl{font-size:calc(clamp(12px,1.65vw,21px)*var(--tfs,1))}
   .art-oval[lang="ur"] .akid{font-size:calc(clamp(10.5px,1.45vw,18px)*var(--tfs,1))}
   .art-centre .chalf[lang="ur"] .cname{font-size:calc(clamp(14px,2vw,26px)*var(--tfs,1))}
   .art-centre .chalf[lang="ur"] .cdesc{font-size:calc(clamp(9px,1.15vw,15px)*var(--tfs,1))}
-  .art-plaque[lang="ur"] .ptitle{font-size:calc(clamp(12px,1.6vw,20px)*var(--tfs,1))}
-  .art-plaque[lang="ur"] .pbody{font-size:calc(clamp(7.5px,.9vw,11.5px)*var(--tfs,1))}
+  .art-plaque[lang="ur"] .ptitle{font-size:clamp(12px,1.6vw,20px)}
+  .art-plaque[lang="ur"] .pbody{font-size:clamp(7.5px,.9vw,11.5px)}
   details.backup{margin-top:10px}
   details.backup summary{cursor:pointer;color:#d8bc5a;font-size:12.5px;list-style:none}
   details.backup summary::-webkit-details-marker{display:none}
@@ -1006,7 +1006,8 @@ function renderPreview(){
     var pos = ART_POS[ch.id];
     if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
     var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
-    var coupleHTML = esc(langName(ch,true)) + (spouse ? joinerHTML + esc(langName(spouse,true)) : "");
+    var wrapBr = (tapestryLang==="ur" && tapestryTextSize>=2) ? "<br>" : "";
+    var coupleHTML = esc(langName(ch,true)) + (spouse ? joinerHTML + wrapBr + esc(langName(spouse,true)) : "");
     var kidsHTML = gkids.map(function(k){
       return '<div class="akid"><span>'+esc(langName(k,true))+'</span></div>';
     }).join("");
