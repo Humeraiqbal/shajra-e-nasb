@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shajra-e-Nasb — Family Tree</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#123f2e;color:#f5e7c1;font-family:Georgia,'Times New Roman',serif}
+  header{text-align:center;padding:22px 14px 6px}
+  header h1{margin:0;font-size:30px;letter-spacing:.04em;color:#e8c85a}
+  header .urdu{font-size:26px;color:#f5e7c1;margin-top:4px}
+  header p{color:#d8bc5a;font-size:14px;margin:6px 0 0}
+  main{max-width:860px;margin:0 auto;padding:14px}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0 18px}
+  button{font-family:Georgia,serif;cursor:pointer;border-radius:10px;border:1.5px solid #c9a227;background:rgba(201,162,39,.14);color:#f5e7c1;padding:10px 14px;font-size:15px}
+  button:hover{background:rgba(201,162,39,.28)}
+  button.primary{background:#c9a227;color:#123f2e;font-weight:700;font-size:17px;padding:14px 20px;width:100%}
+  button.danger{background:transparent;border-color:#a05555;color:#e0a0a0;margin-top:34px}
+  button.small{padding:6px 10px;font-size:13px}
+  .oval{border:2.5px solid #c9a227;border-radius:999px;background:#0d3325;max-width:520px;margin:0 auto;padding:14px 10px;display:flex;text-align:center;overflow:hidden}
+  .oval .half{flex:1;padding:2px 8px}
+  .oval .half:first-child{border-right:1.5px solid #c9a227}
+  .oval .nm{font-size:18px;font-weight:700}
+  .urdu-nm{font-size:16px;color:#d8bc5a;margin-top:2px}
+  .sub{font-size:12px;color:#d8bc5a;text-align:center;margin-top:6px}
+  .connector{text-align:center;color:#c9a227;font-size:20px;line-height:1.2}
+  .boxes{display:grid;gap:14px;margin-top:8px}
+  @media(min-width:640px){.boxes{grid-template-columns:1fr 1fr}}
+  .box{border:1.5px solid #c9a227;border-radius:12px;padding:12px;background:rgba(255,255,255,.04)}
+  .box .couple{text-align:center;font-weight:700;font-size:16px;border-bottom:1px solid rgba(201,162,39,.5);padding-bottom:8px}
+  .box .couple .tap{cursor:pointer;text-decoration:underline dotted rgba(201,162,39,.7)}
+  .box .lbl{text-align:center;font-size:12px;color:#d8bc5a;margin:8px 0}
+  .kids{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .kid{display:inline-flex;align-items:center;gap:5px;border:1px solid #c9a227;border-radius:999px;padding:4px 10px;font-size:13.5px;cursor:pointer;background:rgba(13,51,37,.6)}
+  .kid:hover{background:rgba(201,162,39,.22)}
+  .kid svg{flex:none}
+  .box .openrow{text-align:center;margin-top:10px}
+  .hidden{display:none!important}
+  .card,.formwrap{border:2px solid #c9a227;border-radius:14px;background:#0d3325;padding:18px;max-width:620px;margin:0 auto}
+  .card h2,.formwrap h2{text-align:center;margin:4px 0 4px;font-size:22px}
+  .card .row{margin:9px 0;font-size:15px;line-height:1.55}
+  .card .row b{color:#d8bc5a}
+  .btnrow{display:grid;gap:9px;margin-top:14px}
+  label{display:block;margin:13px 0 4px;font-size:14.5px}
+  input,select{width:100%;background:#fff8e6;color:#222;border:none;border-radius:8px;padding:11px;font-size:15px;font-family:Georgia,serif}
+  input[readonly]{opacity:.85}
+  .locked{background:#e8c85a;color:#123f2e;border-radius:10px;padding:11px;text-align:center;font-weight:700;margin-top:12px}
+  .hint{font-size:12.5px;color:#d8bc5a;margin-top:4px;line-height:1.5}
+  .urdukb{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+  .urdukb button{padding:5px 8px;font-size:16px;border-radius:6px}
+  fieldset{border:1px dashed #c9a227;border-radius:10px;margin-top:16px;padding:10px 12px 14px}
+  legend{color:#d8bc5a;padding:0 6px;font-size:14px}
+  .plaque{border:2px solid #c9a227;border-radius:10px;background:#0d3325;padding:12px;text-align:center}
+  .plaque h3{margin:0 0 6px;color:#e8c85a;font-size:17px}
+  .plaque p{font-size:13.5px;line-height:1.6;margin:6px 0 0}
+  .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
+  .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
+  .tapestry-cols{display:grid;gap:14px}
+  @media(min-width:640px){.tapestry-cols{grid-template-columns:1fr 1fr}}
+  footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
+  footer .frow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+  .backrow{margin-bottom:12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Shajra-e-Nasb</h1>
+  <div class="urdu" lang="ur" dir="rtl">شجرہ نسب</div>
+  <p>Our family lineage — who belongs to who, box by box</p>
+</header>
+<main>
+  <!-- MAIN VIEW -->
+  <section id="view-main">
+    <div class="topbar">
+      <button id="btn-preview" type="button">Preview the Tapestry</button>
+    </div>
+    <button class="primary" id="btn-add-top" type="button">+ Add a New Person</button>
+    <div style="height:16px"></div>
+    <div class="oval" id="centre-oval"></div>
+    <div class="sub">the parents — everyone below is their child</div>
+    <div class="connector">│</div>
+    <div class="boxes" id="family-boxes"></div>
+  </section>
+
+  <!-- FAMILY (ENLARGED BOX) VIEW -->
+  <section id="view-family" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div id="family-detail"></div>
+  </section>
+
+  <!-- PERSON CARD VIEW -->
+  <section id="view-person" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div id="person-detail"></div>
+  </section>
+
+  <!-- FORM VIEW -->
+  <section id="view-form" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back (nothing saved)</button></div>
+    <div class="formwrap">
+      <h2 id="form-title">Add a New Person</h2>
+      <div id="form-locked" class="locked hidden"></div>
+      <form id="person-form" autocomplete="off">
+        <label for="f-name">Full name in English *</label>
+        <input id="f-name" type="text" placeholder="Type the name here…" required>
+        <label for="f-urdu">Urdu name (appears by itself as you type — tap a letter to correct it)</label>
+        <input id="f-urdu" type="text" lang="ur" dir="rtl" placeholder="— appears automatically —">
+        <div class="urdukb" id="urdu-kb"></div>
+        <div id="parents-field">
+          <label for="f-parents">Who are this person's parents? *</label>
+          <select id="f-parents"></select>
+          <div class="hint">This answer decides WHICH family box they land in.</div>
+        </div>
+        <label for="f-gender">Boy or girl?</label>
+        <select id="f-gender"><option value="F">Girl / Female</option><option value="M">Boy / Male</option></select>
+        <label for="f-status">Living or passed away?</label>
+        <select id="f-status"><option value="living">Living</option><option value="passed">Passed away</option></select>
+        <label for="f-born">Born — year and place (if known)</label>
+        <input id="f-born" type="text" placeholder="e.g. 2010, Mississauga">
+        <fieldset id="spouse-fieldset">
+          <legend>Spouse (only if they have one)</legend>
+          <label for="f-spouse-mode">Spouse</label>
+          <select id="f-spouse-mode"><option value="none">No spouse</option><option value="existing">Choose someone already in the tree</option><option value="new">Type in a brand-new spouse</option></select>
+          <div id="spouse-existing-wrap" class="hidden">
+            <label for="f-spouse-existing">Choose the spouse</label>
+            <select id="f-spouse-existing"></select>
+          </div>
+          <div id="spouse-new-wrap" class="hidden">
+            <label for="f-spouse-name">New spouse's full name in English</label>
+            <input id="f-spouse-name" type="text" placeholder="Type the spouse's name…">
+            <label for="f-spouse-urdu">New spouse's Urdu name</label>
+            <input id="f-spouse-urdu" type="text" lang="ur" dir="rtl" placeholder="— appears automatically —">
+            <label for="f-spouse-gender">Spouse — boy or girl?</label>
+            <select id="f-spouse-gender"><option value="M">Boy / Male</option><option value="F">Girl / Female</option></select>
+          </div>
+        </fieldset>
+        <div style="height:14px"></div>
+        <button class="primary" id="form-save" type="submit">SAVE THIS PERSON</button>
+        <button class="danger hidden" id="form-remove" type="button">Remove this person from the tree</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- PREVIEW / TAPESTRY VIEW -->
+  <section id="view-preview" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div class="tapestry-cols">
+      <div class="plaque">
+        <h3>Mustafa Kamal</h3>
+        <div class="chain" id="chain-mustafa"></div>
+        <p>Mustafa Kamal — a captain on one of the ships that brought Muslim merchants and soldiers from Arabia to the subcontinent. Seven generations descend from him to Iqbal Ahmed.</p>
+      </div>
+      <div class="plaque">
+        <h3>The Khilji Khandan</h3>
+        <div class="chain" id="chain-khilji"></div>
+        <p>The Khilji Khandan — the family that ruled the subcontinent for about a hundred years: Bengal from 1204, then the Delhi Sultanate, 1290 to 1320.</p>
+      </div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="oval" id="preview-oval"></div>
+    <div class="sub">Iqbal Ahmed's line on the left — Shahida Khatoon's line on the right</div>
+    <div class="connector">│</div>
+    <div class="boxes" id="preview-boxes"></div>
+  </section>
+</main>
+<footer>
+  <div class="frow">
+    <button class="small" id="btn-export" type="button">Export JSON (backup)</button>
+    <button class="small" id="btn-import" type="button">Import JSON</button>
+    <input type="file" id="import-file" accept="application/json" class="hidden">
+  </div>
+  <div>Entries are saved on this device for now. Use Export JSON to keep a backup or move your entries.</div>
+</footer>
+<script>
+"use strict";
+/* ---------- Transliteration (English -> Urdu) ---------- */
+var NAME_WORDS = {
+  iqbal:"اقبال", ahmed:"احمد", shahida:"شاہدہ", khatoon:"خاتون", sumera:"سمیرہ",
+  sohail:"سہیل", humera:"حمیرا", saqib:"ثاقب", shoaib:"شعیب", abeer:"عبیر",
+  jibran:"جبران", baig:"بیگ", saifan:"سیفان", zubair:"زبیر", yusha:"یوشا",
+  biag:"بیاگ", zaid:"زید", zohail:"زوہیل", shehla:"شہلا", rida:"رضا",
+  eman:"ایمان", tehreem:"تحریم", mawiya:"ماویہ", khiljhi:"خلجی", khilji:"خلجی",
+  eshaal:"ایشال", faiza:"فائزہ", syed:"سید", yonus:"یونس", yusuf:"یوسف",
+  yasna:"یاسنا", azifa:"عظیفہ", adeel:"عدیل", shahmeer:"شاہ میر", mustafa:"مصطفیٰ",
+  kamal:"کمال", fatima:"فاطمہ", zahra:"زہرا", ali:"علی", muhammad:"محمد", mohammed:"محمد"
+};
+var DIGRAPHS = {kh:"خ",gh:"غ",sh:"ش",ch:"چ",th:"تھ",ph:"پھ",bh:"بھ",dh:"دھ",zh:"ژ",ts:"تس"};
+var LETTERS = {a:"ا",b:"ب",c:"ک",d:"د",e:"ی",f:"ف",g:"گ",h:"ہ",i:"ی",j:"ج",k:"ک",l:"ل",m:"م",n:"ن",o:"و",p:"پ",q:"ق",r:"ر",s:"س",t:"ت",u:"و",v:"و",w:"و",x:"کس",y:"ی",z:"ز"};
+function transliterateWord(w){
+  var lw = w.toLowerCase();
+  if (NAME_WORDS[lw]) return NAME_WORDS[lw];
+  var out = "", i = 0;
+  while (i < lw.length){
+    var two = lw.substr(i,2);
+    if (DIGRAPHS[two]){ out += DIGRAPHS[two]; i += 2; continue; }
+    var ch = lw[i];
+    if (LETTERS[ch]) out += LETTERS[ch];
+    i++;
+  }
+  return out;
+}
+function toUrdu(english){
+  if(!english) return "";
+  return english.trim().split(/\s+/).map(transliterateWord).join(" ");
+}
+
+/* ---------- Seed data: 28 people ---------- */
+/* gender: M/F · status: living/passed · fatherId/motherId/spouseId link people */
+function P(id,name,urdu,gender,birthYear,birthPlace,fatherId,motherId,spouseId){
+  return {id:id,name:name,urdu:urdu,gender:gender,status:"living",
+          birthYear:birthYear||"",birthPlace:birthPlace||"",
+          fatherId:fatherId||null,motherId:motherId||null,spouseId:spouseId||null};
+}
+var SEED = [
+  P("iqbal","Iqbal Ahmed","اقبال احمد","M","","",null,null,"shahida"),
+  P("shahida","Shahida Khatoon","شاہدہ خاتون","F","","",null,null,"iqbal"),
+  P("sumera","Sumera Iqbal","سمیرہ اقبال","F",1975,"Karachi","iqbal","shahida","jibran"),
+  P("sohail","Sohail Iqbal","سہیل اقبال","M",1977,"","iqbal","shahida","shehla"),
+  P("humera","Humera Iqbal","حمیرا اقبال","F","","","iqbal","shahida",null),
+  P("saqib","Saqib Iqbal","ثاقب اقبال","M",1984,"Saudi Arabia","iqbal","shahida","faiza"),
+  P("shoaib","Shoaib Iqbal","شعیب اقبال","M","","","iqbal","shahida",null),
+  P("ahmed1","Ahmed Iqbal","احمد اقبال","M","","","iqbal","shahida",null),
+  P("ahmed2","Ahmed Iqbal","احمد اقبال","M","","","iqbal","shahida",null),
+  P("abeer","Abeer Iqbal","عبیر اقبال","F","","","iqbal","shahida","adeel"),
+  P("jibran","Jibran Baig","جبران بیگ","M","","",null,null,"sumera"),
+  P("saifan","Saifan Zubair","سیفان زبیر","M","","","jibran","sumera",null),
+  P("yusha","Yusha Biag","یوشا بیاگ","M","","","jibran","sumera",null),
+  P("zaid","Zaid Baig","زید بیگ","M","","","jibran","sumera",null),
+  P("zohail","Zohail Zubair","زوہیل زبیر","F","","","jibran","sumera",null),
+  P("shehla","Shehla","شہلا","F","","",null,null,"sohail"),
+  P("rida","Rida Sohail","رضا سہیل","F","","","sohail","shehla",null),
+  P("eman","Eman Sohail","ایمان سہیل","F","","","sohail","shehla",null),
+  P("tehreem","Tehreem Sohail","تحریم سہیل","F","","","sohail","shehla",null),
+  P("mawiya","Mawiya Khiljhi","ماویہ خلجی","F",2007,"Mississauga",null,"humera",null),
+  P("eshaal","Eshaal Khilji","ایشال خلجی","F",2010,"",null,"humera",null),
+  P("faiza","Faiza Syed","فائزہ سید","F","","",null,null,"saqib"),
+  P("yonus","Yonus Saqib","یونس ثاقب","M","","","saqib","faiza",null),
+  P("yusuf","Yusuf Saqib","یوسف ثاقب","M","","","saqib","faiza",null),
+  P("yasna","Yasna Saqib","یاسنا ثاقب","F","","","saqib","faiza",null),
+  P("azifa","Azifa Shoaib","عظیفہ شعیب","F","","","shoaib",null,null),
+  P("adeel","Adeel","عدیل","M","","",null,null,"abeer"),
+  P("shahmeer","Shahmeer","شاہ میر","M","","","adeel","abeer",null)
+];
+
+/* ---------- Storage ---------- */
+var LS_KEY = "shajra-e-nasb-data-v1";
+var people = load();
+function load(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw){ var arr = JSON.parse(raw); if(Array.isArray(arr) && arr.length) return arr; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(SEED));
+}
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} }
+function byId(id){ for(var i=0;i<people.length;i++) if(people[i].id===id) return people[i]; return null; }
+function uid(){ return "p" + Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function bornText(p){
+  var bits=[]; if(p.birthYear) bits.push(p.birthYear); if(p.birthPlace) bits.push(p.birthPlace);
+  return bits.join(", ");
+}
+function parseBorn(text){
+  text=(text||"").trim(); if(!text) return {y:"",pl:""};
+  var m=text.match(/^(\d{4})\s*,?\s*(.*)$/);
+  if(m) return {y:m[1],pl:m[2]||""};
+  return {y:"",pl:text};
+}
+/* Children of a couple (person objects or ids): both parents match in either order,
+   or only one parent is known and that parent is one of this couple.
+   With b null, children of the single parent a. */
+function kidsOfCouple(a,b){
+  var aId=(a&&a.id)?a.id:a, bId=(b&&b.id)?b.id:b;
+  return people.filter(function(p){
+    var f=p.fatherId,m=p.motherId;
+    if(bId){
+      return (f===aId&&m===bId)||(f===bId&&m===aId)||
+             (f===aId&&m==null)||(m===aId&&f==null)||
+             (f===bId&&m==null)||(m===bId&&f==null);
+    }
+    return f===aId||m===aId;
+  });
+}
+function siblingsOf(p){
+  if(!p.fatherId && !p.motherId) return [];
+  return people.filter(function(q){
+    if(q.id===p.id) return false;
+    return (p.fatherId && (q.fatherId===p.fatherId||q.motherId===p.fatherId)) ||
+           (p.motherId && (q.fatherId===p.motherId||q.motherId===p.motherId));
+  });
+}
+</script>
+<script>
+"use strict";
+/* ---------- Markers (SVG, no emoji) ---------- */
+function flowerSVG(pink,wilted){
+  var petal = wilted ? "#9a8a6a" : (pink ? "#e8a0bf" : "#e8c85a");
+  var centre = wilted ? "#6f6250" : "#c9a227";
+  var transform = wilted ? ' transform="rotate(38 12 12)"' : "";
+  var stem = wilted ? "M12 14 q4 6 1 9" : "M12 14 q0 5 0 9";
+  return '<svg width="18" height="24" viewBox="0 0 24 24" aria-hidden="true"><g'+transform+'>'+
+    '<circle cx="12" cy="6" r="3.2" fill="'+petal+'"/><circle cx="7.5" cy="10" r="3.2" fill="'+petal+'"/>'+
+    '<circle cx="16.5" cy="10" r="3.2" fill="'+petal+'"/><circle cx="12" cy="9" r="2.4" fill="'+centre+'"/></g>'+
+    '<path d="'+stem+'" stroke="#7a9a5a" stroke-width="1.6" fill="none"/></svg>';
+}
+function leafSVG(wilted){
+  var c = wilted ? "#9a8a6a" : "#c9a227";
+  var transform = wilted ? ' transform="rotate(40 12 12)"' : "";
+  return '<svg width="18" height="24" viewBox="0 0 24 24" aria-hidden="true"><g'+transform+'>'+
+    '<path d="M12 2 q6 6 0 12 q-6 -6 0 -12" fill="'+c+'"/>'+
+    '<path d="M12 14 q5 -1 6 5 q-6 0 -6 -5" fill="'+c+'" opacity=".75"/>'+
+    '<path d="M12 14 q-5 -1 -6 5 q6 0 6 -5" fill="'+c+'" opacity=".55"/></g>'+
+    '<path d="M12 14 L12 22" stroke="#7a9a5a" stroke-width="1.6"/></svg>';
+}
+function markerFor(p){
+  var wilted = p.status==="passed";
+  if(p.gender==="M") return leafSVG(wilted);
+  var age = p.birthYear ? (new Date().getFullYear() - parseInt(p.birthYear,10)) : null;
+  var pink = (age===null || age<17);
+  return flowerSVG(pink,wilted);
+}
+function markerNote(p){
+  if(p.status==="passed") return "wilted flower — passed away";
+  if(p.gender==="M") return "gold leaf sprig — boy";
+  return "pink flower — little girl";
+}
+
+/* ---------- Views ---------- */
+var views=["view-main","view-family","view-person","view-form","view-preview"];
+function show(id){
+  views.forEach(function(v){ document.getElementById(v).classList.toggle("hidden", v!==id); });
+  window.scrollTo(0,0);
+}
+function centreCouple(){
+  var a=byId("iqbal"), b=byId("shahida");
+  if(a&&b) return [a,b];
+  return people.slice(0,2);
+}
+function centreChildren(){
+  var c=centreCouple();
+  return kidsOfCouple(c[0],c[1]);
+}
+function ovalHTML(){
+  var c=centreCouple();
+  return '<div class="half"><div class="nm tap-name" data-person="'+c[0].id+'">'+esc(c[0].name)+'</div><div class="urdu-nm" lang="ur">'+esc(c[0].urdu)+'</div></div>'+
+         '<div class="half"><div class="nm tap-name" data-person="'+c[1].id+'">'+esc(c[1].name)+'</div><div class="urdu-nm" lang="ur">'+esc(c[1].urdu)+'</div></div>';
+}
+function boxHTML(child,forPreview){
+  var spouse = child.spouseId ? byId(child.spouseId) : null;
+  var kids = spouse ? kidsOfCouple(child,spouse) : kidsOfCouple(child,null);
+  var couple = '<span class="tap" data-person="'+child.id+'">'+esc(child.name)+'</span>';
+  if(spouse) couple += ' &nbsp;♥&nbsp; <span class="tap" data-person="'+spouse.id+'">'+esc(spouse.name)+'</span>';
+  var kidsHTML = kids.length ? kids.map(function(k){
+    return '<span class="kid" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span>';
+  }).join("") : '<span style="font-size:13px;color:#d8bc5a">No children entered yet</span>';
+  var openBtn = forPreview ? "" : '<div class="openrow"><button type="button" class="small" data-open-family="'+child.id+'">Open this family →</button></div>';
+  return '<div class="box"><div class="couple">'+couple+'</div>'+
+    '<div class="lbl">their children — all inside this one box</div>'+
+    '<div class="kids">'+kidsHTML+'</div>'+openBtn+'</div>';
+}
+function renderMain(){
+  document.getElementById("centre-oval").innerHTML = ovalHTML();
+  document.getElementById("family-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,false); }).join("");
+}
+function renderPreview(){
+  document.getElementById("preview-oval").innerHTML = ovalHTML();
+  var blocks=""; for(var i=0;i<7;i++) blocks += '<div class="block" aria-label="empty generation block"></div>';
+  document.getElementById("chain-mustafa").innerHTML = blocks;
+  document.getElementById("chain-khilji").innerHTML = blocks;
+  document.getElementById("preview-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,true); }).join("");
+}
+function openFamily(childId){
+  var child=byId(childId); if(!child) return;
+  var spouse = child.spouseId ? byId(child.spouseId) : null;
+  var kids = spouse ? kidsOfCouple(child,spouse) : kidsOfCouple(child,null);
+  var couple = esc(child.name)+(spouse? ' &nbsp;♥&nbsp; '+esc(spouse.name):"");
+  var kidsHTML = kids.length ? kids.map(function(k){
+    return '<div class="row" style="text-align:center"><span class="kid" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span> <span style="font-size:12px;color:#d8bc5a">'+markerNote(k)+'</span></div>';
+  }).join("") : '<div class="row" style="text-align:center">No children entered yet</div>';
+  var btns = '<button type="button" data-add-child="'+child.id+'">+ Add a child to THIS family</button>'+
+             '<button type="button" data-spouse-of="'+child.id+'">'+(spouse?"Change spouse":"Add a spouse")+'</button>'+
+             '<button type="button" data-edit="'+child.id+'">Edit '+esc(child.name)+'</button>';
+  if(spouse) btns += '<button type="button" data-edit="'+spouse.id+'">Edit '+esc(spouse.name)+'</button>';
+  document.getElementById("family-detail").innerHTML =
+    '<div class="card"><div class="sub">THIS FAMILY — OPENED UP</div><h2>'+couple+'</h2>'+
+    '<div class="row" style="text-align:center"><span lang="ur">'+esc(child.urdu)+'</span>'+(spouse?' &nbsp;·&nbsp; <span lang="ur">'+esc(spouse.urdu)+'</span>':"")+'</div>'+
+    kidsHTML+'<div class="btnrow">'+btns+'</div></div>';
+  show("view-family");
+}
+function openPerson(id){
+  var p=byId(id); if(!p) return;
+  var father=p.fatherId?byId(p.fatherId):null, mother=p.motherId?byId(p.motherId):null;
+  var spouse=p.spouseId?byId(p.spouseId):null;
+  var sibs=siblingsOf(p);
+  function link(q){ return q? '<a href="#" data-person="'+q.id+'" style="color:#e8c85a">'+esc(q.name)+'</a>' : "—"; }
+  var parentsTxt = (father||mother) ? [father?link(father):"",mother?link(mother):""].filter(Boolean).join(" + ") : "— (top of this tree)";
+  document.getElementById("person-detail").innerHTML =
+    '<div class="card"><h2>'+esc(p.name)+'</h2>'+
+    '<div class="row" style="text-align:center;font-size:19px" lang="ur" dir="rtl">'+esc(p.urdu)+'</div>'+
+    '<div class="row" style="text-align:center">'+markerFor(p)+' <span style="font-size:12.5px;color:#d8bc5a">'+markerNote(p)+'</span></div>'+
+    '<div class="row"><b>Parents:</b> '+parentsTxt+'</div>'+
+    '<div class="row"><b>Spouse:</b> '+link(spouse)+'</div>'+
+    '<div class="row"><b>Siblings:</b> '+(sibs.length? sibs.map(link).join(", ") : "—")+'</div>'+
+    '<div class="row"><b>Born:</b> '+(bornText(p)||"not entered yet")+'</div>'+
+    '<div class="row"><b>Status:</b> '+(p.status==="passed"?"Passed away":"Living")+'</div>'+
+    '<div class="btnrow"><button type="button" data-edit="'+p.id+'">✎ Edit '+esc(p.name)+'</button></div></div>';
+  show("view-person");
+}
+
+/* ---------- Forms ---------- */
+var formMode="add"; /* add | child | edit */
+var formPersonId=null, formReturnFamily=null;
+function coupleOptions(){
+  var opts=[];
+  var c=centreCouple();
+  opts.push({value:c[0].id+"|"+c[1].id,label:c[0].name+" + "+c[1].name});
+  centreChildren().forEach(function(ch){
+    var sp=ch.spouseId?byId(ch.spouseId):null;
+    if(sp) opts.push({value:ch.id+"|"+sp.id,label:ch.name+" + "+sp.name});
+    else opts.push({value:ch.id+"|",label:ch.name+" (no spouse entered)"});
+  });
+  opts.push({value:"|",label:"No parents in this tree"});
+  return opts;
+}
+function fillParentsSelect(selected){
+  var sel=document.getElementById("f-parents");
+  sel.innerHTML = coupleOptions().map(function(o){
+    return '<option value="'+o.value+'"'+(o.value===selected?" selected":"")+'>'+esc(o.label)+'</option>';
+  }).join("");
+}
+function fillSpouseExisting(selected,excludeId){
+  var sel=document.getElementById("f-spouse-existing");
+  sel.innerHTML = people.filter(function(q){ return q.id!==excludeId; }).map(function(q){
+    return '<option value="'+q.id+'"'+(q.id===selected?" selected":"")+'>'+esc(q.name)+'</option>';
+  }).join("");
+}
+function resetForm(){
+  document.getElementById("person-form").reset();
+  document.getElementById("spouse-existing-wrap").classList.add("hidden");
+  document.getElementById("spouse-new-wrap").classList.add("hidden");
+  document.getElementById("form-remove").classList.add("hidden");
+}
+function openFormAdd(){
+  formMode="add"; formPersonId=null; formReturnFamily=null; resetForm();
+  document.getElementById("form-title").textContent="Add a New Person";
+  document.getElementById("form-locked").classList.add("hidden");
+  document.getElementById("parents-field").classList.remove("hidden");
+  document.getElementById("spouse-fieldset").classList.remove("hidden");
+  fillParentsSelect(centreCouple()[0].id+"|"+centreCouple()[1].id);
+  fillSpouseExisting(null,null);
+  document.getElementById("form-save").textContent="SAVE THIS PERSON";
+  show("view-form");
+}
+function openFormChild(childId){
+  var child=byId(childId); if(!child) return;
+  var spouse=child.spouseId?byId(child.spouseId):null;
+  formMode="child"; formPersonId=null; formReturnFamily=childId; resetForm();
+  document.getElementById("form-title").textContent="Add a Child to This Family";
+  var locked=document.getElementById("form-locked");
+  locked.textContent="Parents — already chosen for you, locked: "+child.name+(spouse?" + "+spouse.name:"");
+  locked.classList.remove("hidden");
+  document.getElementById("parents-field").classList.add("hidden");
+  document.getElementById("spouse-fieldset").classList.add("hidden");
+  document.getElementById("form-save").textContent="Save — add to "+child.name+"'s family";
+  show("view-form");
+}
+function openFormEdit(id){
+  var p=byId(id); if(!p) return;
+  formMode="edit"; formPersonId=id; formReturnFamily=null; resetForm();
+  document.getElementById("form-title").textContent="Edit — "+p.name;
+  document.getElementById("form-locked").classList.add("hidden");
+  document.getElementById("parents-field").classList.remove("hidden");
+  document.getElementById("spouse-fieldset").classList.remove("hidden");
+  document.getElementById("f-name").value=p.name;
+  document.getElementById("f-urdu").value=p.urdu;
+  document.getElementById("f-gender").value=p.gender;
+  document.getElementById("f-status").value=(p.status==="passed"?"passed":"living");
+  document.getElementById("f-born").value=bornText(p);
+  var pv=(p.fatherId||"")+"|"+(p.motherId||"");
+  var opts=coupleOptions(); var found=opts.some(function(o){return o.value===pv;});
+  if(!found && (p.fatherId||p.motherId)){
+    var sel=document.getElementById("f-parents");
+    fillParentsSelect("");
+    var lbl=[p.fatherId?byId(p.fatherId).name:"",p.motherId?byId(p.motherId).name:""].filter(Boolean).join(" + ");
+    sel.innerHTML += '<option value="'+pv+'" selected>'+esc(lbl)+'</option>';
+  } else fillParentsSelect(pv);
+  if(p.spouseId){
+    document.getElementById("f-spouse-mode").value="existing";
+    document.getElementById("spouse-existing-wrap").classList.remove("hidden");
+    fillSpouseExisting(p.spouseId,id);
+  } else {
+    document.getElementById("f-spouse-mode").value="none";
+    fillSpouseExisting(null,id);
+  }
+  document.getElementById("form-save").textContent="SAVE CHANGES";
+  document.getElementById("form-remove").classList.remove("hidden");
+  show("view-form");
+}
+function setSpouse(a,b){
+  if(a.spouseId && a.spouseId!==b.id){ var old=byId(a.spouseId); if(old&&old.spouseId===a.id) old.spouseId=null; }
+  a.spouseId=b.id; b.spouseId=a.id;
+}
+function clearSpouse(a){
+  if(a.spouseId){ var old=byId(a.spouseId); if(old&&old.spouseId===a.id) old.spouseId=null; a.spouseId=null; }
+}
+function submitForm(ev){
+  ev.preventDefault();
+  var name=document.getElementById("f-name").value.trim();
+  if(!name){ alert("Please type the person's name in English."); return; }
+  var urdu=document.getElementById("f-urdu").value.trim() || toUrdu(name);
+  var gender=document.getElementById("f-gender").value;
+  var status=document.getElementById("f-status").value==="passed"?"passed":"living";
+  var born=parseBorn(document.getElementById("f-born").value);
+  var person;
+  if(formMode==="edit"){
+    person=byId(formPersonId); if(!person) return;
+    person.name=name; person.urdu=urdu; person.gender=gender; person.status=status;
+    person.birthYear=born.y; person.birthPlace=born.pl;
+    var pv=document.getElementById("f-parents").value.split("|");
+    person.fatherId=pv[0]||null; person.motherId=pv[1]||null;
+  } else {
+    person={id:uid(),name:name,urdu:urdu,gender:gender,status:status,birthYear:born.y,birthPlace:born.pl,fatherId:null,motherId:null,spouseId:null};
+    if(formMode==="child"){
+      var parent=byId(formReturnFamily);
+      var sp=parent.spouseId?byId(parent.spouseId):null;
+      if(parent.gender==="M"){ person.fatherId=parent.id; person.motherId=sp?sp.id:null; }
+      else { person.motherId=parent.id; person.fatherId=sp?sp.id:null; }
+    } else {
+      var pv2=document.getElementById("f-parents").value.split("|");
+      person.fatherId=pv2[0]||null; person.motherId=pv2[1]||null;
+    }
+    people.push(person);
+  }
+  if(formMode!=="child"){
+    var mode=document.getElementById("f-spouse-mode").value;
+    if(mode==="existing"){
+      var sid=document.getElementById("f-spouse-existing").value;
+      var sp2=byId(sid); if(sp2) setSpouse(person,sp2);
+    } else if(mode==="new"){
+      var sname=document.getElementById("f-spouse-name").value.trim();
+      if(sname){
+        var surdu=document.getElementById("f-spouse-urdu").value.trim()||toUrdu(sname);
+        var nsp={id:uid(),name:sname,urdu:surdu,gender:document.getElementById("f-spouse-gender").value,status:"living",birthYear:"",birthPlace:"",fatherId:null,motherId:null,spouseId:null};
+        people.push(nsp); setSpouse(person,nsp);
+      }
+    } else if(mode==="none"){ clearSpouse(person); }
+  }
+  save(); renderMain();
+  if(formMode==="child" && formReturnFamily){ var rf=formReturnFamily; openFamily(rf); }
+  else show("view-main");
+}
+function removePerson(){
+  var p=byId(formPersonId); if(!p) return;
+  if(!confirm("Remove "+p.name+" from the tree? This cannot be undone.")) return;
+  people.forEach(function(q){
+    if(q.spouseId===p.id) q.spouseId=null;
+    if(q.fatherId===p.id) q.fatherId=null;
+    if(q.motherId===p.id) q.motherId=null;
+  });
+  people=people.filter(function(q){ return q.id!==p.id; });
+  save(); renderMain(); show("view-main");
+}
+
+/* ---------- Wiring ---------- */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-person],[data-open-family],[data-edit],[data-add-child],[data-spouse-of],[data-back]");
+  if(!t) return;
+  if(t.hasAttribute("data-back")){ renderMain(); show("view-main"); return; }
+  if(t.hasAttribute("data-open-family")){ openFamily(t.getAttribute("data-open-family")); return; }
+  if(t.hasAttribute("data-add-child")){ openFormChild(t.getAttribute("data-add-child")); return; }
+  if(t.hasAttribute("data-spouse-of")){ openFormEdit(t.getAttribute("data-spouse-of")); return; }
+  if(t.hasAttribute("data-edit")){ openFormEdit(t.getAttribute("data-edit")); return; }
+  if(t.hasAttribute("data-person")){
+    if(e.target.closest(".kid")||e.target.closest(".tap-name")||e.target.tagName==="A"||e.target.closest(".card")){ e.preventDefault(); openPerson(t.getAttribute("data-person")); return; }
+    if(t.classList.contains("tap")){ openPerson(t.getAttribute("data-person")); return; }
+  }
+});
+document.getElementById("btn-add-top").addEventListener("click",openFormAdd);
+document.getElementById("btn-preview").addEventListener("click",function(){ renderPreview(); show("view-preview"); });
+document.getElementById("person-form").addEventListener("submit",submitForm);
+document.getElementById("form-remove").addEventListener("click",removePerson);
+document.getElementById("f-name").addEventListener("input",function(){
+  document.getElementById("f-urdu").value=toUrdu(this.value);
+});
+document.getElementById("f-spouse-name").addEventListener("input",function(){
+  document.getElementById("f-spouse-urdu").value=toUrdu(this.value);
+});
+document.getElementById("f-spouse-mode").addEventListener("change",function(){
+  document.getElementById("spouse-existing-wrap").classList.toggle("hidden",this.value!=="existing");
+  document.getElementById("spouse-new-wrap").classList.toggle("hidden",this.value!=="new");
+  if(this.value==="existing") fillSpouseExisting(null,formPersonId);
+});
+(function buildUrduKeyboard(){
+  var chars=["ا","ب","پ","ت","ٹ","ث","ج","چ","ح","خ","د","ڈ","ذ","ر","ڑ","ز","ژ","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ک","گ","ل","م","ن","ں","و","ہ","ھ","ء","ی","ے"," "];
+  var kb=document.getElementById("urdu-kb");
+  chars.forEach(function(ch){
+    var b=document.createElement("button"); b.type="button"; b.textContent=(ch===" "?"space":ch); b.setAttribute("lang","ur");
+    b.addEventListener("click",function(){
+      var inp=document.getElementById("f-urdu");
+      var s=inp.selectionStart||inp.value.length;
+      inp.value=inp.value.slice(0,s)+ch+inp.value.slice(inp.selectionEnd||s);
+      inp.focus(); inp.selectionStart=inp.selectionEnd=s+ch.length;
+    });
+    kb.appendChild(b);
+  });
+})();
+/* Export / Import */
+document.getElementById("btn-export").addEventListener("click",function(){
+  var blob=new Blob([JSON.stringify(people,null,2)],{type:"application/json"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="shajra-e-nasb-backup.json"; a.click(); URL.revokeObjectURL(a.href);
+});
+document.getElementById("btn-import").addEventListener("click",function(){ document.getElementById("import-file").click(); });
+document.getElementById("import-file").addEventListener("change",function(){
+  var f=this.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var arr=JSON.parse(r.result);
+      if(!Array.isArray(arr)||!arr.length) throw new Error("bad file");
+      people=arr; save(); renderMain(); show("view-main"); alert("Imported "+arr.length+" people.");
+    }catch(e){ alert("That file could not be imported. Nothing was changed."); }
+  };
+  r.readAsText(f); this.value="";
+});
+renderMain();
+</script>
+</body>
+</html>
