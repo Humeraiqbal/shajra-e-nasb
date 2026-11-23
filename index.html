@@ -170,6 +170,7 @@
   .art-oval .odiv{color:#c9a227;font-size:clamp(7px,.9vw,12px);line-height:1;margin:2px 0}
   .art-oval .akid{font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
   .art-oval .akid svg{height:14px;width:auto;flex:none}
+  .art-branch-svg{position:absolute;z-index:2;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
   .art-branch{position:absolute;transform:translate(-50%,-50%);color:#f8edc9;font-weight:600;text-align:center;white-space:nowrap;z-index:3;font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));text-shadow:0 1px 0 rgba(0,0,0,.5),0 -1px 0 rgba(255,244,200,.22),1px 0 0 rgba(0,0,0,.26),-1px 0 0 rgba(0,0,0,.16),0 2px 4px rgba(0,0,0,.35)}
   .art-branch[lang="ur"]{font-size:calc(clamp(10.5px,1.45vw,18px)*var(--tfs,1))}
   .art-centre{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;color:#3a2c10;z-index:2;overflow:visible;text-shadow:0 1px 0 rgba(255,248,214,.55),0 -1px 1px rgba(96,64,0,.38),0 2px 3px rgba(96,64,0,.22)}
@@ -1014,8 +1015,15 @@ function renderPreview(){
     var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
     var branchHTML = "";
     if(ch.id==="humera" && gkids.length>=2){
-      var tips = [{x:60.2,y:31.2},{x:71.2,y:31.2}];
-      branchHTML = gkids.slice(0,2).map(function(k,i){
+      var tips = [{x:61.5,y:29.4},{x:68,y:29.4}];
+      var branchSVG = '<svg class="art-branch-svg" style="left:57%;top:28%;width:16%;height:9%" viewBox="0 0 160 90" preserveAspectRatio="none" aria-hidden="true">'+
+        '<path d="M89 84 C80 60 60 45 45 36" fill="none" stroke="#8a6d1c" stroke-width="4.5" stroke-linecap="round"/>'+
+        '<path d="M89 84 C95 60 102 45 110 36" fill="none" stroke="#8a6d1c" stroke-width="4.5" stroke-linecap="round"/>'+
+        '<path d="M89 84 C80 60 60 45 45 36" fill="none" stroke="#d9b64a" stroke-width="2.6" stroke-dasharray="5 3.4" stroke-linecap="round"/>'+
+        '<path d="M89 84 C95 60 102 45 110 36" fill="none" stroke="#d9b64a" stroke-width="2.6" stroke-dasharray="5 3.4" stroke-linecap="round"/>'+
+        '<circle cx="45" cy="35" r="4.6" fill="#c95d7a" stroke="#e8c85a" stroke-width="1.2"/>'+
+        '<ellipse cx="111" cy="34" rx="5.4" ry="2.8" fill="#7d9b3a" stroke="#e8c85a" stroke-width="1" transform="rotate(-32 111 34)"/></svg>';
+      branchHTML = branchSVG + gkids.slice(0,2).map(function(k,i){
         return '<div class="art-branch" style="left:'+tips[i].x+'%;top:'+tips[i].y+'%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+esc(langName(k,true))+'</div>';
       }).join("");
       gkids = gkids.slice(2);
