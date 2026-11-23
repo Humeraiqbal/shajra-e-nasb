@@ -71,7 +71,8 @@
   .tapestry-title .ur{font-size:32px;color:#e8c85a;line-height:1.3}
   .tapestry-title .en{font-size:13px;letter-spacing:.22em;color:#d8bc5a;margin-top:2px}
   .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
-  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:flex-start;width:100%}
+  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:stretch;width:100%}
+  .tcluster{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:stretch;width:100%}
   .tleaf-cluster{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;max-width:100%;padding:4px 2px}
   .tleaf-chip{font-size:11px;padding:2px 7px}
   .tunit .toval{padding:8px 4px}
@@ -467,20 +468,15 @@ function cornerSVG(cls){
   return '<span class="tcorner '+cls+'" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M5 29 C5 15 15 5 29 5" fill="none" stroke="#c9a227" stroke-width="2"/><path d="M5 21 C5 12 12 5 21 5" fill="none" stroke="#c9a227" stroke-width="1.2" opacity=".65"/><circle cx="10" cy="10" r="2.4" fill="#c9a227"/></svg></span>';
 }
 function vineSVG(){
-  return '<svg class="tvine" width="220" height="34" viewBox="0 0 300 36" preserveAspectRatio="none" aria-hidden="true">'+
-    '<path d="M150 36 C148 20 70 18 34 3" fill="none" stroke="#c9a227" stroke-width="2"/>'+
-    '<path d="M150 36 C152 20 230 18 266 3" fill="none" stroke="#c9a227" stroke-width="2"/>'+
-    '<path d="M150 36 C150 24 150 12 150 2" fill="none" stroke="#c9a227" stroke-width="2"/>'+
-    '<path d="M96 12 q-9 -6 -16 -4 q5 7 16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
-    '<path d="M204 12 q9 -6 16 -4 q-5 7 -16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
-    '<circle cx="34" cy="3" r="2.6" fill="#c9a227"/><circle cx="266" cy="3" r="2.6" fill="#c9a227"/><circle cx="150" cy="2" r="2.6" fill="#c9a227"/></svg>';
+  /* One clean HORIZONTAL gold vine divider between levels — no diagonals. */
+  return '<svg class="tvine" width="220" height="18" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="M2 9 C40 3 80 15 120 9 C160 3 200 15 240 9 C265 5 285 12 298 9" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M60 8 q-9 -6 -16 -4 q5 7 16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<path d="M240 8 q9 -6 16 -4 q-5 7 -16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<circle cx="150" cy="9" r="2.6" fill="#c9a227"/></svg>';
 }
 function rootVineSVG(){
-  return '<svg class="tvine" width="220" height="30" viewBox="0 0 300 32" preserveAspectRatio="none" aria-hidden="true">'+
-    '<path d="M150 0 C148 14 80 16 44 29" fill="none" stroke="#c9a227" stroke-width="2"/>'+
-    '<path d="M150 0 C152 14 220 16 256 29" fill="none" stroke="#c9a227" stroke-width="2"/>'+
-    '<path d="M104 13 q-9 5 -17 3 q6 -7 17 -3" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
-    '<path d="M196 13 q9 5 17 3 q-6 -7 -17 -3" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/></svg>';
+  return vineSVG();
 }
 function coupleOvalHTML(person,spouse,big){
   var h='<div class="toval'+(big?" trunk-oval":"")+'"><div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
@@ -506,13 +502,14 @@ function unitHTML(person,seen){
     if(seen[k.id]) return;
     if(isBranchUnit(k)) branches.push(k); else leaves.push(k);
   });
-  var above="";
-  if(leaves.length || branches.length){
-    var items="";
-    if(leaves.length) items += '<div class="tleaf-cluster" data-for="'+person.id+'">'+leaves.map(leafChipHTML).join("")+'</div>';
-    branches.forEach(function(b){ items += unitHTML(b,seen); });
-    above = '<div class="tunit-row">'+items+'</div>'+vineSVG();
-  }
+  var items="";
+  if(leaves.length) items += '<div class="tleaf-cluster" data-for="'+person.id+'">'+leaves.map(leafChipHTML).join("")+'</div>';
+  branches.forEach(function(b){ items += unitHTML(b,seen); });
+  /* The cluster area is ALWAYS present (empty for childless units) and is
+     flex:1, so it absorbs height differences ABOVE the oval; the couple
+     oval is the LAST element of the column, so every oval in a row shares
+     one baseline. */
+  var above = '<div class="tcluster">'+items+'</div>';
   return '<div class="tunit" data-unit="'+person.id+'">'+above+coupleOvalHTML(person,spouse,false)+'</div>';
 }
 function renderPreview(){
