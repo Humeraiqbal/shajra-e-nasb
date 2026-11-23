@@ -250,6 +250,10 @@
         <select id="f-gender"><option value="F">Girl / Female</option><option value="M">Boy / Male</option></select>
         <label for="f-status">Living or passed away?</label>
         <select id="f-status"><option value="living">Living</option><option value="passed">Passed away</option></select>
+        <div id="passed-wrap" class="hidden">
+          <label for="f-passed">Passed away — year and place (if known)</label>
+          <input id="f-passed" type="text" placeholder="e.g. 2015, Karachi">
+        </div>
         <label for="f-born">Born — year and place (if known)</label>
         <input id="f-born" type="text" placeholder="e.g. 2010, Mississauga">
         <fieldset id="spouse-fieldset">
@@ -385,6 +389,14 @@ function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){retu
 function bornText(p){
   var bits=[]; if(p.birthYear) bits.push(p.birthYear); if(p.birthPlace) bits.push(p.birthPlace);
   return bits.join(", ");
+}
+function deathText(p){
+  var bits=[]; if(p.deathYear) bits.push(p.deathYear); if(p.deathPlace) bits.push(p.deathPlace);
+  return bits.join(", ");
+}
+function togglePassedWrap(){
+  var w=document.getElementById("passed-wrap"); if(!w) return;
+  w.classList.toggle("hidden", document.getElementById("f-status").value!=="passed");
 }
 function parseBorn(text){
   text=(text||"").trim(); if(!text) return {y:"",pl:""};
@@ -1115,7 +1127,7 @@ function openPerson(id){
     '<div class="row"><b>Spouse:</b> '+link(spouse)+'</div>'+
     '<div class="row"><b>Siblings:</b> '+(sibs.length? sibs.map(link).join(", ") : "—")+'</div>'+
     '<div class="row"><b>Born:</b> '+(bornText(p)||"not entered yet")+'</div>'+
-    '<div class="row"><b>Status:</b> '+(p.status==="passed"?"Passed away":"Living")+'</div>'+
+    '<div class="row"><b>Status:</b> '+(p.status==="passed"?("Passed away"+(deathText(p)?" — "+esc(deathText(p)):"")):"Living")+'</div>'+
     '<div class="btnrow"><button type="button" data-edit="'+p.id+'">✎ Edit '+esc(p.name)+'</button></div></div>';
   show("view-person");
 }
@@ -1149,6 +1161,7 @@ function fillSpouseExisting(selected,excludeId){
 }
 function resetForm(){
   document.getElementById("person-form").reset();
+  togglePassedWrap();
   document.getElementById("spouse-existing-wrap").classList.add("hidden");
   document.getElementById("spouse-new-wrap").classList.add("hidden");
   document.getElementById("form-remove").classList.add("hidden");
@@ -1188,6 +1201,8 @@ function openFormEdit(id){
   document.getElementById("f-urdu").value=p.urdu;
   document.getElementById("f-gender").value=p.gender;
   document.getElementById("f-status").value=(p.status==="passed"?"passed":"living");
+  togglePassedWrap();
+  document.getElementById("f-passed").value=deathText(p);
   document.getElementById("f-born").value=bornText(p);
   var pv=(p.fatherId||"")+"|"+(p.motherId||"");
   var opts=coupleOptions(); var found=opts.some(function(o){return o.value===pv;});
@@ -1224,15 +1239,17 @@ function submitForm(ev){
   var gender=document.getElementById("f-gender").value;
   var status=document.getElementById("f-status").value==="passed"?"passed":"living";
   var born=parseBorn(document.getElementById("f-born").value);
+  var died=(status==="passed") ? parseBorn(document.getElementById("f-passed").value) : {y:"",pl:""};
   var person;
   if(formMode==="edit"){
     person=byId(formPersonId); if(!person) return;
     person.name=name; person.urdu=urdu; person.gender=gender; person.status=status;
     person.birthYear=born.y; person.birthPlace=born.pl;
+    person.deathYear=died.y; person.deathPlace=died.pl;
     var pv=document.getElementById("f-parents").value.split("|");
     person.fatherId=pv[0]||null; person.motherId=pv[1]||null;
   } else {
-    person={id:uid(),name:name,urdu:urdu,gender:gender,status:status,birthYear:born.y,birthPlace:born.pl,fatherId:null,motherId:null,spouseId:null};
+    person={id:uid(),name:name,urdu:urdu,gender:gender,status:status,birthYear:born.y,birthPlace:born.pl,deathYear:died.y,deathPlace:died.pl,fatherId:null,motherId:null,spouseId:null};
     if(formMode==="child"){
       var parent=byId(formReturnFamily);
       var sp=parent.spouseId?byId(parent.spouseId):null;
@@ -1275,6 +1292,7 @@ function removePerson(){
 }
 
 /* ---------- Wiring ---------- */
+document.getElementById("f-status").addEventListener("change",togglePassedWrap);
 document.addEventListener("click",function(e){
   var t=e.target.closest("[data-person],[data-open-family],[data-edit],[data-add-child],[data-spouse-of],[data-back]");
   if(!t) return;
