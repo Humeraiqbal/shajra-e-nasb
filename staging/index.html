@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAGING — Shajra-e-Nasb (Humera’s review copy)</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#123f2e;color:#f5e7c1;font-family:Georgia,'Times New Roman',serif}
+  header{text-align:center;padding:22px 14px 6px}
+  header h1{margin:0;font-size:30px;letter-spacing:.04em;color:#e8c85a}
+  header .urdu{font-size:26px;color:#f5e7c1;margin-top:4px}
+  header p{color:#d8bc5a;font-size:14px;margin:6px 0 0}
+  main{max-width:860px;margin:0 auto;padding:14px}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0 18px}
+  button{font-family:Georgia,serif;cursor:pointer;border-radius:10px;border:1.5px solid #c9a227;background:rgba(201,162,39,.14);color:#f5e7c1;padding:10px 14px;font-size:15px}
+  button:hover{background:rgba(201,162,39,.28)}
+  button.primary{background:#c9a227;color:#123f2e;font-weight:700;font-size:17px;padding:14px 20px;width:100%}
+  button.danger{background:transparent;border-color:#a05555;color:#e0a0a0;margin-top:34px}
+  button.small{padding:6px 10px;font-size:13px}
+  .oval{border:2.5px solid #c9a227;border-radius:999px;background:#0d3325;max-width:520px;margin:0 auto;padding:14px 10px;display:flex;text-align:center;overflow:hidden}
+  .oval .half{flex:1;padding:2px 8px}
+  .oval .half:first-child{border-right:1.5px solid #c9a227}
+  .oval .nm{font-size:18px;font-weight:700}
+  .urdu-nm{font-size:16px;color:#d8bc5a;margin-top:2px}
+  .sub{font-size:12px;color:#d8bc5a;text-align:center;margin-top:6px}
+  .connector{text-align:center;color:#c9a227;font-size:20px;line-height:1.2}
+  .boxes{display:grid;gap:14px;margin-top:8px}
+  @media(min-width:640px){.boxes{grid-template-columns:1fr 1fr}}
+  .box{border:1.5px solid #c9a227;border-radius:12px;padding:12px;background:rgba(255,255,255,.04)}
+  .box .couple{text-align:center;font-weight:700;font-size:16px;border-bottom:1px solid rgba(201,162,39,.5);padding-bottom:8px}
+  .box .couple .tap{cursor:pointer;text-decoration:underline dotted rgba(201,162,39,.7)}
+  .box .lbl{text-align:center;font-size:12px;color:#d8bc5a;margin:8px 0}
+  .kids{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .kid{display:inline-flex;align-items:center;gap:5px;border:1px solid #c9a227;border-radius:999px;padding:4px 10px;font-size:13.5px;cursor:pointer;background:rgba(13,51,37,.6)}
+  .kid:hover{background:rgba(201,162,39,.22)}
+  .kid svg{flex:none}
+  .box .openrow{text-align:center;margin-top:10px}
+  .hidden{display:none!important}
+  .card,.formwrap{border:2px solid #c9a227;border-radius:14px;background:#0d3325;padding:18px;max-width:620px;margin:0 auto}
+  .card h2,.formwrap h2{text-align:center;margin:4px 0 4px;font-size:22px}
+  .card .row{margin:9px 0;font-size:15px;line-height:1.55}
+  .card .row b{color:#d8bc5a}
+  .btnrow{display:grid;gap:9px;margin-top:14px}
+  label{display:block;margin:13px 0 4px;font-size:14.5px}
+  input,select{width:100%;background:#fff8e6;color:#222;border:none;border-radius:8px;padding:11px;font-size:15px;font-family:Georgia,serif}
+  input[readonly]{opacity:.85}
+  .locked{background:#e8c85a;color:#123f2e;border-radius:10px;padding:11px;text-align:center;font-weight:700;margin-top:12px}
+  .hint{font-size:12.5px;color:#d8bc5a;margin-top:4px;line-height:1.5}
+  .urdukb{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+  .urdukb button{padding:5px 8px;font-size:16px;border-radius:6px}
+  fieldset{border:1px dashed #c9a227;border-radius:10px;margin-top:16px;padding:10px 12px 14px}
+  legend{color:#d8bc5a;padding:0 6px;font-size:14px}
+  .plaque{border:2px solid #c9a227;border-radius:10px;background:#0d3325;padding:10px 12px;text-align:center}
+  .plaque h3{margin:0 0 6px;color:#e8c85a;font-size:17px}
+  .plaque p{font-size:13.5px;line-height:1.5;margin:6px 0 0}
+  .chain{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
+  .block{width:120px;height:30px;border:1.5px dashed #c9a227;border-radius:6px;background:rgba(201,162,39,.07)}
+  .tapestry-frame{position:relative;border:4px solid #c9a227;outline:2px solid rgba(138,109,26,.85);outline-offset:6px;border-radius:12px;padding:12px 32px 6px;
+    box-shadow:0 0 0 10px #0a2417,0 0 0 11.5px rgba(201,162,39,.45),inset 0 0 64px rgba(0,0,0,.55);
+    background:
+      radial-gradient(ellipse at 50% 38%,rgba(232,200,90,.13),rgba(0,0,0,0) 55%),
+      radial-gradient(ellipse at center,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,rgba(0,0,0,0) 1px 3px),
+      repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,rgba(0,0,0,0) 1px 3px),
+      repeating-linear-gradient(45deg,rgba(255,255,255,.016) 0 2px,rgba(0,0,0,0) 2px 4px),
+      repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 2px,rgba(0,0,0,0) 2px 4px),
+      linear-gradient(165deg,#17452c 0%,#0c3122 52%,#061f14 100%)}
+  .tvine-border{position:absolute;pointer-events:none;opacity:.95;z-index:3}
+  .tvine-border.tvb-t{top:10px;left:22px;right:22px;height:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='15' viewBox='0 0 30 15'%3E%3Cpath d='M1 11 Q8 3 15 11 T29 11' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M15 11 q-1 -6 -6 -7 q1 6 6 7' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='15' cy='11' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-x left center/auto 15px}
+  .tvine-border.tvb-b{bottom:10px;left:22px;right:22px;height:15px;transform:scaleY(-1);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='15' viewBox='0 0 30 15'%3E%3Cpath d='M1 11 Q8 3 15 11 T29 11' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M15 11 q-1 -6 -6 -7 q1 6 6 7' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='15' cy='11' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-x left center/auto 15px}
+  .tvine-border.tvb-l{left:10px;top:22px;bottom:22px;width:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='30' viewBox='0 0 15 30'%3E%3Cpath d='M11 1 Q3 8 11 15 T11 29' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M11 15 q-6 -1 -7 -6 q6 1 7 6' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='11' cy='15' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-y center top/15px auto}
+  .tvine-border.tvb-r{right:10px;top:22px;bottom:22px;width:15px;transform:scaleX(-1);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='30' viewBox='0 0 15 30'%3E%3Cpath d='M11 1 Q3 8 11 15 T11 29' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Cpath d='M11 15 q-6 -1 -7 -6 q6 1 7 6' fill='%23c9a227' opacity='.85'/%3E%3Ccircle cx='11' cy='15' r='1.6' fill='%23e8c85a'/%3E%3C/svg%3E") repeat-y center top/15px auto}
+  .ttree{display:block;width:100%;margin:0 auto;pointer-events:none}
+  .ttree-branches{max-width:1120px}
+  .ttree-roots{max-width:1120px}
+  .ttree-measured{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .tcontent{position:relative;z-index:1}
+  .tcorner{position:absolute;width:34px;height:34px;pointer-events:none}
+  .tcorner.tl{top:6px;left:6px}
+  .tcorner.tr{top:6px;right:6px;transform:scaleX(-1)}
+  .tcorner.bl{bottom:6px;left:6px;transform:scaleY(-1)}
+  .tcorner.br{bottom:6px;right:6px;transform:scale(-1,-1)}
+  .tapestry-title{text-align:center;margin-bottom:0}
+  .tapestry-title .ur{font-size:20px;color:#e8c85a;line-height:1.25}
+  .tapestry-title .en{font-size:12px;letter-spacing:.22em;color:#d8bc5a;margin-top:1px}
+  .tunit{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:118px;max-width:360px}
+  .tunit-row{display:flex;flex-wrap:wrap;gap:12px 8px;justify-content:center;align-items:stretch;width:100%}
+  .tcluster{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:stretch;width:100%}
+  .tleaf-cluster{display:flex;flex-wrap:wrap;gap:9px 7px;justify-content:center;align-items:flex-start;max-width:100%;padding:4px 2px}
+  .medallion{display:inline-flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:2px 3px;max-width:88px;background:none;border:none}
+  .medallion-ring{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:3px double #c9a227;background:radial-gradient(circle at 50% 32%,rgba(232,200,90,.22),rgba(9,42,29,.92) 72%);box-shadow:0 0 0 1.5px rgba(138,109,26,.85),inset 0 0 9px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.4)}
+  .medallion-name{font-size:11px;color:#f3e5bb;text-align:center;line-height:1.25;overflow-wrap:break-word;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+  .medallion:hover .medallion-ring{background:radial-gradient(circle at 50% 32%,rgba(232,200,90,.42),rgba(201,162,39,.28) 78%)}
+  .tunit .toval{padding:8px 4px}
+  .tunit .toval .nm{font-size:12px;overflow-wrap:break-word}
+  .tunit .toval .urdu-nm{font-size:11px;overflow-wrap:break-word}
+  #tapestry-frame{width:min(1300px,calc(100vw - 24px));margin-left:50%;transform:translateX(-50%)}
+  .band-rows{position:relative;padding:0}
+  .ttree-bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .band-row{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:1px 0}
+  .band-row.single-left{justify-content:flex-start;padding-left:12%}
+  .band-row.single-right{justify-content:flex-end;padding-right:12%}
+  .band-row .tunit{flex:1 1 0;min-width:0;display:block}
+  /* Ellipse safe zone: the oval's height is content-driven with a MINIMUM
+     from aspect-ratio 5/8 (min-height is also set inline per oval), and it
+     grows taller whenever the family's lines need the room — text is never
+     clipped. Inside, .oval-inner constrains the words to the middle band
+     of the ellipse, the only part wide enough for full lines. */
+  .toval.child-oval{flex-direction:column;align-items:center;justify-content:center;max-width:none;width:100%;padding:14px 6px;border-radius:50%;aspect-ratio:5/8}
+  .oval-inner{width:74%;margin:0 auto;display:flex;flex-direction:column;align-items:center;min-width:0}
+  .toval .cpl{display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;min-width:0}
+  .toval .amp{color:#c9a227;font-size:11px;line-height:1.1}
+  .oval-divider{line-height:0;margin:3px 0 0}
+  .oval-kids{margin-top:4px;display:flex;flex-direction:column;gap:2px;width:100%}
+  .oval-kid{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;color:#f3e5bb;text-align:center;line-height:1.2}
+  .oval-kid span{overflow-wrap:break-word;min-width:0}
+  .oval-kid svg{flex:none;height:20px;width:auto}
+  .oval-kid.subkid{font-size:11px;color:#d8bc5a;margin-left:16px}
+  .oval-wilt{position:absolute;top:-13px;left:8px;line-height:0;z-index:3;transform:rotate(-8deg)}
+  .toval.deceased{border-color:#a68a3f}
+  .toval{position:relative;border:4px double #c9a227;border-radius:999px;background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.15),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(17,60,39,.97),rgba(7,32,21,.97));width:100%;max-width:300px;padding:13px 8px;display:flex;text-align:center;overflow:visible;box-shadow:0 0 0 2px rgba(138,109,26,.85),0 0 0 5px rgba(201,162,39,.32),inset 0 0 20px rgba(0,0,0,.55),inset 0 0 9px rgba(201,162,39,.22),0 4px 12px rgba(0,0,0,.35)}
+  .toval .half{flex:1;padding:2px 6px;min-width:0}
+  .toval .half + .half{border-left:1.5px solid rgba(201,162,39,.75)}
+  .toval .nm{font-size:15px;font-weight:700;color:#f8eed2;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .toval .urdu-nm{font-size:14px;color:#e8c85a}
+  .oval-sprig{position:absolute;left:50%;transform:translateX(-50%);line-height:0;pointer-events:none;z-index:2}
+  .oval-sprig.top{top:-12px}
+  .oval-sprig.bottom{bottom:-12px;transform:translateX(-50%) scaleY(-1)}
+  .toval.trunk-oval{width:300px;max-width:300px;aspect-ratio:1/1.05;border-radius:50%;padding:16px 24px;border-width:3.5px;align-items:center}
+  .toval.trunk-oval .nm{font-size:20px}
+  .toval.trunk-oval .urdu-nm{font-size:18px}
+  .tvine{display:block;margin:1px auto}
+  .roots{display:grid;gap:16px;margin-top:2px;align-items:stretch}
+  @media(min-width:640px){.roots{grid-template-columns:1fr 1fr}}
+  .root-side{display:flex;flex-direction:column}
+  .root-side{align-items:flex-start}
+  #root-khilji{align-items:flex-end}
+  .root-plaque{flex:1;display:flex;flex-direction:column;max-width:300px;width:100%}
+  .root-plaque .chain{margin:12px 0 4px}
+  .root-gap{flex:1;min-height:150px}
+  .parchment{background:radial-gradient(ellipse at 32% 16%,rgba(255,252,225,.55),rgba(0,0,0,0) 58%),linear-gradient(165deg,#f0e0ac 0%,#e4cf8f 46%,#d4ba6f 82%,#c3a457 100%);color:#4a3418;border:2px solid #8a6d1a;border-radius:16px 5px 16px 5px;box-shadow:inset 0 0 0 3px rgba(138,109,26,.30),inset 0 0 30px rgba(122,84,20,.38),0 5px 16px rgba(0,0,0,.4)}
+  .parchment h3{color:#6b4e12;letter-spacing:.16em;font-variant:small-caps;font-size:17px;text-shadow:0 1px 0 rgba(255,248,214,.65)}
+  .parchment p{color:#4a3418}
+  .parchment .sub{color:#7a5c1e}
+  .parchment .hang-chain{display:block;margin:0 auto 2px;line-height:0}
+  .khilji-plaque{flex:0 1 auto}
+  .gen-block{background:linear-gradient(170deg,#ecd99e,#d9bf74 70%,#c9ab5c);border:1.5px dashed #8a6d1a;box-shadow:inset 0 0 8px rgba(122,84,20,.35),0 1px 3px rgba(0,0,0,.3)}
+  .tapestry-title .en{font-variant:small-caps;text-shadow:0 2px 7px rgba(0,0,0,.55)}
+  .tapestry-title .ur{text-shadow:0 2px 8px rgba(0,0,0,.5)}
+  @media(max-width:520px){
+    .tapestry-frame{padding:20px 10px 18px}
+    .toval.trunk-oval .nm{font-size:17px}
+    .toval.trunk-oval .urdu-nm{font-size:15px}
+    .block{width:104px}
+    .tunit{min-width:118px}
+  }
+  footer{max-width:860px;margin:0 auto;padding:8px 14px 30px;text-align:center;color:#d8bc5a;font-size:13px;line-height:1.7}
+  footer .frow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+
+  .lang-switch{display:flex;gap:8px;justify-content:center;align-items:center;margin:0 0 14px;flex-wrap:wrap}
+  .lang-switch .lang-lbl{color:#d8bc5a;font-size:14px}
+  .lang-switch button.active{background:#c9a227;color:#123f2e;font-weight:700}
+  .tapestry-wrap{position:relative}
+  .tapestry-wrap>img{display:block;width:100%;height:auto}
+  .art-oval{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0;color:#f8edc9;text-shadow:0 1px 0 rgba(0,0,0,.5),0 -1px 0 rgba(255,244,200,.22),1px 0 0 rgba(0,0,0,.26),-1px 0 0 rgba(0,0,0,.16),0 2px 4px rgba(0,0,0,.35);overflow:visible;z-index:2}
+  .couple-heart{height:30px;width:auto;vertical-align:-8px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+  .couple-heart.stack{height:20px;vertical-align:middle}
+  .art-oval .cpl{font-weight:700;font-size:calc(clamp(10px,1.35vw,17px)*var(--tfs,1));line-height:1.15;width:100%;text-align:center}
+  .art-oval .akid{width:100%}
+  .art-oval .odiv{color:#c9a227;font-size:clamp(7px,.9vw,12px);line-height:1;margin:2px 0}
+  .art-oval .akid{font-size:calc(clamp(9px,1.2vw,15.5px)*var(--tfs,1));line-height:1.25;display:flex;align-items:center;gap:3px;justify-content:center}
+  .art-oval .akid svg{height:14px;width:auto;flex:none}
+  .art-centre{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;display:flex;color:#3a2c10;z-index:2;overflow:visible;text-shadow:0 1px 0 rgba(255,248,214,.55),0 -1px 1px rgba(96,64,0,.38),0 2px 3px rgba(96,64,0,.22)}
+  .art-centre .chalf{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2%}
+  .art-centre .chalf:first-child{border-right:none}
+  .art-centre .cname{font-weight:700;font-size:calc(clamp(12px,1.7vw,22px)*var(--tfs,1));line-height:1.15;width:100%;text-align:center}
+  .art-centre .cdesc{width:100%;text-align:center}
+  .art-centre .cdesc{font-style:italic;font-size:calc(clamp(7.5px,1vw,13px)*var(--tfs,1));line-height:1.25;margin-top:3px}
+  .art-plaque{position:absolute;transform:translate(-50%,-50%);background:transparent;border:none;color:#3a2c10;text-align:center;padding:0;z-index:2;overflow:visible;display:flex;flex-direction:column;justify-content:center;text-shadow:0 1px 0 rgba(255,248,214,.5),0 -1px 1px rgba(96,64,0,.3)}
+  .art-plaque .ptitle{font-weight:700;font-size:clamp(10px,1.4vw,18px);line-height:1.15}
+  .art-plaque .pbody{font-size:clamp(6px,.72vw,9.8px);line-height:1.25;margin-top:2px}
+  .art-oval[lang="ur"] .cpl{font-size:calc(clamp(11px,1.5vw,19px)*var(--tfs,1))}
+  .art-oval[lang="ur"] .akid{font-size:calc(clamp(10.5px,1.45vw,18px)*var(--tfs,1))}
+  .art-centre .chalf[lang="ur"] .cname{font-size:calc(clamp(14px,2vw,26px)*var(--tfs,1))}
+  .art-centre .chalf[lang="ur"] .cdesc{font-size:calc(clamp(9px,1.15vw,15px)*var(--tfs,1))}
+  .art-plaque[lang="ur"] .ptitle{font-size:clamp(12px,1.6vw,20px)}
+  .art-plaque[lang="ur"] .pbody{font-size:clamp(6.5px,.76vw,9.8px);line-height:1.2}
+  .ts-3 .art-oval .cpl{font-size:calc(clamp(10px,1.35vw,17px)*1.28)}
+  .ts-3 .art-oval .akid{font-size:calc(clamp(9px,1.2vw,15.5px)*1.28)}
+  .ts-3 .art-oval[lang="ur"] .cpl{font-size:calc(clamp(11px,1.5vw,19px)*1.26)}
+  .ts-3 .art-oval[lang="ur"] .akid{font-size:calc(clamp(10.5px,1.45vw,18px)*1.26)}
+  details.backup{margin-top:10px}
+  details.backup summary{cursor:pointer;color:#d8bc5a;font-size:12.5px;list-style:none}
+  details.backup summary::-webkit-details-marker{display:none}
+  details.backup .frow{margin-top:10px}
+  .backrow{margin-bottom:12px}
+  /* ---------- Colour themes: cloth + embroidery metal (user-selectable, remembered) ---------- */
+  body[data-cloth="royal"]{background:#12264f}
+  body[data-cloth="royal"] .oval,body[data-cloth="royal"] .card,body[data-cloth="royal"] .formwrap,body[data-cloth="royal"] .plaque{background:#0b1a38}
+  body[data-cloth="royal"] .kid{background:rgba(11,26,56,.65)}
+  body[data-cloth="royal"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(16,38,79,.97),rgba(7,17,40,.97))}
+  body[data-cloth="ruby"]{background:#57152a}
+  body[data-cloth="ruby"] .oval,body[data-cloth="ruby"] .card,body[data-cloth="ruby"] .formwrap,body[data-cloth="ruby"] .plaque{background:#3d0e1e}
+  body[data-cloth="ruby"] .kid{background:rgba(61,14,30,.65)}
+  body[data-cloth="ruby"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(87,21,42,.97),rgba(46,8,22,.97))}
+  body[data-cloth="purple"]{background:#33155c}
+  body[data-cloth="purple"] .oval,body[data-cloth="purple"] .card,body[data-cloth="purple"] .formwrap,body[data-cloth="purple"] .plaque{background:#22093f}
+  body[data-cloth="purple"] .kid{background:rgba(34,9,63,.65)}
+  body[data-cloth="purple"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(51,21,92,.97),rgba(24,7,48,.97))}
+  body[data-cloth="pearl"]{background:#f1e8d2;color:#33270f}
+  body[data-cloth="pearl"] .oval,body[data-cloth="pearl"] .card,body[data-cloth="pearl"] .formwrap,body[data-cloth="pearl"] .plaque{background:#faf3df}
+  body[data-cloth="pearl"] .kid{background:rgba(250,243,223,.85)}
+  body[data-cloth="pearl"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(160,124,32,.14),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(250,243,223,.99),rgba(238,226,196,.99))}
+  body[data-cloth="pearl"] .sub,body[data-cloth="pearl"] .hint,body[data-cloth="pearl"] legend,body[data-cloth="pearl"] header p,body[data-cloth="pearl"] .box .lbl,body[data-cloth="pearl"] .lang-switch .lang-lbl,body[data-cloth="pearl"] details.backup summary,body[data-cloth="pearl"] .urdu-nm,body[data-cloth="pearl"] .card .row b{color:#7a5c14}
+  body[data-cloth="pearl"] header .urdu{color:#33270f}
+  body[data-cloth="pearl"] button{color:#33270f}
+  body[data-cloth="pearl"] .tapestry-frame{box-shadow:0 0 0 10px #e7dcbf,0 0 0 11.5px rgba(160,124,32,.5),inset 0 0 64px rgba(120,90,20,.15)}
+  body[data-metal="silver"] button{border-color:#c7ccd4;background:rgba(199,204,212,.14)}
+  body[data-metal="silver"] button:hover{background:rgba(199,204,212,.28)}
+  body[data-metal="silver"] button.primary{background:#c7ccd4;color:#1c2733}
+  body[data-metal="silver"] .lang-switch button.active{background:#c7ccd4;color:#1c2733}
+  body[data-metal="silver"] .oval,body[data-metal="silver"] .card,body[data-metal="silver"] .formwrap,body[data-metal="silver"] .plaque,body[data-metal="silver"] fieldset{border-color:#c7ccd4}
+  body[data-metal="silver"] .oval .half:first-child{border-right-color:#c7ccd4}
+  body[data-metal="silver"] .box,body[data-metal="silver"] .kid{border-color:#c7ccd4}
+  body[data-metal="silver"] .box .couple{border-bottom-color:rgba(199,204,212,.5)}
+  body[data-metal="silver"] .connector{color:#c7ccd4}
+  body[data-metal="silver"] header h1,body[data-metal="silver"] .plaque h3{color:#eef1f5}
+  body[data-metal="silver"] .toval{border-color:#c7ccd4;box-shadow:0 0 0 2px rgba(140,148,160,.85),0 0 0 5px rgba(199,204,212,.32),inset 0 0 20px rgba(0,0,0,.55),inset 0 0 9px rgba(199,204,212,.22),0 4px 12px rgba(0,0,0,.35)}
+  body[data-metal="silver"] .tapestry-frame{border-color:#c7ccd4;outline-color:rgba(140,148,160,.85)}
+  body[data-metal="silver"] .locked{background:#dfe3e8;color:#1c2733}
+  .lang-switch select{width:auto;padding:9px 10px;font-size:14.5px;border:1.5px solid rgba(0,0,0,.35);border-radius:9px}
+  .swatch{display:inline-block;width:20px;height:20px;border-radius:50%;border:2px solid rgba(0,0,0,.35);vertical-align:middle;flex:none}
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:99;background:#7a1f1f;color:#fff;text-align:center;padding:10px 8px;font-family:Georgia,serif;font-size:15px;font-weight:700">STAGING — Humera’s review copy only. Your family cannot see this page.</div>
+<header>
+  <h1>Shajra-e-Nasb</h1>
+  <div class="urdu" lang="ur" dir="rtl">شجرہ نسب</div>
+  <p>Our family lineage — who belongs to who, box by box</p>
+</header>
+<main>
+  <!-- MAIN VIEW -->
+  <section id="view-main">
+    <div class="topbar">
+      <button class="primary" id="btn-preview" type="button">Preview the Tapestry</button>
+    </div>
+    <button id="btn-add-top" type="button" style="width:100%">+ Add a New Person</button>
+    <div style="height:16px"></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><select class="cloth-select" aria-label="Cloth colour"><option value="emerald">Emerald Green</option><option value="royal">Royal Blue</option><option value="ruby">Ruby Red</option><option value="purple">Deep Purple</option><option value="pearl">Pearl White</option></select><span class="swatch cloth-swatch"></span></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><select class="metal-select" aria-label="Embroidery colour"><option value="gold">Gold</option><option value="silver">Silver</option></select><span class="swatch metal-swatch"></span><span class="hint">Pearl white always pairs with gold.</span></div>
+    <div class="oval" id="centre-oval"></div>
+    <div class="sub">the parents — everyone below is their child</div>
+    <div class="connector">│</div>
+    <div class="boxes" id="family-boxes"></div>
+  </section>
+
+  <!-- FAMILY (ENLARGED BOX) VIEW -->
+  <section id="view-family" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div id="family-detail"></div>
+  </section>
+
+  <!-- PERSON CARD VIEW -->
+  <section id="view-person" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div id="person-detail"></div>
+  </section>
+
+  <!-- FORM VIEW -->
+  <section id="view-form" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back (nothing saved)</button></div>
+    <div class="formwrap">
+      <h2 id="form-title">Add a New Person</h2>
+      <div id="form-locked" class="locked hidden"></div>
+      <form id="person-form" autocomplete="off">
+        <label for="f-name">Full name in English *</label>
+        <input id="f-name" type="text" placeholder="Type the name here…" required>
+        <label for="f-urdu">Urdu name (appears by itself as you type — tap a letter to correct it)</label>
+        <input id="f-urdu" type="text" lang="ur" dir="rtl" placeholder="— appears automatically —">
+        <div class="urdukb" id="urdu-kb"></div>
+        <div id="parents-field">
+          <label for="f-parents">Who are this person's parents? *</label>
+          <select id="f-parents"></select>
+          <div class="hint">This answer decides WHICH family box they land in.</div>
+        </div>
+        <label for="f-gender">Boy or girl?</label>
+        <select id="f-gender"><option value="F">Girl / Female</option><option value="M">Boy / Male</option></select>
+        <label for="f-status">Living or passed away?</label>
+        <select id="f-status"><option value="living">Living</option><option value="passed">Passed away</option></select>
+        <div id="passed-wrap" class="hidden">
+          <label for="f-passed">Passed away — year and place (if known)</label>
+          <input id="f-passed" type="text" placeholder="e.g. 2015, Karachi">
+        </div>
+        <label for="f-born">Born — year and place (if known)</label>
+        <input id="f-born" type="text" placeholder="e.g. 2010, Mississauga">
+        <fieldset id="spouse-fieldset">
+          <legend>Spouse (only if they have one)</legend>
+          <label for="f-spouse-mode">Spouse</label>
+          <select id="f-spouse-mode"><option value="none">No spouse</option><option value="existing">Choose someone already in the tree</option><option value="new">Type in a brand-new spouse</option></select>
+          <div id="spouse-existing-wrap" class="hidden">
+            <label for="f-spouse-existing">Choose the spouse</label>
+            <select id="f-spouse-existing"></select>
+          </div>
+          <div id="spouse-new-wrap" class="hidden">
+            <label for="f-spouse-name">New spouse's full name in English</label>
+            <input id="f-spouse-name" type="text" placeholder="Type the spouse's name…">
+            <label for="f-spouse-urdu">New spouse's Urdu name</label>
+            <input id="f-spouse-urdu" type="text" lang="ur" dir="rtl" placeholder="— appears automatically —">
+            <label for="f-spouse-gender">Spouse — boy or girl?</label>
+            <select id="f-spouse-gender"><option value="M">Boy / Male</option><option value="F">Girl / Female</option></select>
+          </div>
+        </fieldset>
+        <div style="height:14px"></div>
+        <button class="primary" id="form-save" type="submit">SAVE THIS PERSON</button>
+        <button class="danger hidden" id="form-remove" type="button">Remove this person from the tree</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- PREVIEW / LIVING TAPESTRY VIEW (drawn from the live data; grows upward) -->
+  <section id="view-preview" class="hidden">
+    <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Tapestry language:</span><button type="button" id="lang-en">English</button><button type="button" id="lang-ur" lang="ur">اردو</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Text size:</span><button type="button" id="ts-1">A</button><button type="button" id="ts-2">A+</button><button type="button" id="ts-3">A++</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><select class="cloth-select" aria-label="Cloth colour"><option value="emerald">Emerald Green</option><option value="royal">Royal Blue</option><option value="ruby">Ruby Red</option><option value="purple">Deep Purple</option><option value="pearl">Pearl White</option></select><span class="swatch cloth-swatch"></span></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><select class="metal-select" aria-label="Embroidery colour"><option value="gold">Gold</option><option value="silver">Silver</option></select><span class="swatch metal-swatch"></span><span class="hint">Pearl white always pairs with gold.</span></div>
+    <div class="tapestry-frame" id="tapestry-frame"></div>
+  </section>
+</main>
+<footer id="page-footer">
+  <div>Entries are saved in the family's shared tree — everyone sees the same tree.</div>
+  <details class="backup" id="backup-details">
+    <summary>Backup copies (only Humera needs this)</summary>
+    <div class="frow">
+      <button class="small" id="btn-export" type="button">Save a backup copy of the family list</button>
+      <button class="small" id="btn-import" type="button">Load a backup copy</button>
+      <input type="file" id="import-file" accept="application/json" class="hidden">
+    </div>
+    <div>Use a backup copy to keep your entries safe or move them to another device.</div>
+  </details>
+</footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+"use strict";
+/* ---------- Transliteration (English -> Urdu) ---------- */
+var NAME_WORDS = {
+  iqbal:"اقبال", ahmed:"احمد", shahida:"شاہدہ", khatoon:"خاتون", sumera:"سمیرہ",
+  sohail:"سہیل", humera:"حمیرا", saqib:"ثاقب", shoaib:"شعیب", abeer:"عبیر",
+  jibran:"جبران", baig:"بیگ", saifan:"سیفان", zubair:"زبیر", yusha:"یوشا",
+  biag:"بیاگ", zaid:"زید", zohail:"زوہیل", shehla:"شہلا", rida:"رضا",
+  eman:"ایمان", tehreem:"تحریم", mawiya:"ماویہ", khiljhi:"خلجی", khilji:"خلجی",
+  eshaal:"ایشال", faiza:"فائزہ", syed:"سید", yonus:"یونس", yusuf:"یوسف",
+  yasna:"یاسنا", azifa:"عظیفہ", adeel:"عدیل", shahmeer:"شاہ میر", mustafa:"مصطفیٰ",
+  kamal:"کمال", fatima:"فاطمہ", zahra:"زہرا", ali:"علی", muhammad:"محمد", mohammed:"محمد"
+};
+var DIGRAPHS = {kh:"خ",gh:"غ",sh:"ش",ch:"چ",th:"تھ",ph:"پھ",bh:"بھ",dh:"دھ",zh:"ژ",ts:"تس"};
+var LETTERS = {a:"ا",b:"ب",c:"ک",d:"د",e:"ی",f:"ف",g:"گ",h:"ہ",i:"ی",j:"ج",k:"ک",l:"ل",m:"م",n:"ن",o:"و",p:"پ",q:"ق",r:"ر",s:"س",t:"ت",u:"و",v:"و",w:"و",x:"کس",y:"ی",z:"ز"};
+function transliterateWord(w){
+  var lw = w.toLowerCase();
+  if (NAME_WORDS[lw]) return NAME_WORDS[lw];
+  var out = "", i = 0;
+  while (i < lw.length){
+    var two = lw.substr(i,2);
+    if (DIGRAPHS[two]){ out += DIGRAPHS[two]; i += 2; continue; }
+    var ch = lw[i];
+    if (LETTERS[ch]) out += LETTERS[ch];
+    i++;
+  }
+  return out;
+}
+function toUrdu(english){
+  if(!english) return "";
+  return english.trim().split(/\s+/).map(transliterateWord).join(" ");
+}
+
+/* ---------- Seed data: 28 people ---------- */
+/* gender: M/F · status: living/passed · fatherId/motherId/spouseId link people */
+function P(id,name,urdu,gender,birthYear,birthPlace,fatherId,motherId,spouseId){
+  return {id:id,name:name,urdu:urdu,gender:gender,status:"living",
+          birthYear:birthYear||"",birthPlace:birthPlace||"",
+          fatherId:fatherId||null,motherId:motherId||null,spouseId:spouseId||null};
+}
+var SEED = [
+  P("iqbal","Iqbal Ahmed","اقبال احمد","M","","",null,null,"shahida"),
+  P("shahida","Shahida Khatoon","شاہدہ خاتون","F","","",null,null,"iqbal"),
+  P("sumera","Sumera Iqbal","سمیرہ اقبال","F",1975,"Karachi","iqbal","shahida","jibran"),
+  P("sohail","Sohail Iqbal","سہیل اقبال","M",1977,"","iqbal","shahida","shehla"),
+  P("humera","Humera Iqbal","حمیرا اقبال","F",1979,"","iqbal","shahida",null),
+  P("saqib","Saqib Iqbal","ثاقب اقبال","M",1984,"Saudi Arabia","iqbal","shahida","faiza"),
+  P("shoaib","Shoaib Iqbal","شعیب اقبال","M","","","iqbal","shahida",null),
+  P("ahmed1","Ahmed Iqbal","احمد اقبال","M",1993,"","iqbal","shahida","fiza"),
+  P("ahmed2","Ahmed Iqbal","احمد اقبال","M",1993,"","iqbal","shahida","fiza"),
+  P("abeer","Abeer Iqbal","عبیر اقبال","F",1995,"","iqbal","shahida","adeel"),
+  P("jibran","Jibran Baig","جبران بیگ","M","","",null,null,"sumera"),
+  P("saifan","Saifan Zubair","سیفان زبیر","M","","","jibran","sumera",null),
+  P("yusha","Yusha Biag","یوشا بیاگ","M","","","jibran","sumera",null),
+  P("zaid","Zaid Baig","زید بیگ","M","","","jibran","sumera",null),
+  P("zohail","Zohail Zubair","زوہیل زبیر","F","","","jibran","sumera",null),
+  P("shehla","Shehla","شہلا","F","","",null,null,"sohail"),
+  P("rida","Rida Sohail","رضا سہیل","F","","","sohail","shehla",null),
+  P("eman","Eman Sohail","ایمان سہیل","F","","","sohail","shehla",null),
+  P("tehreem","Tehreem Sohail","تحریم سہیل","F","","","sohail","shehla",null),
+  P("mawiya","Mawiya Khiljhi","ماویہ خلجی","F",2007,"Mississauga",null,"humera",null),
+  P("eshaal","Eshaal Khilji","ایشال خلجی","F",2010,"",null,"humera",null),
+  P("faiza","Faiza Syed","فائزہ سید","F","","",null,null,"saqib"),
+  P("yonus","Yonus Saqib","یونس ثاقب","M","","","saqib","faiza",null),
+  P("yusuf","Yusuf Saqib","یوسف ثاقب","M","","","saqib","faiza",null),
+  P("yasna","Yasna Saqib","یاسنا ثاقب","F","","","saqib","faiza",null),
+  P("azifa","Azifa Shoaib","عظیفہ شعیب","F","","","shoaib",null,null),
+  P("adeel","Adeel","عدیل","M","","",null,null,"abeer"),
+  P("fiza","Fiza","فیضہ","F","","",null,null,"ahmed1"),
+  P("shahmeer","Shahmeer","شاہ میر","M","","","adeel","abeer",null)
+];
+
+/* ---------- Storage ---------- */
+var LS_KEY = "shajra-e-nasb-data-v1";
+var people = load();
+function load(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw){ var arr = JSON.parse(raw); if(Array.isArray(arr) && arr.length) return arr; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(SEED));
+}
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} dbSave(); }
+
+/* ---------- Shared database (Firebase Firestore) ----------
+   The family data lives in ONE shared document. The code never owns data:
+   every device reads and writes the same place. localStorage is only a
+   local cache / offline fallback. */
+var FB_CONFIG = {
+  apiKey: "AIzaSyBUIAOvRJZncz8TSNjK94HpQzecwQqkFwA",
+  authDomain: "shajra-e-nasb.firebaseapp.com",
+  projectId: "shajra-e-nasb",
+  storageBucket: "shajra-e-nasb.firebasestorage.app",
+  messagingSenderId: "703970186960",
+  appId: "1:703970186960:web:b71fae32353f010660f0d5"
+};
+var dbDoc = null, saveTimer = null;
+function dbSave(){
+  if(!dbDoc) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){
+    dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+  }, 400);
+}
+function localSaved(){
+  try{ var raw = localStorage.getItem(LS_KEY); if(raw){ var a = JSON.parse(raw); if(Array.isArray(a) && a.length) return a; } }catch(e){}
+  return null;
+}
+function cacheLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} }
+function startLive(){
+  dbDoc.onSnapshot(function(snap){
+    if(!snap.exists) return;
+    var remote = (snap.data() && snap.data().people) || [];
+    if(JSON.stringify(remote) !== JSON.stringify(people)){
+      people = remote; cacheLocal(); renderMain();
+      var pv = document.getElementById("view-preview");
+      if(pv && !pv.classList.contains("hidden")) renderPreview();
+    }
+  }, function(){});
+}
+function initDB(){
+  try{
+    if(!window.firebase) return;
+    firebase.initializeApp(FB_CONFIG);
+    dbDoc = firebase.firestore().collection("tree").doc("staging");
+    dbDoc.get().then(function(snap){
+      if(!snap.exists){
+        /* First run ever: this device's copy becomes the shared data. */
+        dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+        startLive();
+        return;
+      }
+      var remote = (snap.data() && snap.data().people) || [];
+      var seen = {}; remote.forEach(function(p){ seen[p.id]=1; });
+      var extra = (localSaved() || []).filter(function(p){ return !seen[p.id]; });
+      if(extra.length){
+        people = remote.concat(extra); cacheLocal();
+        dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+      } else {
+        people = remote; cacheLocal();
+      }
+      renderMain();
+      if(location.hash === "#tapestry"){ renderPreview(); }
+      startLive();
+    }).catch(function(){});
+  }catch(e){}
+}
+function byId(id){ for(var i=0;i<people.length;i++) if(people[i].id===id) return people[i]; return null; }
+function uid(){ return "p" + Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function bornText(p){
+  var bits=[]; if(p.birthYear) bits.push(p.birthYear); if(p.birthPlace) bits.push(p.birthPlace);
+  return bits.join(", ");
+}
+function deathText(p){
+  var bits=[]; if(p.deathYear) bits.push(p.deathYear); if(p.deathPlace) bits.push(p.deathPlace);
+  return bits.join(", ");
+}
+function togglePassedWrap(){
+  var w=document.getElementById("passed-wrap"); if(!w) return;
+  w.classList.toggle("hidden", document.getElementById("f-status").value!=="passed");
+}
+function parseBorn(text){
+  text=(text||"").trim(); if(!text) return {y:"",pl:""};
+  var m=text.match(/^(\d{4})\s*,?\s*(.*)$/);
+  if(m) return {y:m[1],pl:m[2]||""};
+  return {y:"",pl:text};
+}
+/* Children of a couple (person objects or ids): both parents match in either order,
+   or only one parent is known and that parent is one of this couple.
+   With b null, children of the single parent a. */
+function kidsOfCouple(a,b){
+  var aId=(a&&a.id)?a.id:a, bId=(b&&b.id)?b.id:b;
+  return people.filter(function(p){
+    var f=p.fatherId,m=p.motherId;
+    if(bId){
+      return (f===aId&&m===bId)||(f===bId&&m===aId)||
+             (f===aId&&m==null)||(m===aId&&f==null)||
+             (f===bId&&m==null)||(m===bId&&f==null);
+    }
+    return f===aId||m===aId;
+  });
+}
+function siblingsOf(p){
+  if(!p.fatherId && !p.motherId) return [];
+  return people.filter(function(q){
+    if(q.id===p.id) return false;
+    return (p.fatherId && (q.fatherId===p.fatherId||q.motherId===p.fatherId)) ||
+           (p.motherId && (q.fatherId===p.motherId||q.motherId===p.motherId));
+  });
+}
+</script>
+<script>
+"use strict";
+/* ---------- Markers (SVG, embroidered tapestry motifs — no emoji) ---------- */
+/* Colour rules: little girls (16 or under, by birth year) = pink flower;
+   grown women = deep rose-red flower; young boys = light green-gold sprig;
+   grown men = deep antique gold sprig; passed away = wilted/faded;
+   birth year unknown = neutral ivory-gold (never pink by default). */
+var MARK = {
+  girlYoung:{petal:"#e79ec0", stitch:"#b45f8a", centre:"#c9a227"},
+  girlAdult:{petal:"#b03a4b", stitch:"#7e2434", centre:"#c9a227"},
+  boyYoung:{leaf:"#a9b95e", stitch:"#77873a"},
+  boyAdult:{leaf:"#c9a227", stitch:"#8a6d1a"},
+  ivoryFlower:{petal:"#e6d9ae", stitch:"#a68a3f", centre:"#c9a227"},
+  ivorySprig:{leaf:"#d9c98e", stitch:"#a68a3f"},
+  wilted:{petal:"#9a8a6a", leaf:"#9a8a6a", stitch:"#6f6250", centre:"#6f6250"}
+};
+function ageOf(p){
+  if(!p.birthYear) return null;
+  var y = parseInt(p.birthYear,10);
+  if(isNaN(y)) return null;
+  return new Date().getFullYear() - y;
+}
+function flowerSVG(pal,wilted){
+  /* 5 teardrop petals with stitched (dashed) outlines + gold French-knot centre */
+  var petalPath = wilted ? "M11 9.5 C9.6 6.2 9.8 3.4 11 1.6 C12.2 3.4 12.4 6.2 11 9.5 Z"
+                         : "M11 9.5 C7.9 6.4 7.7 3 11 1.2 C14.3 3 14.1 6.4 11 9.5 Z";
+  var hiPath = wilted ? "M11 8.2 C10.3 6 10.4 4.2 11 3.2 C11.6 4.2 11.7 6 11 8.2 Z"
+                      : "M11 8.2 C9.4 6 9.3 4 11 3 C12.7 4 12.6 6 11 8.2 Z";
+  var petals="", i, a;
+  for(i=0;i<5;i++){
+    a = i*72;
+    petals += '<path d="'+petalPath+'" transform="rotate('+a+' 11 9.5)" fill="'+pal.petal+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    petals += '<path d="'+hiPath+'" transform="rotate('+a+' 11 9.5)" fill="#ffffff" opacity="0.20"/>';
+  }
+  var knots = '<circle cx="11" cy="9.5" r="1.5" fill="'+pal.centre+'"/>'+
+    '<circle cx="9.6" cy="8.6" r="0.55" fill="'+pal.centre+'"/><circle cx="12.4" cy="8.6" r="0.55" fill="'+pal.centre+'"/>'+
+    '<circle cx="9.6" cy="10.6" r="0.55" fill="'+pal.centre+'"/><circle cx="12.4" cy="10.6" r="0.55" fill="'+pal.centre+'"/>';
+  var stemPath = wilted ? "M11 13 C13.5 17 14.5 21 12.5 26" : "M11 13 C10.4 17.5 11.4 22 10.8 26.5";
+  var stem = '<path d="'+stemPath+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+
+    '<path d="M11 20 C8.8 19.4 7.2 19.6 5.8 21 C7.4 21.8 9.4 21.6 11 20.8 Z" fill="'+(wilted?pal.leaf:"#7a9a4e")+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="0.6" stroke-dasharray="2.5 1.8"/>'+
+    '<path d="M11.2 23 C13.2 22.2 14.8 22.2 16.2 23.4 C14.6 24.4 12.6 24.2 11.2 23.6 Z" fill="'+(wilted?pal.leaf:"#7a9a4e")+'" stroke="'+(wilted?pal.stitch:"#5f7d3a")+'" stroke-width="0.6" stroke-dasharray="2.5 1.8"/>';
+  var inner = stem + petals + knots;
+  var group = wilted ? '<g transform="rotate(42 11 12) translate(0 2)">'+inner+'</g>' : '<g>'+inner+'</g>';
+  return '<svg width="20" height="26" viewBox="0 0 22 28" aria-hidden="true">'+group+'</svg>';
+}
+function leafSVG(pal,wilted){
+  /* Vine sprig: central stem with 3 pairs of stitched leaflets + a top leaf */
+  var ys=[20,14.5,9], parts="", i, y;
+  var stemPath = wilted ? "M11 27 C10 21 10.6 14 11.6 7" : "M11 27 C11.4 20 10.6 12 11 4.5";
+  parts += '<path d="'+stemPath+'" stroke="'+(wilted?pal.stitch:"#8a6d1a")+'" stroke-width="1.3" fill="none" stroke-linecap="round"/>';
+  for(i=0;i<ys.length;i++){
+    y=ys[i];
+    var leafR = "M11 "+y+" C13.2 "+(y-3.4)+" 16.4 "+(y-4.2)+" 19.6 "+(y-3.4)+" C18.9 "+(y+0.4)+" 15.2 "+(y+1)+" 11 "+y+" Z";
+    var veinR = "M11.4 "+(y-0.4)+" C14 "+(y-2)+" 16.6 "+(y-2.7)+" 19 "+(y-2.9);
+    parts += '<path d="'+leafR+'" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    parts += '<path d="'+leafR+'" transform="translate(22 0) scale(-1 1)" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+    parts += '<path d="'+veinR+'" stroke="#ffffff" stroke-width="0.6" fill="none" opacity="0.28"/>';
+    parts += '<path d="'+veinR+'" transform="translate(22 0) scale(-1 1)" stroke="#ffffff" stroke-width="0.6" fill="none" opacity="0.28"/>';
+  }
+  parts += '<path d="M11 9.5 C9.2 6.8 9.2 3.8 11 1.8 C12.8 3.8 12.8 6.8 11 9.5 Z" fill="'+pal.leaf+'" stroke="'+pal.stitch+'" stroke-width="0.7" stroke-dasharray="2.5 1.8"/>';
+  parts += '<path d="M11 8 C10.2 6.2 10.2 4.4 11 3.2 C11.8 4.4 11.8 6.2 11 8 Z" fill="#ffffff" opacity="0.20"/>';
+  var group = wilted ? '<g transform="rotate(42 11 14) translate(0 2)">'+parts+'</g>' : '<g>'+parts+'</g>';
+  return '<svg width="20" height="26" viewBox="0 0 22 28" aria-hidden="true">'+group+'</svg>';
+}
+function markerFor(p){
+  var wilted = p.status==="passed";
+  var age = ageOf(p);
+  var young = (age!==null && age<=16);
+  if(p.gender==="M"){
+    if(wilted) return leafSVG(MARK.wilted,true);
+    if(age===null) return leafSVG(MARK.ivorySprig,false);
+    return leafSVG(young ? MARK.boyYoung : MARK.boyAdult,false);
+  }
+  if(wilted) return flowerSVG(MARK.wilted,true);
+  if(age===null) return flowerSVG(MARK.ivoryFlower,false);
+  return flowerSVG(young ? MARK.girlYoung : MARK.girlAdult,false);
+}
+function markerNote(p){
+  var age = ageOf(p);
+  if(p.status==="passed") return p.gender==="M" ? "wilted leaf sprig — passed away" : "wilted flower — passed away";
+  if(age===null) return (p.gender==="M" ? "ivory-gold leaf sprig" : "ivory-gold flower")+" — birth year not recorded; add a birth year for the age colour";
+  if(p.gender==="M") return age<=16 ? "light green-gold leaf sprig — young boy" : "deep gold leaf sprig — grown-up";
+  return age<=16 ? "pink flower — little girl" : "deep rose-red flower — grown-up";
+}
+
+/* ---------- Views ---------- */
+var views=["view-main","view-family","view-person","view-form","view-preview"];
+function show(id){
+  views.forEach(function(v){ document.getElementById(v).classList.toggle("hidden", v!==id); });
+  var footer=document.getElementById("page-footer");
+  if(footer) footer.classList.toggle("hidden", id==="view-preview");
+  window.scrollTo(0,0);
+  if(id==="view-preview"){
+    /* The tree's branches/roots are drawn from measured layout, which only
+       exists once this view is visible — draw after the next frame. */
+    if(window.requestAnimationFrame) window.requestAnimationFrame(function(){ drawTree(); });
+    else drawTree();
+  }
+}
+function centreCouple(){
+  var a=byId("iqbal"), b=byId("shahida");
+  if(a&&b) return [a,b];
+  return people.slice(0,2);
+}
+function centreChildren(){
+  var c=centreCouple();
+  return kidsOfCouple(c[0],c[1]);
+}
+function ovalHTML(){
+  var c=centreCouple();
+  return '<div class="half"><div class="nm tap-name" data-person="'+c[0].id+'">'+esc(c[0].name)+'</div><div class="urdu-nm" lang="ur">'+esc(c[0].urdu)+'</div></div>'+
+         '<div class="half"><div class="nm tap-name" data-person="'+c[1].id+'">'+esc(c[1].name)+'</div><div class="urdu-nm" lang="ur">'+esc(c[1].urdu)+'</div></div>';
+}
+function boxHTML(child,forPreview){
+  var spouse = child.spouseId ? byId(child.spouseId) : null;
+  var kids = spouse ? kidsOfCouple(child,spouse) : kidsOfCouple(child,null);
+  var couple = '<span class="tap" data-person="'+child.id+'">'+esc(child.name)+'</span>';
+  if(spouse) couple += ' &nbsp;♥&nbsp; <span class="tap" data-person="'+spouse.id+'">'+esc(spouse.name)+'</span>';
+  var kidsHTML = kids.length ? kids.map(function(k){
+    return '<span class="kid" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span>';
+  }).join("") : '<span style="font-size:13px;color:#d8bc5a">No children entered yet</span>';
+  var openBtn = forPreview ? "" : '<div class="openrow"><button type="button" class="small" data-open-family="'+child.id+'">Open this family →</button></div>';
+  return '<div class="box"><div class="couple">'+couple+'</div>'+
+    '<div class="lbl">their children — all inside this one box</div>'+
+    '<div class="kids">'+kidsHTML+'</div>'+openBtn+'</div>';
+}
+function renderMain(){
+  document.getElementById("centre-oval").innerHTML = ovalHTML();
+  document.getElementById("family-boxes").innerHTML = centreChildren().map(function(ch){ return boxHTML(ch,false); }).join("");
+}
+/* ---------- Living Tapestry (Preview drawn from the live data) ----------
+   The tree grows UPWARD: roots (ancestral lines) at the bottom, the centre
+   couple as the trunk, their children as couple ovals above, and each new
+   generation rendered recursively above its parents — so the tapestry grows
+   by itself whenever a spouse or child is added to the data. */
+var BLURB_MUSTAFA = "Mustafa Kamal — a captain on one of the ships that brought Muslim merchants and soldiers from Arabia to the subcontinent. Seven generations descend from him to Iqbal Ahmed.";
+var BLURB_KHILJI = "The Khilji Khandan — the family that ruled the subcontinent for about a hundred years: Bengal from 1204, then the Delhi Sultanate, 1290 to 1320.";
+function spouseOf(p){ return (p && p.spouseId) ? byId(p.spouseId) : null; }
+function unitKids(person,spouse){ return spouse ? kidsOfCouple(person,spouse) : kidsOfCouple(person,null); }
+function isBranchUnit(p){
+  if(spouseOf(p)) return true;
+  return unitKids(p,null).length>0;
+}
+function cornerSVG(cls){
+  return '<span class="tcorner '+cls+'" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M5 29 C5 15 15 5 29 5" fill="none" stroke="#c9a227" stroke-width="2"/><path d="M5 21 C5 12 12 5 21 5" fill="none" stroke="#c9a227" stroke-width="1.2" opacity=".65"/><circle cx="10" cy="10" r="2.4" fill="#c9a227"/></svg></span>';
+}
+function vineSVG(){
+  /* One clean HORIZONTAL gold vine divider between levels — no diagonals. */
+  return '<svg class="tvine tcontent" width="220" height="18" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">'+
+    '<path d="M2 9 C40 3 80 15 120 9 C160 3 200 15 240 9 C265 5 285 12 298 9" fill="none" stroke="#c9a227" stroke-width="2"/>'+
+    '<path d="M60 8 q-9 -6 -16 -4 q5 7 16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<path d="M240 8 q9 -6 16 -4 q-5 7 -16 4" fill="#7a9a4e" stroke="#c9a227" stroke-width=".8"/>'+
+    '<circle cx="150" cy="9" r="2.6" fill="#c9a227"/></svg>';
+}
+function rootVineSVG(){
+  return vineSVG();
+}
+function borderVineHTML(){
+  /* Embroidered floral vine running along all four inner edges of the frame. */
+  return '<span class="tvine-border tvb-t" aria-hidden="true"></span><span class="tvine-border tvb-b" aria-hidden="true"></span><span class="tvine-border tvb-l" aria-hidden="true"></span><span class="tvine-border tvb-r" aria-hidden="true"></span>';
+}
+function sprigSVG(cls,w){
+  /* Small gold leaf sprig ornament pinned to the top / bottom of an oval frame. */
+  return '<span class="oval-sprig '+cls+'" aria-hidden="true"><svg width="'+w+'" height="14" viewBox="0 0 48 14"><path d="M24 13 C24 8 24 5 24 2" stroke="#c9a227" stroke-width="1.6" fill="none"/><path d="M24 10 C18 10 14 7 12 2 C18 2 22 5 24 10 Z" fill="#c9a227"/><path d="M24 10 C30 10 34 7 36 2 C30 2 26 5 24 10 Z" fill="#c9a227"/><path d="M24 7 C21 5 20 3 20 1 C23 2 24 4 24 7 Z" fill="#e8c85a"/><path d="M24 7 C27 5 28 3 28 1 C25 2 24 4 24 7 Z" fill="#e8c85a"/></svg></span>';
+}
+/* Age band -> row for a child of the centre couple. The band sets ONLY the
+   height of the oval (its branch length); no band number or age is ever
+   written on the tapestry. Row 1 = lowest (just above the centre oval),
+   row 4 = highest. Ages under 30 join the top band (row 4). A child with no
+   recorded birth year sits in the middle (row 3) — a year is never invented. */
+function bandRowFor(p){
+  var a = ageOf(p);
+  if(a===null) return 3;
+  if(a>=45) return 1;
+  if(a>=40) return 2;
+  if(a>=35) return 3;
+  return 4;
+}
+function treeBgSVG(rowsMeta){
+  /* The golden tree behind the children rows: one distinct branch from the
+     trunk crown (bottom centre) to EACH child oval, plus decorative filler
+     branches ending in leaves/buds that weave between the ovals so the
+     canopy looks full. Drawn from the current rows, so it redraws and
+     rebalances itself whenever the family grows. Three stitch layers. */
+  var W=1000,H=600, limbs="", buds="", fillers="", i, j;
+  var R = rowsMeta.length;
+  for(i=0;i<R;i++){
+    var n = rowsMeta[i].count;
+    var y = (R===1) ? 300 : Math.round(470 - i*(400/Math.max(1,R-1)));
+    for(j=0;j<n;j++){
+      var x = Math.round((j+0.5)*(W/n));
+      var c1 = Math.round(500+(x-500)*0.25), c2 = Math.round(500+(x-500)*0.65);
+      limbs += '<path data-part="branch" d="M500 600 C '+c1+' '+(y+150)+', '+c2+' '+(y+55)+', '+x+' '+(y+28)+'" fill="none"/>';
+      buds += '<circle cx="'+x+'" cy="'+(y+24)+'" r="3.4" fill="#e8c85a"/>';
+    }
+  }
+  var fxs=[70,300,700,930,180,820];
+  for(i=0;i<fxs.length;i++){
+    var fx=fxs[i], fy=110+((i*83)%300);
+    var fc1=Math.round(500+(fx-500)*0.3), fc2=Math.round(500+(fx-500)*0.7);
+    fillers += '<path data-part="filler" d="M500 600 C '+fc1+' '+(fy+170)+', '+fc2+' '+(fy+60)+', '+fx+' '+fy+'" fill="none"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c -12 -4 -20 -12 -24 -24 c 12 2 20 10 24 24 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c 12 -4 20 -12 24 -24 c -12 2 -20 10 -24 24 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<circle cx="'+fx+'" cy="'+(fy-4)+'" r="3" fill="#c9a227"/>';
+  }
+  var all = limbs + '<path data-part="trunk" d="M500 600 C494 566 506 540 500 512" fill="none"/>';
+  return '<svg class="ttree-bg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">'+
+    '<g stroke="#8a6d1a" stroke-width="10" opacity=".45" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="4.5" opacity=".95" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="2.4" opacity=".8" stroke-linecap="round">'+fillers+'</g>'+
+    buds+'</svg>';
+}
+function treeRootsSVG(){
+  /* The golden tree, lower half: the trunk continues down from the centre
+     oval and splits into roots that spread wide and reach the very bottom
+     of the frame, toward both root plaques. */
+  var xs=[60,210,350,470,730,850,990,1140];
+  var roots="", i, x, c1, c2;
+  for(i=0;i<xs.length;i++){
+    x=xs[i];
+    c1=Math.round(600+(x-600)*0.15); c2=Math.round(600+(x-600)*0.55);
+    roots+='<path data-part="root" d="M600 46 C '+c1+' 84, '+c2+' 116, '+x+' 155" fill="none"/>';
+  }
+  var all='<path data-part="trunk" d="M600 0 C606 16 594 30 600 50" fill="none"/>'+roots;
+  return '<svg class="ttree ttree-roots" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true" style="height:118px;margin-bottom:-6px">'+
+    '<g stroke="#8a6d1a" stroke-width="9" opacity=".5" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#c9a227" stroke-width="4" opacity=".95" stroke-linecap="round">'+all+'</g>'+
+    '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+all+'</g></svg>';
+}
+function treeFallbackInner(rowsMeta){
+  /* Fallback tree in a 1000x1000 space: what the tapestry shows until
+     drawTree() can measure the real layout and redraw with true geometry
+     (and what non-DOM test harnesses see). Canopy branches converge at
+     (500,620); roots fan from (500,705) to the bottom edge (y=985). */
+  var limbs="", buds="", fillers="", i, j;
+  var R = rowsMeta.length;
+  for(i=0;i<R;i++){
+    var n = rowsMeta[i].count;
+    var y = (R===1) ? 330 : Math.round(500 - i*(430/Math.max(1,R-1)));
+    for(j=0;j<n;j++){
+      var x = Math.round((j+0.5)*(1000/n));
+      var c1 = Math.round(500+(x-500)*0.25), c2 = Math.round(500+(x-500)*0.65);
+      limbs += '<path data-part="branch" d="M500 620 C '+c1+' '+(y+150)+', '+c2+' '+(y+55)+', '+x+' '+(y+28)+'" fill="none"/>';
+      buds += '<circle cx="'+x+'" cy="'+(y+24)+'" r="3.4" fill="#e8c85a"/>';
+    }
+  }
+  var fxs=[70,300,700,930,180,820];
+  for(i=0;i<fxs.length;i++){
+    var fx=fxs[i], fy=110+((i*83)%300);
+    var fc1=Math.round(500+(fx-500)*0.3), fc2=Math.round(500+(fx-500)*0.7);
+    fillers += '<path data-part="filler" d="M500 620 C '+fc1+' '+(fy+170)+', '+fc2+' '+(fy+60)+', '+fx+' '+fy+'" fill="none"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c -12 -4 -20 -12 -24 -24 c 12 2 20 10 24 24 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<path d="M'+fx+' '+fy+' c 12 -4 20 -12 24 -24 c -12 2 -20 10 -24 24 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/>';
+    fillers += '<circle cx="'+fx+'" cy="'+(fy-4)+'" r="3" fill="#c9a227"/>';
+  }
+  var canopy = limbs + '<path data-part="trunk" d="M500 620 C494 586 506 560 500 532" fill="none"/>';
+  var xs=[80,240,390,470,530,610,760,920], roots="", x, rc1, rc2;
+  for(i=0;i<xs.length;i++){
+    x=xs[i];
+    rc1=Math.round(500+(x-500)*0.15); rc2=Math.round(500+(x-500)*0.55);
+    roots+='<path data-part="root" d="M500 705 C '+rc1+' 800, '+rc2+' 890, '+x+' 985" fill="none"/>';
+  }
+  var lower = '<path data-part="trunk" d="M500 640 C506 662 494 682 500 705" fill="none"/>'+roots;
+  function layers(paths){
+    return '<g stroke="#8a6d1a" stroke-width="10" opacity=".45" stroke-linecap="round">'+paths+'</g>'+
+           '<g stroke="#c9a227" stroke-width="4.5" opacity=".95" stroke-linecap="round">'+paths+'</g>'+
+           '<g stroke="#e8c85a" stroke-width="1.2" stroke-dasharray="7 6" opacity=".85" stroke-linecap="round">'+paths+'</g>';
+  }
+  return layers(canopy)+'<g stroke="#c9a227" stroke-width="2.4" opacity=".8" stroke-linecap="round">'+fillers+'</g>'+layers(lower)+buds;
+}
+function drawTree(){
+  /* Measured tree: run AFTER the tapestry is laid out (show() calls it via
+     requestAnimationFrame, and on window resize). The tree is drawn like a
+     real crown, from measured geometry:
+       - THREE-ish SHORT BRANCHES in the zone between the disc and the
+         bottom row: the crown (top centre of the centre disc) to each
+         bottom-row oval's bottom tip, near-vertical.
+       - TWO MAIN LIMBS originate at the disc's LEFT and RIGHT edge
+         midpoints, travel outward at disc height, rise in a straight
+         vertical run OUTSIDE the bottom row's horizontal span, and
+         curve inward only once above the bottom row's top edge — so
+         no arc shows in the open zone between the disc top and the
+         bottom row (no smile under the row).
+       - Every UPPER oval is reached by a TWIG that starts on the
+         nearest limb BELOW the oval and bends up to arrive at the
+         oval's bottom tip VERTICALLY (final control point directly
+         below the tip) — never horizontally at an oval's side.
+       - NOTHING is drawn above the heading block's bottom edge (+8):
+         limbs, twigs and filler sprays are all clamped below it.
+       - The TRUNK starts at the disc's BOTTOM edge (never crossing the
+         disc) and runs to the roots, which fan from its foot to the
+         frame's bottom inner edge, endpoints within the MIDDLE 60%
+         of the gap between the two plaques, each root's x staying
+         inside the gap corridor for its whole descent.
+     The stitch/shadow layers reuse the SAME path geometry (a wider stroke
+     underneath, a dashed stitch on top) — never translated copies, so no
+     doubled lines. Branch paths carry data-part on the main gold layer
+     only; shadow/stitch layers use -under / -stitch suffixes. Because it
+     measures the live DOM, the tree redraws itself correctly after every
+     data change. No-ops where layout cannot be measured. */
+  var frameEl = document.getElementById("tapestry-frame");
+  if(!frameEl || typeof frameEl.querySelector!=="function" || typeof frameEl.getBoundingClientRect!=="function") return;
+  var svg = frameEl.querySelector("[data-tree-svg]");
+  if(!svg || typeof svg.getBoundingClientRect!=="function" || typeof svg.setAttribute!=="function") return;
+  var sr = svg.getBoundingClientRect();
+  if(!sr || !sr.width || !sr.height) return;
+  var trunkEl = frameEl.querySelector("[data-trunk-oval]");
+  if(!trunkEl || typeof trunkEl.getBoundingClientRect!=="function") return;
+  var ovalEls = frameEl.querySelectorAll("[data-child-oval]");
+  if(!ovalEls || !ovalEls.length) return;
+  function n(v){ return Math.round(v*10)/10; }
+  function rel(r){ return {x:r.left-sr.left, y:r.top-sr.top, w:r.width, h:r.height, cx:r.left-sr.left+r.width/2, b:r.bottom-sr.top, r:r.right-sr.left}; }
+  var tr = rel(trunkEl.getBoundingClientRect());
+  /* The heading block: NO tree geometry may rise above its bottom edge
+     (+8px) — no limb or filler ever crosses behind the شجرہ نسب
+     calligraphy. topLim is the ceiling every path point must respect. */
+  var headLim = -Infinity;
+  var headEl = frameEl.querySelector("[data-tapestry-title]");
+  if(headEl && typeof headEl.getBoundingClientRect==="function"){
+    headLim = rel(headEl.getBoundingClientRect()).b + 8;
+  }
+  var topLim = (headLim===-Infinity) ? 10 : headLim;
+  var crownX = tr.cx, crownY = tr.y, discBotY = tr.b;
+  var W = sr.width, H = sr.height;
+  var ovals = [], i;
+  for(i=0;i<ovalEls.length;i++){
+    if(typeof ovalEls[i].getBoundingClientRect!=="function") return;
+    ovals.push(rel(ovalEls[i].getBoundingClientRect()));
+  }
+  /* The bottom row is the group of ovals whose bottoms sit lowest —
+     nearest the disc. Everyone else is an upper oval. */
+  var maxB = -1;
+  ovals.forEach(function(o){ if(o.b>maxB) maxB = o.b; });
+  var bottomRow = ovals.filter(function(o){ return Math.abs(o.b-maxB) < 12; });
+  var upper = ovals.filter(function(o){ return Math.abs(o.b-maxB) >= 12; });
+  function cubic(p0,p1,p2,p3){ return {p0:p0,p1:p1,p2:p2,p3:p3}; }
+  function cubicAt(c,t){
+    var u = 1-t;
+    return {
+      x: u*u*u*c.p0.x + 3*u*u*t*c.p1.x + 3*u*t*t*c.p2.x + t*t*t*c.p3.x,
+      y: u*u*u*c.p0.y + 3*u*u*t*c.p1.y + 3*u*t*t*c.p2.y + t*t*t*c.p3.y
+    };
+  }
+  function dSeg(c){ return 'C '+n(c.p1.x)+' '+n(c.p1.y)+', '+n(c.p2.x)+' '+n(c.p2.y)+', '+n(c.p3.x)+' '+n(c.p3.y); }
+  function dOf(c){ return 'M'+n(c.p0.x)+' '+n(c.p0.y)+' '+dSeg(c); }
+  var paths = {branch:[], limb:[], twig:[], trunk:[], root:[], filler:[]};
+  var buds = "";
+  function bud(x,y){ buds += '<circle cx="'+n(x)+'" cy="'+n(y)+'" r="3.2" fill="#e8c85a"/>'; }
+  /* (a) Short branches: crown -> each bottom-row oval's bottom tip. */
+  bottomRow.forEach(function(o){
+    var dy = o.b - crownY;
+    paths.branch.push({d: dOf(cubic({x:crownX,y:crownY},{x:o.cx,y:crownY+dy*0.35},{x:o.cx,y:o.b-dy*0.30},{x:o.cx,y:o.b}))});
+    bud(o.cx, o.b);
+  });
+  /* (b) Two main limbs. Each ORIGINATES at the disc's side-edge
+     midpoint (its start sits on the disc's rim), travels OUTWARD at
+     disc height, then rises in a straight vertical run OUTSIDE the
+     bottom row's horizontal span, and only curves inward toward the
+     upper ovals once it is ABOVE the bottom row's top edge. So for
+     every point above the disc's top edge and below the bottom row's
+     top, the limb is outside the row's span — no arc ever shows in
+     the open zone between the disc top and the bottom row, and there
+     is no smile under the row. */
+  var limbs = {left:null, right:null};
+  if(upper.length){
+    var bl = Math.min.apply(null, bottomRow.map(function(o){ return o.x; }));
+    var br = Math.max.apply(null, bottomRow.map(function(o){ return o.r; }));
+    var topY = Math.min.apply(null, upper.map(function(o){ return o.y; }));
+    var discCY = (crownY + discBotY)/2;
+    var botTop = Math.min.apply(null, bottomRow.map(function(o){ return o.y; }));
+    function makeLimb(sign){
+      var edgeX = sign<0 ? tr.x : tr.r;
+      var sideX = sign<0 ? bl-64 : br+64;
+      var joinY = botTop - 30;
+      var endX = sideX + sign*10;
+      var endY = Math.max(topY + 24, topLim);
+      var dx = Math.abs(sideX - edgeX);
+      var seg1 = cubic({x:edgeX, y:discCY},
+        {x:edgeX + sign*dx*0.35, y:discCY},
+        {x:edgeX + sign*dx*0.75, y:discCY},
+        {x:sideX, y:discCY});
+      var seg2 = cubic({x:sideX, y:discCY},
+        {x:sideX, y:discCY - (discCY-joinY)*0.40},
+        {x:sideX, y:joinY + (discCY-joinY)*0.35},
+        {x:sideX, y:joinY});
+      var seg3 = cubic({x:sideX, y:joinY},
+        {x:sideX, y:joinY - (joinY-endY)*0.45},
+        {x:endX, y:endY + (joinY-endY)*0.30},
+        {x:endX, y:endY});
+      return {segs:[seg1,seg2,seg3], d: 'M'+n(seg1.p0.x)+' '+n(seg1.p0.y)+' '+dSeg(seg1)+' '+dSeg(seg2)+' '+dSeg(seg3)};
+    }
+    limbs.left = makeLimb(-1);
+    limbs.right = makeLimb(1);
+    paths.limb.push(limbs.left, limbs.right);
+  }
+  function pointOnLimb(L, targetY){
+    var best = null, bd = 1e12, si, t;
+    for(si=0; si<L.segs.length; si++){
+      for(t=0; t<=1.0001; t+=0.02){
+        var p = cubicAt(L.segs[si], Math.min(1,t));
+        var dd = Math.abs(p.y - targetY);
+        if(dd < bd){ bd = dd; best = p; }
+      }
+    }
+    return best;
+  }
+  /* (c) Twigs: each starts on the nearest limb at a point BELOW the
+     oval's tip, then bends up so its final approach is VERTICAL — the
+     last control point sits directly below the tip (same x, 45px
+     lower) — so a twig always meets its oval at the bottom tip,
+     never horizontally at the oval's side. */
+  upper.forEach(function(o){
+    var L = (o.cx <= crownX) ? limbs.left : limbs.right;
+    if(!L) return;
+    var s = pointOnLimb(L, o.b + 45);
+    var d = 'M'+n(s.x)+' '+n(s.y)+' C '+n(s.x)+' '+n(o.b+45)+', '+n(o.cx)+' '+n(o.b+45)+', '+n(o.cx)+' '+n(o.b);
+    paths.twig.push({d:d});
+    bud(o.cx, o.b);
+  });
+  /* Trunk: from the disc's BOTTOM edge down to the roots' foot. */
+  var trunkEndY = discBotY + 18;
+  paths.trunk.push({d: dOf(cubic({x:crownX,y:discBotY},{x:crownX-6,y:discBotY+7},{x:crownX+6,y:discBotY+12},{x:crownX,y:trunkEndY}))});
+  /* Roots: from the trunk's foot to the frame's bottom inner edge,
+     endpoints strictly within [leftPlaque.right + 12, rightPlaque.left - 12]. */
+  var x0 = W*0.16, x1 = W*0.84;
+  var pl = frameEl.querySelector("[data-plaque-left]"), pr = frameEl.querySelector("[data-plaque-right]");
+  if(pl && pr && typeof pl.getBoundingClientRect==="function" && typeof pr.getBoundingClientRect==="function"){
+    var lr = rel(pl.getBoundingClientRect()), rr = rel(pr.getBoundingClientRect());
+    if(rr.x - (lr.x + lr.w) > 60){ x0 = lr.x + lr.w + 12; x1 = rr.x - 12; }
+  }
+  /* Narrow fan: endpoints within the MIDDLE 60% of the gap, and every
+     control point interpolates between the trunk foot and an endpoint,
+     so each root's x stays inside the gap corridor for its whole
+     descent — the lines never cross the plaques' inner top corners. */
+  var gapW = x1 - x0;
+  var fx0 = x0 + gapW*0.2, fx1 = x1 - gapW*0.2;
+  var rootY = H - 8, nR = 8;
+  for(i=0;i<nR;i++){
+    var rx = fx0 + (fx1-fx0)*(i/(nR-1));
+    paths.root.push({d: dOf(cubic({x:crownX,y:trunkEndY},
+      {x:crownX+(rx-crownX)*0.15, y:trunkEndY+(rootY-trunkEndY)*0.45},
+      {x:crownX+(rx-crownX)*0.55, y:trunkEndY+(rootY-trunkEndY)*0.78},
+      {x:rx, y:rootY}))});
+  }
+  /* Filler sprays: sprout from points ON a limb, end in leaf clusters in
+     the gaps between neighbouring upper ovals (or just outside the
+     outermost ones) — inside the canopy, never joining two ovals, never
+     floating unattached, never entering the band under the bottom row. */
+  function spray(sx,sy,ex,ey){
+    ex = Math.max(18, Math.min(W-18, ex));
+    /* Heading ceiling: the endpoint stays 22px below topLim (the leaf
+       glyphs reach ~21px above it) and the curve's control point never
+       rises above topLim either — nothing crosses behind the heading. */
+    ey = Math.max(topLim + 22, ey);
+    var qy = Math.max(topLim, Math.min(sy,ey)-20);
+    var d = 'M'+n(sx)+' '+n(sy)+' Q '+n((sx+ex)/2)+' '+n(qy)+' '+n(ex)+' '+n(ey);
+    var leaves = '<g transform="translate('+n(ex)+' '+n(ey)+')"><path d="M0 0 c -11 -3 -18 -10 -21 -21 c 11 2 18 9 21 21 Z" fill="#7a9a4e" stroke="#c9a227" stroke-width="1"/><path d="M0 0 c 11 -3 18 -10 21 -21 c -11 2 -18 9 -21 21 Z" fill="#a9b95e" stroke="#c9a227" stroke-width="1"/><circle cx="0" cy="-3" r="2.8" fill="#c9a227"/></g>';
+    paths.filler.push({d:d, leaves:leaves});
+  }
+  if(upper.length && limbs.left && limbs.right){
+    var sorted = upper.slice().sort(function(a,b){ return a.cx-b.cx; });
+    for(i=0;i+1<sorted.length;i++){
+      var a = sorted[i], b = sorted[i+1];
+      if(Math.abs(a.y-b.y) > 40) continue;
+      var gapX = (a.cx+b.cx)/2;
+      var L2 = (gapX <= crownX) ? limbs.left : limbs.right;
+      var st = pointOnLimb(L2, Math.min(a.y,b.y) + 30);
+      spray(st.x, st.y, gapX, Math.min(a.y,b.y) - 12);
+    }
+    var first = sorted[0], last = sorted[sorted.length-1];
+    var stF = pointOnLimb(limbs.left, topY + 60), stL = pointOnLimb(limbs.right, topY + 60);
+    spray(stF.x, stF.y, first.cx-46, first.y+10);
+    spray(stL.x, stL.y, last.cx+46, last.y+10);
+  }
+  /* Emit the three stitch layers from the SAME geometry per part. */
+  function layer(part, suffix, stroke, w, op, dash){
+    var s = "";
+    paths[part].forEach(function(p){ s += '<path data-part="'+part+suffix+'" d="'+p.d+'"/>'; });
+    if(!s) return "";
+    return '<g fill="none" stroke="'+stroke+'" stroke-width="'+w+'" opacity="'+op+'" stroke-linecap="round"'+(dash?' stroke-dasharray="'+dash+'"':'')+'>'+s+'</g>';
+  }
+  var parts = ["branch","limb","twig","trunk","root"], under = "", main = "", stitch = "";
+  parts.forEach(function(part){
+    under  += layer(part, "-under",  "#8a6d1a", 9,   ".45");
+    main   += layer(part, "",        "#c9a227", 4.2, ".95");
+    stitch += layer(part, "-stitch", "#e8c85a", 1.1, ".85", "7 6");
+  });
+  var fillersStr = "";
+  paths.filler.forEach(function(p){ fillersStr += '<path data-part="filler" d="'+p.d+'"/>'+p.leaves; });
+  svg.setAttribute("viewBox", "0 0 "+Math.round(W)+" "+Math.round(H));
+  svg.innerHTML = under + main + stitch +
+    (fillersStr ? '<g fill="none" stroke="#c9a227" stroke-width="2.2" opacity=".85" stroke-linecap="round">'+fillersStr+'</g>' : "") +
+    buds;
+}
+function hangChainSVG(){
+  /* Three little chain links a parchment plaque hangs from. */
+  return '<span class="hang-chain" aria-hidden="true"><svg width="60" height="16" viewBox="0 0 60 16"><path d="M8 1 v6 M30 1 v6 M52 1 v6" stroke="#8a6d1a" stroke-width="2"/><circle cx="8" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="30" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/><circle cx="52" cy="11" r="2.6" fill="none" stroke="#8a6d1a" stroke-width="1.6"/></svg></span>';
+}
+function coupleOvalHTML(person,spouse,big){
+  var sprigW = big?58:40;
+  var h='<div class="toval ornate-oval'+(big?" trunk-oval":"")+'"'+(big?' data-trunk-oval="1"':"")+'>'+sprigSVG("top",sprigW)+'<div class="half"><div class="nm tap-name" data-person="'+person.id+'">'+esc(person.name)+'</div><div class="urdu-nm" lang="ur">'+esc(person.urdu)+'</div></div>';
+  if(spouse) h+='<div class="half"><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div></div>';
+  return h+sprigSVG("bottom",sprigW)+'</div>';
+}
+function dividerSVG(){
+  /* Small horizontal gold vine divider inside a child oval, between the
+     couple's names and their children's names. */
+  return '<span class="oval-divider" aria-hidden="true"><svg width="92" height="10" viewBox="0 0 92 10"><path d="M2 5 C20 1 34 9 46 5 C58 1 72 9 90 5" fill="none" stroke="#c9a227" stroke-width="1.4"/><circle cx="46" cy="5" r="1.8" fill="#e8c85a"/><path d="M20 5 q-6 -4 -11 -3 q3 5 11 3" fill="#7a9a4e"/><path d="M72 5 q6 -4 11 -3 q-3 5 -11 3" fill="#7a9a4e"/></svg></span>';
+}
+/* One line inside a child oval: a grandchild, with their embroidered marker.
+   If the grandchild has a spouse, the spouse's name rides on the same line;
+   the grandchild's own children follow as smaller lines beneath — so the
+   oval simply grows longer as the family grows. */
+function kidLineHTML(k,seen,depth){
+  if(seen[k.id]) return "";
+  seen[k.id]=1;
+  var spouse = spouseOf(k);
+  var label = esc(k.name);
+  if(spouse){ seen[spouse.id]=1; label += ' <span style="color:#c9a227">♥</span> '+esc(spouse.name); }
+  var h = '<div class="oval-kid'+(depth>0?" subkid":"")+'" data-kid="'+k.id+'">'+markerFor(k)+'<span data-person="'+k.id+'">'+label+'</span></div>';
+  var kids = unitKids(k,spouse);
+  kids.forEach(function(g){ h += kidLineHTML(g,seen,depth+1); });
+  return h;
+}
+/* One child of the centre couple = ONE narrow vertical ornate oval:
+   the child (+ spouse) at the top, a vine divider, then their children
+   listed INSIDE the oval. A child with no spouse still gets their own
+   named oval — there are NO blank or nameless ovals. A child who has
+   passed away keeps their oval, marked with a wilted ornament. */
+function childOvalHTML(child,w){
+  var spouse = spouseOf(child);
+  var seen = {}; seen[child.id]=1; if(spouse) seen[spouse.id]=1;
+  var kids = unitKids(child,spouse);
+  var kidsHTML = kids.length ? '<div class="oval-kids">'+kids.map(function(k){ return kidLineHTML(k,seen,0); }).join("")+'</div>' : "";
+  var wilt = (child.status==="passed") ? '<span class="oval-wilt" data-wilted="1" aria-hidden="true">'+markerFor(child)+'</span>' : "";
+  var names = '<div class="cpl"><div class="nm tap-name" data-person="'+child.id+'">'+esc(child.name)+'</div><div class="urdu-nm" lang="ur">'+esc(child.urdu)+'</div>';
+  if(spouse) names += '<div class="amp">♥</div><div class="nm tap-name" data-person="'+spouse.id+'">'+esc(spouse.name)+'</div><div class="urdu-nm" lang="ur">'+esc(spouse.urdu)+'</div>';
+  names += '</div>';
+  /* The words live in .oval-inner — the ellipse's safe middle band — and
+     the oval carries a min-height from the 5/8 aspect, growing taller
+     whenever the content needs more room (never clipping a name). */
+  var inner = '<div class="oval-inner">'+names+(kids.length?dividerSVG():"")+kidsHTML+'</div>';
+  var minH = Math.round((w||140)*8/5);
+  return '<div class="toval ornate-oval child-oval'+(child.status==="passed"?" deceased":"")+'" data-child-oval="'+child.id+'" style="min-height:'+minH+'px">'+sprigSVG("top",40)+wilt+inner+sprigSVG("bottom",40)+'</div>';
+}
+function childUnitHTML(child,count){
+  /* Oval width shrinks as its row fills, so a row always stays balanced.
+     At ~142px wide the oval's minimum height (5/8 aspect) is ~227px, wide
+     enough that every line sits inside the ellipse's safe middle band. */
+  var maxW = Math.max(140, Math.min(142, Math.floor(566/Math.max(1,count))));
+  return '<div class="tunit" data-unit="'+child.id+'" data-band="'+bandRowFor(child)+'" style="max-width:'+maxW+'px">'+childOvalHTML(child,maxW)+'</div>';
+}
+var tapestryLang = (function(){ try{ return localStorage.getItem("shajraLang")||"en"; }catch(e){ return "en"; } })();
+function setTapestryLang(l){ tapestryLang=l; try{ localStorage.setItem("shajraLang",l); }catch(e){} renderPreview(); }
+var tapestryTextSize = (function(){ try{ return parseInt(localStorage.getItem("shajraTextSize")||"1",10)||1; }catch(e){ return 1; } })();
+var TFS_STEPS = [1,1.2,1.45];
+function setTextSize(n){ tapestryTextSize=n; try{ localStorage.setItem("shajraTextSize",String(n)); }catch(e){} renderPreview(); }
+var clothSel=(function(){ try{ return localStorage.getItem("shajraCloth")||"emerald"; }catch(e){ return "emerald"; } })();
+var metalSel=(function(){ try{ return localStorage.getItem("shajraMetal")||"gold"; }catch(e){ return "gold"; } })();
+var CLOTH_SHADES={emerald:"#123f2e",royal:"#12264f",ruby:"#57152a",purple:"#33155c",pearl:"#f1e8d2"};
+var METAL_SHADES={gold:"#c9a227",silver:"#c7ccd4"};
+function applyTheme(){
+  if(clothSel==="pearl") metalSel="gold";
+  document.body.setAttribute("data-cloth",clothSel);
+  document.body.setAttribute("data-metal",metalSel);
+  var cs=document.querySelectorAll(".cloth-select"), ms=document.querySelectorAll(".metal-select"), sw=document.querySelectorAll(".cloth-swatch"), sm=document.querySelectorAll(".metal-swatch"), i;
+  for(i=0;i<cs.length;i++){ cs[i].value=clothSel; cs[i].style.background=CLOTH_SHADES[clothSel]; cs[i].style.color=(clothSel==="pearl"?"#33270f":"#f5e7c1"); }
+  for(i=0;i<ms.length;i++){ ms[i].value=metalSel; ms[i].style.background=METAL_SHADES[metalSel]; ms[i].style.color="#33270f"; }
+  for(i=0;i<sw.length;i++) sw[i].style.background=CLOTH_SHADES[clothSel];
+  for(i=0;i<sm.length;i++) sm[i].style.background=METAL_SHADES[metalSel];
+}
+function setCloth(c){ clothSel=c; if(c==="pearl") metalSel="gold"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
+function setMetal(m){ metalSel=m; if(m==="silver" && clothSel==="pearl") clothSel="emerald"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
+document.addEventListener("change",function(e){
+  var t=e.target;
+  if(t && t.classList && t.classList.contains("cloth-select")) setCloth(t.value);
+  else if(t && t.classList && t.classList.contains("metal-select")) setMetal(t.value);
+});
+function langName(p,first){
+  if(!p) return "";
+  var t = (tapestryLang==="ur") ? (p.urdu||toUrdu(p.name)) : p.name;
+  t = String(t||"").trim();
+  if(!first) return t;
+  if(tapestryLang==="ur"){
+    var enParts = String(p.name||"").trim().split(/\s+/);
+    var urParts = t.split(/\s+/);
+    if(enParts.length>=2 && urParts.length>=2) return urParts.slice(0,urParts.length-1).join(" ");
+    return t;
+  }
+  return t.split(/\s+/)[0]||t;
+}
+var DESC_LINES = { en:["Descendant of Mustafa Kamal","Descendant of the Khilji Khandan"],
+  ur:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644 \u06a9\u06cc \u0646\u0633\u0644 \u0633\u06d2","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646 \u06a9\u06cc \u0646\u0633\u0644 \u0633\u06d2"] };
+var PLAQUE_UR = { titles:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646"],
+  bodies:["\u0627\u06cc\u06a9 \u0628\u062d\u0631\u06cc \u062c\u06c1\u0627\u0632 \u06a9\u06d2 \u06a9\u067e\u062a\u0627\u0646\u060c \u062c\u0648 \u0645\u0633\u0644\u0645\u0627\u0646 \u062a\u0627\u062c\u0631\u0648\u06ba \u0627\u0648\u0631 \u0633\u067e\u0627\u06c1\u06cc\u0648\u06ba \u06a9\u0648 \u0639\u0631\u0628 \u0633\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u0644\u0627\u0626\u06d2\u06d4 \u0627\u0646 \u0633\u06d2 \u0627\u0642\u0628\u0627\u0644 \u0627\u062d\u0645\u062f \u062a\u06a9 \u0633\u0627\u062a \u0646\u0633\u0644\u06cc\u06ba \u0622\u062a\u06cc \u06c1\u06cc\u06ba\u06d4",
+          "\u0648\u06c1 \u062e\u0627\u0646\u062f\u0627\u0646 \u062c\u0633 \u0646\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u067e\u0631 \u062a\u0642\u0631\u06cc\u0628\u0627\u064b \u0633\u0648 \u0633\u0627\u0644 \u062d\u06a9\u0648\u0645\u062a \u06a9\u06cc: 1204 \u0633\u06d2 \u0628\u0646\u06af\u0627\u0644\u060c \u067e\u06be\u0631 \u062f\u06c1\u0644\u06cc \u0633\u0644\u0637\u0646\u062a\u060c 1290 \u0633\u06d2 1320 \u062a\u06a9\u06d4"] };
+var ART_POS = { saqib:{x:33.9,y:18.2,w:11.2,h:16.2}, shoaib:{x:71.7,y:13.3,w:8.9,h:12.7},
+  ahmed1:{x:22.7,y:30.5,w:12.9,h:15.1}, ahmed2:{x:22.7,y:30.5,w:12.9,h:15.1},
+  abeer:{x:77.7,y:30.3,w:12.8,h:15.5}, sumera:{x:34.7,y:43.5,w:13.5,h:16.2},
+  sohail:{x:50,y:40.2,w:12.6,h:15.1}, humera:{x:65.9,y:44.3,w:12.9,h:16.2} };
+var ART_EXTRA = [ {x:11,y:13,w:11,h:17}, {x:50,y:9.5,w:11,h:16}, {x:90,y:12,w:11,h:17}, {x:11,y:60,w:11,h:17} ];
+function renderPreview(){
+  var be=document.getElementById("lang-en"), bu=document.getElementById("lang-ur");
+  if(be) be.classList.toggle("active", tapestryLang==="en");
+  if(bu) bu.classList.toggle("active", tapestryLang==="ur");
+  [1,2,3].forEach(function(n){ var b=document.getElementById("ts-"+n); if(b) b.classList.toggle("active", tapestryTextSize===n); });
+  var cpl = centreCouple();
+  var kids = centreChildren();
+  var heartSVG = '<img class="couple-heart" src="heart-gold.png" alt="">';
+  var joinerHTML = (tapestryLang==="ur") ? " "+heartSVG+" " : " &amp; ";
+  var extraIdx = 0;
+  var overlays = kids.map(function(ch){
+    var spouse = spouseOf(ch);
+    var pos = ART_POS[ch.id];
+    if(!pos){ pos = ART_EXTRA[extraIdx % ART_EXTRA.length]; extraIdx++; }
+    var gkids = spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null);
+    var branchHTML = "";
+    var chFull = !!spouse || (spouse ? kidsOfCouple(ch,spouse) : kidsOfCouple(ch,null)).length>0;
+    var coupleHTML;
+    if(spouse && tapestryLang==="ur"){
+      coupleHTML = esc(langName(ch,!chFull)) + '<br><img class="couple-heart stack" src="heart-gold.png" alt=""><br>' + esc(langName(spouse,false));
+    } else {
+      var wrapBr = spouse ? "<br>" : ((tapestryLang==="ur" && tapestryTextSize>=2) ? "<br>" : "");
+      coupleHTML = esc(langName(ch,!chFull)) + (spouse ? joinerHTML + wrapBr + esc(langName(spouse,false)) : "");
+    }
+    var kidsHTML = gkids.map(function(k){
+      return '<div class="akid"><span>'+esc(langName(k,true))+'</span></div>';
+    }).join("");
+    var style = 'left:'+pos.x+'%;top:'+pos.y+'%;width:'+pos.w+'%;height:'+pos.h+'%';
+    return '<div class="art-oval" style="'+style+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+
+      '<div class="cpl">'+coupleHTML+'</div>'+(kidsHTML?'<div style="height:4px"></div>'+kidsHTML:"")+'</div>'+branchHTML;
+  }).join("");
+  var centre = '<div class="art-centre" style="left:49.8%;top:62.3%;width:19%;height:20.3%">'+
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[0],false))+'</div></div>'+
+    '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[1],false))+'</div></div></div>';
+  var pTitles = (tapestryLang==="ur") ? PLAQUE_UR.titles : ["Mustafa Kamal","The Khilji Khandan"];
+  var pBodies = (tapestryLang==="ur") ? PLAQUE_UR.bodies :
+    [ BLURB_MUSTAFA.split(" \u2014 ")[1] || BLURB_MUSTAFA, BLURB_KHILJI.split(" \u2014 ")[1] || BLURB_KHILJI ];
+  var plaques = '<div class="art-plaque" style="left:24.2%;top:80.4%;width:15.6%;height:8.8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[0])+'</div><div class="pbody">'+esc(pBodies[0])+'</div></div>'+
+    '<div class="art-plaque" style="left:75.4%;top:80.7%;width:16.2%;height:8.8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[1])+'</div><div class="pbody">'+esc(pBodies[1])+'</div></div>';
+  document.getElementById("tapestry-frame").innerHTML =
+    '<div class="tapestry-wrap ts-'+tapestryTextSize+'" style="--tfs:'+(TFS_STEPS[tapestryTextSize-1]||1)+'"><img src="blank-tapestry.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
+  return;
+  var c = centreCouple();
+  var kids = centreChildren();
+  /* Group the centre couple's children into age-band rows. Row 1 (oldest)
+     sits LOWEST, just above the centre oval; row 4 (youngest) is HIGHEST.
+     DOM order is top row first, so rows render 4,3,2,1. Everything —
+     grouping, row widths, branches — derives from the data right now. */
+  var byBand = {};
+  kids.forEach(function(ch){
+    var b = bandRowFor(ch);
+    if(!byBand[b]) byBand[b]=[];
+    byBand[b].push(ch);
+  });
+  var bandsDesc = Object.keys(byBand).map(Number).sort(function(a,b){ return b-a; });
+  var rowsMeta = bandsDesc.map(function(b){ return {band:b, count:byBand[b].length}; });
+  var rowsHTML = bandsDesc.map(function(b){
+    var row = byBand[b];
+    var units = row.map(function(ch){ return childUnitHTML(ch,row.length); }).join("");
+    /* A row holding a SINGLE oval is staggered off-centre, alternating by
+       band (row 2 left, row 3 right), so its branch gets its own visible
+       corridor instead of hiding on the shared centre line. Multi-oval
+       rows stay centred. */
+    var stagger = "";
+    if(row.length===1) stagger = (b%2===0) ? "left" : "right";
+    return '<div class="band-row'+(stagger?" single-"+stagger:"")+'" data-band-row="'+b+'" data-count="'+row.length+'" data-band-stagger="'+stagger+'">'+units+'</div>';
+  }).join("");
+  var html =
+    cornerSVG("tl")+cornerSVG("tr")+cornerSVG("bl")+cornerSVG("br")+
+    borderVineHTML()+
+    '<svg class="ttree-measured" data-tree-svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">'+treeFallbackInner(rowsMeta)+'</svg>'+
+    '<div class="tapestry-title tcontent" data-tapestry-title="1"><div class="ur" lang="ur" dir="rtl">شجرہ نسب</div><div class="en">THE LIVING TAPESTRY</div></div>'+
+    '<div class="band-rows tcontent">'+rowsHTML+'</div>'+
+    '<div class="tcontent" style="display:flex;justify-content:center">'+coupleOvalHTML(c[0],c[1],true)+'</div>'+
+    '<div class="roots tcontent">'+
+      '<div class="root-side" id="root-mustafa" data-plaque-left="1">'+
+        '<div class="plaque root-plaque parchment">'+hangChainSVG()+'<h3>Mustafa Kamal</h3><p>'+esc(BLURB_MUSTAFA)+'</p></div>'+
+      '</div>'+
+      '<div class="root-side" id="root-khilji" data-plaque-right="1">'+
+        '<div class="plaque root-plaque parchment khilji-plaque">'+hangChainSVG()+'<h3>The Khilji Khandan</h3><p>'+esc(BLURB_KHILJI)+'</p></div>'+
+      '</div>'+
+    '</div>';
+  document.getElementById("tapestry-frame").innerHTML = html;
+  drawTree();
+}
+function openFamily(childId){
+  var child=byId(childId); if(!child) return;
+  var spouse = child.spouseId ? byId(child.spouseId) : null;
+  var kids = spouse ? kidsOfCouple(child,spouse) : kidsOfCouple(child,null);
+  var couple = esc(child.name)+(spouse? ' &nbsp;♥&nbsp; '+esc(spouse.name):"");
+  var kidsHTML = kids.length ? kids.map(function(k){
+    return '<div class="row" style="text-align:center"><span class="kid" data-person="'+k.id+'">'+markerFor(k)+esc(k.name)+'</span> <span style="font-size:12px;color:#d8bc5a">'+markerNote(k)+'</span></div>';
+  }).join("") : '<div class="row" style="text-align:center">No children entered yet</div>';
+  var btns = '<button type="button" data-add-child="'+child.id+'">+ Add a child to THIS family</button>'+
+             '<button type="button" data-spouse-of="'+child.id+'">'+(spouse?"Change spouse":"Add a spouse")+'</button>'+
+             '<button type="button" data-edit="'+child.id+'">Edit '+esc(child.name)+'</button>';
+  if(spouse) btns += '<button type="button" data-edit="'+spouse.id+'">Edit '+esc(spouse.name)+'</button>';
+  document.getElementById("family-detail").innerHTML =
+    '<div class="card"><div class="sub">THIS FAMILY — OPENED UP</div><h2>'+couple+'</h2>'+
+    '<div class="row" style="text-align:center"><span lang="ur">'+esc(child.urdu)+'</span>'+(spouse?' &nbsp;·&nbsp; <span lang="ur">'+esc(spouse.urdu)+'</span>':"")+'</div>'+
+    kidsHTML+'<div class="btnrow">'+btns+'</div></div>';
+  show("view-family");
+}
+function openPerson(id){
+  var p=byId(id); if(!p) return;
+  var father=p.fatherId?byId(p.fatherId):null, mother=p.motherId?byId(p.motherId):null;
+  var spouse=p.spouseId?byId(p.spouseId):null;
+  var sibs=siblingsOf(p);
+  function link(q){ return q? '<a href="#" data-person="'+q.id+'" style="color:#e8c85a">'+esc(q.name)+'</a>' : "—"; }
+  var parentsTxt = (father||mother) ? [father?link(father):"",mother?link(mother):""].filter(Boolean).join(" + ") : "— (top of this tree)";
+  document.getElementById("person-detail").innerHTML =
+    '<div class="card"><h2>'+esc(p.name)+'</h2>'+
+    '<div class="row" style="text-align:center;font-size:19px" lang="ur" dir="rtl">'+esc(p.urdu)+'</div>'+
+    '<div class="row" style="text-align:center">'+markerFor(p)+' <span style="font-size:12.5px;color:#d8bc5a">'+markerNote(p)+'</span></div>'+
+    '<div class="row"><b>Parents:</b> '+parentsTxt+'</div>'+
+    '<div class="row"><b>Spouse:</b> '+link(spouse)+'</div>'+
+    '<div class="row"><b>Siblings:</b> '+(sibs.length? sibs.map(link).join(", ") : "—")+'</div>'+
+    '<div class="row"><b>Born:</b> '+(bornText(p)||"not entered yet")+'</div>'+
+    '<div class="row"><b>Status:</b> '+(p.status==="passed"?("Passed away"+(deathText(p)?" — "+esc(deathText(p)):"")):"Living")+'</div>'+
+    '<div class="btnrow"><button type="button" data-edit="'+p.id+'">✎ Edit '+esc(p.name)+'</button></div></div>';
+  show("view-person");
+}
+
+/* ---------- Forms ---------- */
+var formMode="add"; /* add | child | edit */
+var formPersonId=null, formReturnFamily=null;
+function coupleOptions(){
+  var opts=[];
+  var c=centreCouple();
+  opts.push({value:c[0].id+"|"+c[1].id,label:c[0].name+" + "+c[1].name});
+  centreChildren().forEach(function(ch){
+    var sp=ch.spouseId?byId(ch.spouseId):null;
+    if(sp) opts.push({value:ch.id+"|"+sp.id,label:ch.name+" + "+sp.name});
+    else opts.push({value:ch.id+"|",label:ch.name+" (no spouse entered)"});
+  });
+  opts.push({value:"|",label:"No parents in this tree"});
+  return opts;
+}
+function fillParentsSelect(selected){
+  var sel=document.getElementById("f-parents");
+  sel.innerHTML = coupleOptions().map(function(o){
+    return '<option value="'+o.value+'"'+(o.value===selected?" selected":"")+'>'+esc(o.label)+'</option>';
+  }).join("");
+}
+function fillSpouseExisting(selected,excludeId){
+  var sel=document.getElementById("f-spouse-existing");
+  sel.innerHTML = people.filter(function(q){ return q.id!==excludeId; }).map(function(q){
+    return '<option value="'+q.id+'"'+(q.id===selected?" selected":"")+'>'+esc(q.name)+'</option>';
+  }).join("");
+}
+function resetForm(){
+  document.getElementById("person-form").reset();
+  togglePassedWrap();
+  document.getElementById("spouse-existing-wrap").classList.add("hidden");
+  document.getElementById("spouse-new-wrap").classList.add("hidden");
+  document.getElementById("form-remove").classList.add("hidden");
+}
+function openFormAdd(){
+  formMode="add"; formPersonId=null; formReturnFamily=null; resetForm();
+  document.getElementById("form-title").textContent="Add a New Person";
+  document.getElementById("form-locked").classList.add("hidden");
+  document.getElementById("parents-field").classList.remove("hidden");
+  document.getElementById("spouse-fieldset").classList.remove("hidden");
+  fillParentsSelect(centreCouple()[0].id+"|"+centreCouple()[1].id);
+  fillSpouseExisting(null,null);
+  document.getElementById("form-save").textContent="SAVE THIS PERSON";
+  show("view-form");
+}
+function openFormChild(childId){
+  var child=byId(childId); if(!child) return;
+  var spouse=child.spouseId?byId(child.spouseId):null;
+  formMode="child"; formPersonId=null; formReturnFamily=childId; resetForm();
+  document.getElementById("form-title").textContent="Add a Child to This Family";
+  var locked=document.getElementById("form-locked");
+  locked.textContent="Parents — already chosen for you, locked: "+child.name+(spouse?" + "+spouse.name:"");
+  locked.classList.remove("hidden");
+  document.getElementById("parents-field").classList.add("hidden");
+  document.getElementById("spouse-fieldset").classList.add("hidden");
+  document.getElementById("form-save").textContent="Save — add to "+child.name+"'s family";
+  show("view-form");
+}
+function openFormEdit(id){
+  var p=byId(id); if(!p) return;
+  formMode="edit"; formPersonId=id; formReturnFamily=null; resetForm();
+  document.getElementById("form-title").textContent="Edit — "+p.name;
+  document.getElementById("form-locked").classList.add("hidden");
+  document.getElementById("parents-field").classList.remove("hidden");
+  document.getElementById("spouse-fieldset").classList.remove("hidden");
+  document.getElementById("f-name").value=p.name;
+  document.getElementById("f-urdu").value=p.urdu;
+  document.getElementById("f-gender").value=p.gender;
+  document.getElementById("f-status").value=(p.status==="passed"?"passed":"living");
+  togglePassedWrap();
+  document.getElementById("f-passed").value=deathText(p);
+  document.getElementById("f-born").value=bornText(p);
+  var pv=(p.fatherId||"")+"|"+(p.motherId||"");
+  var opts=coupleOptions(); var found=opts.some(function(o){return o.value===pv;});
+  if(!found && (p.fatherId||p.motherId)){
+    var sel=document.getElementById("f-parents");
+    fillParentsSelect("");
+    var lbl=[p.fatherId?byId(p.fatherId).name:"",p.motherId?byId(p.motherId).name:""].filter(Boolean).join(" + ");
+    sel.innerHTML += '<option value="'+pv+'" selected>'+esc(lbl)+'</option>';
+  } else fillParentsSelect(pv);
+  if(p.spouseId){
+    document.getElementById("f-spouse-mode").value="existing";
+    document.getElementById("spouse-existing-wrap").classList.remove("hidden");
+    fillSpouseExisting(p.spouseId,id);
+  } else {
+    document.getElementById("f-spouse-mode").value="none";
+    fillSpouseExisting(null,id);
+  }
+  document.getElementById("form-save").textContent="SAVE CHANGES";
+  document.getElementById("form-remove").classList.remove("hidden");
+  show("view-form");
+}
+function setSpouse(a,b){
+  if(a.spouseId && a.spouseId!==b.id){ var old=byId(a.spouseId); if(old&&old.spouseId===a.id) old.spouseId=null; }
+  a.spouseId=b.id; b.spouseId=a.id;
+}
+function clearSpouse(a){
+  if(a.spouseId){ var old=byId(a.spouseId); if(old&&old.spouseId===a.id) old.spouseId=null; a.spouseId=null; }
+}
+function submitForm(ev){
+  ev.preventDefault();
+  var name=document.getElementById("f-name").value.trim();
+  if(!name){ alert("Please type the person's name in English."); return; }
+  var urdu=document.getElementById("f-urdu").value.trim() || toUrdu(name);
+  var gender=document.getElementById("f-gender").value;
+  var status=document.getElementById("f-status").value==="passed"?"passed":"living";
+  var born=parseBorn(document.getElementById("f-born").value);
+  var died=(status==="passed") ? parseBorn(document.getElementById("f-passed").value) : {y:"",pl:""};
+  var person;
+  if(formMode==="edit"){
+    person=byId(formPersonId); if(!person) return;
+    person.name=name; person.urdu=urdu; person.gender=gender; person.status=status;
+    person.birthYear=born.y; person.birthPlace=born.pl;
+    person.deathYear=died.y; person.deathPlace=died.pl;
+    var pv=document.getElementById("f-parents").value.split("|");
+    person.fatherId=pv[0]||null; person.motherId=pv[1]||null;
+  } else {
+    person={id:uid(),name:name,urdu:urdu,gender:gender,status:status,birthYear:born.y,birthPlace:born.pl,deathYear:died.y,deathPlace:died.pl,fatherId:null,motherId:null,spouseId:null};
+    if(formMode==="child"){
+      var parent=byId(formReturnFamily);
+      var sp=parent.spouseId?byId(parent.spouseId):null;
+      if(parent.gender==="M"){ person.fatherId=parent.id; person.motherId=sp?sp.id:null; }
+      else { person.motherId=parent.id; person.fatherId=sp?sp.id:null; }
+    } else {
+      var pv2=document.getElementById("f-parents").value.split("|");
+      person.fatherId=pv2[0]||null; person.motherId=pv2[1]||null;
+    }
+    people.push(person);
+  }
+  if(formMode!=="child"){
+    var mode=document.getElementById("f-spouse-mode").value;
+    if(mode==="existing"){
+      var sid=document.getElementById("f-spouse-existing").value;
+      var sp2=byId(sid); if(sp2) setSpouse(person,sp2);
+    } else if(mode==="new"){
+      var sname=document.getElementById("f-spouse-name").value.trim();
+      if(sname){
+        var surdu=document.getElementById("f-spouse-urdu").value.trim()||toUrdu(sname);
+        var nsp={id:uid(),name:sname,urdu:surdu,gender:document.getElementById("f-spouse-gender").value,status:"living",birthYear:"",birthPlace:"",fatherId:null,motherId:null,spouseId:null};
+        people.push(nsp); setSpouse(person,nsp);
+      }
+    } else if(mode==="none"){ clearSpouse(person); }
+  }
+  save(); renderMain();
+  if(formMode==="child" && formReturnFamily){ var rf=formReturnFamily; openFamily(rf); }
+  else show("view-main");
+}
+function removePerson(){
+  var p=byId(formPersonId); if(!p) return;
+  if(!confirm("Remove "+p.name+" from the tree? This cannot be undone.")) return;
+  people.forEach(function(q){
+    if(q.spouseId===p.id) q.spouseId=null;
+    if(q.fatherId===p.id) q.fatherId=null;
+    if(q.motherId===p.id) q.motherId=null;
+  });
+  people=people.filter(function(q){ return q.id!==p.id; });
+  save(); renderMain(); show("view-main");
+}
+
+/* ---------- Wiring ---------- */
+document.getElementById("f-status").addEventListener("change",togglePassedWrap);
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-person],[data-open-family],[data-edit],[data-add-child],[data-spouse-of],[data-back]");
+  if(!t) return;
+  if(t.hasAttribute("data-back")){ renderMain(); show("view-main"); return; }
+  if(t.hasAttribute("data-open-family")){ openFamily(t.getAttribute("data-open-family")); return; }
+  if(t.hasAttribute("data-add-child")){ openFormChild(t.getAttribute("data-add-child")); return; }
+  if(t.hasAttribute("data-spouse-of")){ openFormEdit(t.getAttribute("data-spouse-of")); return; }
+  if(t.hasAttribute("data-edit")){ openFormEdit(t.getAttribute("data-edit")); return; }
+  if(t.hasAttribute("data-person")){
+    if(e.target.closest(".kid")||e.target.closest(".tap-name")||e.target.tagName==="A"||e.target.closest(".card")){ e.preventDefault(); openPerson(t.getAttribute("data-person")); return; }
+    if(t.classList.contains("tap")){ openPerson(t.getAttribute("data-person")); return; }
+  }
+});
+if(window && typeof window.addEventListener==="function"){
+  window.addEventListener("resize",function(){
+    var pv=document.getElementById("view-preview");
+    if(pv && pv.classList && typeof pv.classList.contains==="function" && !pv.classList.contains("hidden")) drawTree();
+  });
+}
+document.getElementById("btn-add-top").addEventListener("click",openFormAdd);
+document.getElementById("btn-preview").addEventListener("click",function(){ renderPreview(); show("view-preview"); });
+document.getElementById("lang-en").addEventListener("click",function(){ setTapestryLang("en"); });
+document.getElementById("lang-ur").addEventListener("click",function(){ setTapestryLang("ur"); });
+[1,2,3].forEach(function(n){ document.getElementById("ts-"+n).addEventListener("click",function(){ setTextSize(n); }); });
+document.getElementById("person-form").addEventListener("submit",submitForm);
+document.getElementById("form-remove").addEventListener("click",removePerson);
+document.getElementById("f-name").addEventListener("input",function(){
+  document.getElementById("f-urdu").value=toUrdu(this.value);
+});
+document.getElementById("f-spouse-name").addEventListener("input",function(){
+  document.getElementById("f-spouse-urdu").value=toUrdu(this.value);
+});
+document.getElementById("f-spouse-mode").addEventListener("change",function(){
+  document.getElementById("spouse-existing-wrap").classList.toggle("hidden",this.value!=="existing");
+  document.getElementById("spouse-new-wrap").classList.toggle("hidden",this.value!=="new");
+  if(this.value==="existing") fillSpouseExisting(null,formPersonId);
+});
+(function buildUrduKeyboard(){
+  var chars=["ا","ب","پ","ت","ٹ","ث","ج","چ","ح","خ","د","ڈ","ذ","ر","ڑ","ز","ژ","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ک","گ","ل","م","ن","ں","و","ہ","ھ","ء","ی","ے"," "];
+  var kb=document.getElementById("urdu-kb");
+  chars.forEach(function(ch){
+    var b=document.createElement("button"); b.type="button"; b.textContent=(ch===" "?"space":ch); b.setAttribute("lang","ur");
+    b.addEventListener("click",function(){
+      var inp=document.getElementById("f-urdu");
+      var s=inp.selectionStart||inp.value.length;
+      inp.value=inp.value.slice(0,s)+ch+inp.value.slice(inp.selectionEnd||s);
+      inp.focus(); inp.selectionStart=inp.selectionEnd=s+ch.length;
+    });
+    kb.appendChild(b);
+  });
+})();
+/* Export / Import */
+document.getElementById("btn-export").addEventListener("click",function(){
+  var blob=new Blob([JSON.stringify(people,null,2)],{type:"application/json"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="shajra-e-nasb-backup.json"; a.click(); URL.revokeObjectURL(a.href);
+});
+document.getElementById("btn-import").addEventListener("click",function(){ document.getElementById("import-file").click(); });
+document.getElementById("import-file").addEventListener("change",function(){
+  var f=this.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var arr=JSON.parse(r.result);
+      if(!Array.isArray(arr)||!arr.length) throw new Error("bad file");
+      people=arr; save(); renderMain(); show("view-main"); alert("Imported "+arr.length+" people.");
+    }catch(e){ alert("That file could not be imported. Nothing was changed."); }
+  };
+  r.readAsText(f); this.value="";
+});
+renderMain();
+if(location.hash==="#tapestry"){ renderPreview(); show("view-preview"); }
+applyTheme();
+initDB();
+</script>
+</body>
+</html>
