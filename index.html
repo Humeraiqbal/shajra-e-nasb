@@ -300,6 +300,8 @@
     <div>Use a backup copy to keep your entries safe or move them to another device.</div>
   </details>
 </footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
 "use strict";
 /* ---------- Transliteration (English -> Urdu) ---------- */
@@ -382,7 +384,71 @@ function load(){
   }catch(e){}
   return JSON.parse(JSON.stringify(SEED));
 }
-function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} }
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} dbSave(); }
+
+/* ---------- Shared database (Firebase Firestore) ----------
+   The family data lives in ONE shared document. The code never owns data:
+   every device reads and writes the same place. localStorage is only a
+   local cache / offline fallback. */
+var FB_CONFIG = {
+  apiKey: "AIzaSyBUIAOvRJZncz8TSNjK94HpQzecwQqkFwA",
+  authDomain: "shajra-e-nasb.firebaseapp.com",
+  projectId: "shajra-e-nasb",
+  storageBucket: "shajra-e-nasb.firebasestorage.app",
+  messagingSenderId: "703970186960",
+  appId: "1:703970186960:web:b71fae32353f010660f0d5"
+};
+var dbDoc = null, saveTimer = null;
+function dbSave(){
+  if(!dbDoc) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){
+    dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+  }, 400);
+}
+function localSaved(){
+  try{ var raw = localStorage.getItem(LS_KEY); if(raw){ var a = JSON.parse(raw); if(Array.isArray(a) && a.length) return a; } }catch(e){}
+  return null;
+}
+function cacheLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(people)); }catch(e){} }
+function startLive(){
+  dbDoc.onSnapshot(function(snap){
+    if(!snap.exists) return;
+    var remote = (snap.data() && snap.data().people) || [];
+    if(JSON.stringify(remote) !== JSON.stringify(people)){
+      people = remote; cacheLocal(); renderMain();
+      var pv = document.getElementById("view-preview");
+      if(pv && !pv.classList.contains("hidden")) renderPreview();
+    }
+  }, function(){});
+}
+function initDB(){
+  try{
+    if(!window.firebase) return;
+    firebase.initializeApp(FB_CONFIG);
+    dbDoc = firebase.firestore().collection("tree").doc("family");
+    dbDoc.get().then(function(snap){
+      if(!snap.exists){
+        /* First run ever: this device's copy becomes the shared data. */
+        dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+        startLive();
+        return;
+      }
+      var remote = (snap.data() && snap.data().people) || [];
+      var seen = {}; remote.forEach(function(p){ seen[p.id]=1; });
+      var extra = (localSaved() || []).filter(function(p){ return !seen[p.id]; });
+      if(extra.length){
+        people = remote.concat(extra); cacheLocal();
+        dbDoc.set({people:people, updatedAt:new Date().toISOString()}).catch(function(){});
+      } else {
+        people = remote; cacheLocal();
+      }
+      renderMain();
+      if(location.hash === "#tapestry"){ renderPreview(); }
+      startLive();
+    }).catch(function(){});
+  }catch(e){}
+}
 function byId(id){ for(var i=0;i<people.length;i++) if(people[i].id===id) return people[i]; return null; }
 function uid(){ return "p" + Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
@@ -1365,6 +1431,7 @@ document.getElementById("import-file").addEventListener("change",function(){
 });
 renderMain();
 if(location.hash==="#tapestry"){ renderPreview(); show("view-preview"); }
+initDB();
 </script>
 </body>
 </html>
