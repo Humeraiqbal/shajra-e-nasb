@@ -326,6 +326,8 @@
     <div class="lang-switch"><span class="lang-lbl">Text size:</span><button type="button" id="ts-1">A</button><button type="button" id="ts-2">A+</button><button type="button" id="ts-3">A++</button></div>
     <div class="lang-switch"><span class="lang-lbl">Cloth:</span><select class="cloth-select" aria-label="Cloth colour"><option value="emerald">Emerald Green</option><option value="royal">Royal Blue</option><option value="ruby">Ruby Red</option><option value="purple">Deep Purple</option><option value="pearl">Pearl White</option></select><span class="swatch cloth-swatch"></span></div>
     <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><select class="metal-select" aria-label="Embroidery colour"><option value="gold">Gold</option><option value="silver">Silver</option></select><span class="swatch metal-swatch"></span><span class="hint">Pearl white always pairs with gold.</span></div>
+    <div class="lang-switch"><button type="button" id="btn-repaint" onclick="requestRepaint()">Request a new painting in these colours</button></div>
+    <div class="hint" id="repaint-msg" style="text-align:center;margin-bottom:10px"></div>
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
@@ -462,6 +464,14 @@ function startLive(){
       if(pv && !pv.classList.contains("hidden")) renderPreview();
     }
   }, function(){});
+}
+function requestRepaint(){
+  const msg=document.getElementById('repaint-msg');
+  if(!db){ msg.textContent='The shared tree is not connected right now \u2014 please try again in a moment.'; return; }
+  const btn=document.getElementById('btn-repaint'); btn.disabled=true;
+  db.collection('requests_staging').add({type:'repaint',cloth:clothSel,metal:metalSel,lang:tapestryLang,at:new Date().toISOString(),done:false})
+    .then(()=>{ msg.textContent='Request saved. Koda will paint it and place it here in staging for Humera\u2019s review \u2014 the family tapestry does not change until she approves it.'; btn.disabled=false; })
+    .catch(()=>{ msg.textContent='The request could not be saved \u2014 please try again.'; btn.disabled=false; });
 }
 function initDB(){
   try{
