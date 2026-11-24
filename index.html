@@ -229,6 +229,8 @@
   body[data-metal="silver"] .toval{border-color:#c7ccd4;box-shadow:0 0 0 2px rgba(140,148,160,.85),0 0 0 5px rgba(199,204,212,.32),inset 0 0 20px rgba(0,0,0,.55),inset 0 0 9px rgba(199,204,212,.22),0 4px 12px rgba(0,0,0,.35)}
   body[data-metal="silver"] .tapestry-frame{border-color:#c7ccd4;outline-color:rgba(140,148,160,.85)}
   body[data-metal="silver"] .locked{background:#dfe3e8;color:#1c2733}
+  .lang-switch select{width:auto;padding:9px 10px;font-size:14.5px;border:1.5px solid rgba(0,0,0,.35);border-radius:9px}
+  .swatch{display:inline-block;width:20px;height:20px;border-radius:50%;border:2px solid rgba(0,0,0,.35);vertical-align:middle;flex:none}
 </style>
 </head>
 <body>
@@ -245,8 +247,8 @@
     </div>
     <button id="btn-add-top" type="button" style="width:100%">+ Add a New Person</button>
     <div style="height:16px"></div>
-    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><button type="button" data-cloth-btn="emerald">Emerald Green</button><button type="button" data-cloth-btn="royal">Royal Blue</button><button type="button" data-cloth-btn="ruby">Ruby Red</button><button type="button" data-cloth-btn="purple">Deep Purple</button><button type="button" data-cloth-btn="pearl">Pearl White</button></div>
-    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><button type="button" data-metal-btn="gold">Gold</button><button type="button" data-metal-btn="silver">Silver</button><span class="hint">Pearl white always pairs with gold.</span></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><select class="cloth-select" aria-label="Cloth colour"><option value="emerald">Emerald Green</option><option value="royal">Royal Blue</option><option value="ruby">Ruby Red</option><option value="purple">Deep Purple</option><option value="pearl">Pearl White</option></select><span class="swatch cloth-swatch"></span></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><select class="metal-select" aria-label="Embroidery colour"><option value="gold">Gold</option><option value="silver">Silver</option></select><span class="swatch metal-swatch"></span><span class="hint">Pearl white always pairs with gold.</span></div>
     <div class="oval" id="centre-oval"></div>
     <div class="sub">the parents — everyone below is their child</div>
     <div class="connector">│</div>
@@ -321,8 +323,8 @@
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
     <div class="lang-switch"><span class="lang-lbl">Tapestry language:</span><button type="button" id="lang-en">English</button><button type="button" id="lang-ur" lang="ur">اردو</button></div>
     <div class="lang-switch"><span class="lang-lbl">Text size:</span><button type="button" id="ts-1">A</button><button type="button" id="ts-2">A+</button><button type="button" id="ts-3">A++</button></div>
-    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><button type="button" data-cloth-btn="emerald">Emerald Green</button><button type="button" data-cloth-btn="royal">Royal Blue</button><button type="button" data-cloth-btn="ruby">Ruby Red</button><button type="button" data-cloth-btn="purple">Deep Purple</button><button type="button" data-cloth-btn="pearl">Pearl White</button></div>
-    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><button type="button" data-metal-btn="gold">Gold</button><button type="button" data-metal-btn="silver">Silver</button><span class="hint">Pearl white always pairs with gold.</span></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><select class="cloth-select" aria-label="Cloth colour"><option value="emerald">Emerald Green</option><option value="royal">Royal Blue</option><option value="ruby">Ruby Red</option><option value="purple">Deep Purple</option><option value="pearl">Pearl White</option></select><span class="swatch cloth-swatch"></span></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><select class="metal-select" aria-label="Embroidery colour"><option value="gold">Gold</option><option value="silver">Silver</option></select><span class="swatch metal-swatch"></span><span class="hint">Pearl white always pairs with gold.</span></div>
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
@@ -1092,20 +1094,24 @@ var TFS_STEPS = [1,1.2,1.45];
 function setTextSize(n){ tapestryTextSize=n; try{ localStorage.setItem("shajraTextSize",String(n)); }catch(e){} renderPreview(); }
 var clothSel=(function(){ try{ return localStorage.getItem("shajraCloth")||"emerald"; }catch(e){ return "emerald"; } })();
 var metalSel=(function(){ try{ return localStorage.getItem("shajraMetal")||"gold"; }catch(e){ return "gold"; } })();
+var CLOTH_SHADES={emerald:"#123f2e",royal:"#12264f",ruby:"#57152a",purple:"#33155c",pearl:"#f1e8d2"};
+var METAL_SHADES={gold:"#c9a227",silver:"#c7ccd4"};
 function applyTheme(){
   if(clothSel==="pearl") metalSel="gold";
   document.body.setAttribute("data-cloth",clothSel);
   document.body.setAttribute("data-metal",metalSel);
-  var cb=document.querySelectorAll("[data-cloth-btn]"), mb=document.querySelectorAll("[data-metal-btn]"), i;
-  for(i=0;i<cb.length;i++) cb[i].classList.toggle("active", cb[i].getAttribute("data-cloth-btn")===clothSel);
-  for(i=0;i<mb.length;i++) mb[i].classList.toggle("active", mb[i].getAttribute("data-metal-btn")===metalSel);
+  var cs=document.querySelectorAll(".cloth-select"), ms=document.querySelectorAll(".metal-select"), sw=document.querySelectorAll(".cloth-swatch"), sm=document.querySelectorAll(".metal-swatch"), i;
+  for(i=0;i<cs.length;i++){ cs[i].value=clothSel; cs[i].style.background=CLOTH_SHADES[clothSel]; cs[i].style.color=(clothSel==="pearl"?"#33270f":"#f5e7c1"); }
+  for(i=0;i<ms.length;i++){ ms[i].value=metalSel; ms[i].style.background=METAL_SHADES[metalSel]; ms[i].style.color="#33270f"; }
+  for(i=0;i<sw.length;i++) sw[i].style.background=CLOTH_SHADES[clothSel];
+  for(i=0;i<sm.length;i++) sm[i].style.background=METAL_SHADES[metalSel];
 }
 function setCloth(c){ clothSel=c; if(c==="pearl") metalSel="gold"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
 function setMetal(m){ metalSel=m; if(m==="silver" && clothSel==="pearl") clothSel="emerald"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
-document.addEventListener("click",function(e){
+document.addEventListener("change",function(e){
   var t=e.target;
-  if(t && t.hasAttribute && t.hasAttribute("data-cloth-btn")) setCloth(t.getAttribute("data-cloth-btn"));
-  else if(t && t.hasAttribute && t.hasAttribute("data-metal-btn")) setMetal(t.getAttribute("data-metal-btn"));
+  if(t && t.classList && t.classList.contains("cloth-select")) setCloth(t.value);
+  else if(t && t.classList && t.classList.contains("metal-select")) setMetal(t.value);
 });
 function langName(p,first){
   if(!p) return "";
