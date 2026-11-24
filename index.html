@@ -195,6 +195,40 @@
   details.backup summary::-webkit-details-marker{display:none}
   details.backup .frow{margin-top:10px}
   .backrow{margin-bottom:12px}
+  /* ---------- Colour themes: cloth + embroidery metal (user-selectable, remembered) ---------- */
+  body[data-cloth="royal"]{background:#12264f}
+  body[data-cloth="royal"] .oval,body[data-cloth="royal"] .card,body[data-cloth="royal"] .formwrap,body[data-cloth="royal"] .plaque{background:#0b1a38}
+  body[data-cloth="royal"] .kid{background:rgba(11,26,56,.65)}
+  body[data-cloth="royal"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(16,38,79,.97),rgba(7,17,40,.97))}
+  body[data-cloth="ruby"]{background:#57152a}
+  body[data-cloth="ruby"] .oval,body[data-cloth="ruby"] .card,body[data-cloth="ruby"] .formwrap,body[data-cloth="ruby"] .plaque{background:#3d0e1e}
+  body[data-cloth="ruby"] .kid{background:rgba(61,14,30,.65)}
+  body[data-cloth="ruby"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(87,21,42,.97),rgba(46,8,22,.97))}
+  body[data-cloth="purple"]{background:#33155c}
+  body[data-cloth="purple"] .oval,body[data-cloth="purple"] .card,body[data-cloth="purple"] .formwrap,body[data-cloth="purple"] .plaque{background:#22093f}
+  body[data-cloth="purple"] .kid{background:rgba(34,9,63,.65)}
+  body[data-cloth="purple"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(232,200,90,.13),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(51,21,92,.97),rgba(24,7,48,.97))}
+  body[data-cloth="pearl"]{background:#f1e8d2;color:#33270f}
+  body[data-cloth="pearl"] .oval,body[data-cloth="pearl"] .card,body[data-cloth="pearl"] .formwrap,body[data-cloth="pearl"] .plaque{background:#faf3df}
+  body[data-cloth="pearl"] .kid{background:rgba(250,243,223,.85)}
+  body[data-cloth="pearl"] .toval{background:radial-gradient(ellipse at 50% 36%,rgba(160,124,32,.14),rgba(0,0,0,0) 64%),linear-gradient(170deg,rgba(250,243,223,.99),rgba(238,226,196,.99))}
+  body[data-cloth="pearl"] .sub,body[data-cloth="pearl"] .hint,body[data-cloth="pearl"] legend,body[data-cloth="pearl"] header p,body[data-cloth="pearl"] .box .lbl,body[data-cloth="pearl"] .lang-switch .lang-lbl,body[data-cloth="pearl"] details.backup summary,body[data-cloth="pearl"] .urdu-nm,body[data-cloth="pearl"] .card .row b{color:#7a5c14}
+  body[data-cloth="pearl"] header .urdu{color:#33270f}
+  body[data-cloth="pearl"] button{color:#33270f}
+  body[data-cloth="pearl"] .tapestry-frame{box-shadow:0 0 0 10px #e7dcbf,0 0 0 11.5px rgba(160,124,32,.5),inset 0 0 64px rgba(120,90,20,.15)}
+  body[data-metal="silver"] button{border-color:#c7ccd4;background:rgba(199,204,212,.14)}
+  body[data-metal="silver"] button:hover{background:rgba(199,204,212,.28)}
+  body[data-metal="silver"] button.primary{background:#c7ccd4;color:#1c2733}
+  body[data-metal="silver"] .lang-switch button.active{background:#c7ccd4;color:#1c2733}
+  body[data-metal="silver"] .oval,body[data-metal="silver"] .card,body[data-metal="silver"] .formwrap,body[data-metal="silver"] .plaque,body[data-metal="silver"] fieldset{border-color:#c7ccd4}
+  body[data-metal="silver"] .oval .half:first-child{border-right-color:#c7ccd4}
+  body[data-metal="silver"] .box,body[data-metal="silver"] .kid{border-color:#c7ccd4}
+  body[data-metal="silver"] .box .couple{border-bottom-color:rgba(199,204,212,.5)}
+  body[data-metal="silver"] .connector{color:#c7ccd4}
+  body[data-metal="silver"] header h1,body[data-metal="silver"] .plaque h3{color:#eef1f5}
+  body[data-metal="silver"] .toval{border-color:#c7ccd4;box-shadow:0 0 0 2px rgba(140,148,160,.85),0 0 0 5px rgba(199,204,212,.32),inset 0 0 20px rgba(0,0,0,.55),inset 0 0 9px rgba(199,204,212,.22),0 4px 12px rgba(0,0,0,.35)}
+  body[data-metal="silver"] .tapestry-frame{border-color:#c7ccd4;outline-color:rgba(140,148,160,.85)}
+  body[data-metal="silver"] .locked{background:#dfe3e8;color:#1c2733}
 </style>
 </head>
 <body>
@@ -211,6 +245,8 @@
     </div>
     <button id="btn-add-top" type="button" style="width:100%">+ Add a New Person</button>
     <div style="height:16px"></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><button type="button" data-cloth-btn="emerald">Emerald Green</button><button type="button" data-cloth-btn="royal">Royal Blue</button><button type="button" data-cloth-btn="ruby">Ruby Red</button><button type="button" data-cloth-btn="purple">Deep Purple</button><button type="button" data-cloth-btn="pearl">Pearl White</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><button type="button" data-metal-btn="gold">Gold</button><button type="button" data-metal-btn="silver">Silver</button><span class="hint">Pearl white always pairs with gold.</span></div>
     <div class="oval" id="centre-oval"></div>
     <div class="sub">the parents — everyone below is their child</div>
     <div class="connector">│</div>
@@ -285,11 +321,13 @@
     <div class="backrow"><button type="button" data-back>← Back to the whole tree</button></div>
     <div class="lang-switch"><span class="lang-lbl">Tapestry language:</span><button type="button" id="lang-en">English</button><button type="button" id="lang-ur" lang="ur">اردو</button></div>
     <div class="lang-switch"><span class="lang-lbl">Text size:</span><button type="button" id="ts-1">A</button><button type="button" id="ts-2">A+</button><button type="button" id="ts-3">A++</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Cloth:</span><button type="button" data-cloth-btn="emerald">Emerald Green</button><button type="button" data-cloth-btn="royal">Royal Blue</button><button type="button" data-cloth-btn="ruby">Ruby Red</button><button type="button" data-cloth-btn="purple">Deep Purple</button><button type="button" data-cloth-btn="pearl">Pearl White</button></div>
+    <div class="lang-switch"><span class="lang-lbl">Embroidery:</span><button type="button" data-metal-btn="gold">Gold</button><button type="button" data-metal-btn="silver">Silver</button><span class="hint">Pearl white always pairs with gold.</span></div>
     <div class="tapestry-frame" id="tapestry-frame"></div>
   </section>
 </main>
 <footer id="page-footer">
-  <div>Entries are saved on this device for now.</div>
+  <div>Entries are saved in the family's shared tree — everyone sees the same tree.</div>
   <details class="backup" id="backup-details">
     <summary>Backup copies (only Humera needs this)</summary>
     <div class="frow">
@@ -1052,6 +1090,23 @@ function setTapestryLang(l){ tapestryLang=l; try{ localStorage.setItem("shajraLa
 var tapestryTextSize = (function(){ try{ return parseInt(localStorage.getItem("shajraTextSize")||"1",10)||1; }catch(e){ return 1; } })();
 var TFS_STEPS = [1,1.2,1.45];
 function setTextSize(n){ tapestryTextSize=n; try{ localStorage.setItem("shajraTextSize",String(n)); }catch(e){} renderPreview(); }
+var clothSel=(function(){ try{ return localStorage.getItem("shajraCloth")||"emerald"; }catch(e){ return "emerald"; } })();
+var metalSel=(function(){ try{ return localStorage.getItem("shajraMetal")||"gold"; }catch(e){ return "gold"; } })();
+function applyTheme(){
+  if(clothSel==="pearl") metalSel="gold";
+  document.body.setAttribute("data-cloth",clothSel);
+  document.body.setAttribute("data-metal",metalSel);
+  var cb=document.querySelectorAll("[data-cloth-btn]"), mb=document.querySelectorAll("[data-metal-btn]"), i;
+  for(i=0;i<cb.length;i++) cb[i].classList.toggle("active", cb[i].getAttribute("data-cloth-btn")===clothSel);
+  for(i=0;i<mb.length;i++) mb[i].classList.toggle("active", mb[i].getAttribute("data-metal-btn")===metalSel);
+}
+function setCloth(c){ clothSel=c; if(c==="pearl") metalSel="gold"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
+function setMetal(m){ metalSel=m; if(m==="silver" && clothSel==="pearl") clothSel="emerald"; try{ localStorage.setItem("shajraCloth",clothSel); localStorage.setItem("shajraMetal",metalSel); }catch(e){} applyTheme(); }
+document.addEventListener("click",function(e){
+  var t=e.target;
+  if(t && t.hasAttribute && t.hasAttribute("data-cloth-btn")) setCloth(t.getAttribute("data-cloth-btn"));
+  else if(t && t.hasAttribute && t.hasAttribute("data-metal-btn")) setMetal(t.getAttribute("data-metal-btn"));
+});
 function langName(p,first){
   if(!p) return "";
   var t = (tapestryLang==="ur") ? (p.urdu||toUrdu(p.name)) : p.name;
@@ -1431,6 +1486,7 @@ document.getElementById("import-file").addEventListener("change",function(){
 });
 renderMain();
 if(location.hash==="#tapestry"){ renderPreview(); show("view-preview"); }
+applyTheme();
 initDB();
 </script>
 </body>
