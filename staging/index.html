@@ -1142,10 +1142,10 @@ var DESC_LINES = { en:["Descendant of Mustafa Kamal","Descendant of the Khilji K
 var PLAQUE_UR = { titles:["\u0645\u0635\u0637\u0641\u06cc\u0670 \u06a9\u0645\u0627\u0644","\u062e\u0644\u062c\u06cc \u062e\u0627\u0646\u062f\u0627\u0646"],
   bodies:["\u0627\u06cc\u06a9 \u0628\u062d\u0631\u06cc \u062c\u06c1\u0627\u0632 \u06a9\u06d2 \u06a9\u067e\u062a\u0627\u0646\u060c \u062c\u0648 \u0645\u0633\u0644\u0645\u0627\u0646 \u062a\u0627\u062c\u0631\u0648\u06ba \u0627\u0648\u0631 \u0633\u067e\u0627\u06c1\u06cc\u0648\u06ba \u06a9\u0648 \u0639\u0631\u0628 \u0633\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u0644\u0627\u0626\u06d2\u06d4 \u0627\u0646 \u0633\u06d2 \u0627\u0642\u0628\u0627\u0644 \u0627\u062d\u0645\u062f \u062a\u06a9 \u0633\u0627\u062a \u0646\u0633\u0644\u06cc\u06ba \u0622\u062a\u06cc \u06c1\u06cc\u06ba\u06d4",
           "\u0648\u06c1 \u062e\u0627\u0646\u062f\u0627\u0646 \u062c\u0633 \u0646\u06d2 \u0628\u0631\u0635\u063a\u06cc\u0631 \u067e\u0631 \u062a\u0642\u0631\u06cc\u0628\u0627\u064b \u0633\u0648 \u0633\u0627\u0644 \u062d\u06a9\u0648\u0645\u062a \u06a9\u06cc: 1204 \u0633\u06d2 \u0628\u0646\u06af\u0627\u0644\u060c \u067e\u06be\u0631 \u062f\u06c1\u0644\u06cc \u0633\u0644\u0637\u0646\u062a\u060c 1290 \u0633\u06d2 1320 \u062a\u06a9\u06d4"] };
-var ART_POS = { saqib:{x:22.8,y:22.3,w:20,h:22}, shoaib:{x:75,y:20.9,w:9.5,h:12},
-  ahmed1:{x:34.4,y:44.1,w:9,h:12.5}, ahmed2:{x:34.4,y:44.1,w:9,h:12.5},
-  abeer:{x:67.9,y:46.7,w:11.5,h:15}, sumera:{x:17.6,y:64.8,w:11,h:26},
-  sohail:{x:49.8,y:35.5,w:10.5,h:21}, humera:{x:80.3,y:69,w:12,h:17} };
+var ART_POS = { sumera:{x:18.1,y:68.8,w:13.4,h:19.4}, sohail:{x:31.9,y:48.4,w:12.6,h:18.3},
+  humera:{x:68.1,y:48.1,w:12.6,h:17.6}, saqib:{x:50,y:29.3,w:16.9,h:14.6},
+  shoaib:{x:18.3,y:30.4,w:13.4,h:19.3}, ahmed1:{x:81.7,y:30.4,w:13.7,h:19.5}, ahmed2:{x:81.7,y:30.4,w:13.7,h:19.5},
+  abeer:{x:32.1,y:15.4,w:6.9,h:10.4}, pmwtt9tcskwf2r:{x:51.1,y:8.3,w:4,h:6.8} };
 var ART_EXTRA = [ {x:11,y:13,w:11,h:17}, {x:50,y:9.5,w:11,h:16}, {x:90,y:12,w:11,h:17}, {x:11,y:60,w:11,h:17} ];
 function renderPreview(){
   var be=document.getElementById("lang-en"), bu=document.getElementById("lang-ur");
@@ -1178,16 +1178,16 @@ function renderPreview(){
     return '<div class="art-oval" style="'+style+'"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'>'+
       '<div class="cpl">'+coupleHTML+'</div>'+(kidsHTML?'<div style="height:4px"></div>'+kidsHTML:"")+'</div>'+branchHTML;
   }).join("");
-  var centre = '<div class="art-centre" style="left:49.8%;top:61.9%;width:19.5%;height:20%">'+
+  var centre = '<div class="art-centre" style="left:49.8%;top:62.4%;width:20%;height:20.3%">'+
     '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[0],false))+'</div></div>'+
     '<div class="chalf"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="cname">'+esc(langName(cpl[1],false))+'</div></div></div>';
   var pTitles = (tapestryLang==="ur") ? PLAQUE_UR.titles : ["Mustafa Kamal","The Khilji Khandan"];
   var pBodies = (tapestryLang==="ur") ? PLAQUE_UR.bodies :
     [ BLURB_MUSTAFA.split(" \u2014 ")[1] || BLURB_MUSTAFA, BLURB_KHILJI.split(" \u2014 ")[1] || BLURB_KHILJI ];
-  var plaques = '<div class="art-plaque" style="left:18.8%;top:87.1%;width:19.5%;height:8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[0])+'</div><div class="pbody">'+esc(pBodies[0])+'</div></div>'+
-    '<div class="art-plaque" style="left:80.5%;top:87.2%;width:19.5%;height:8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[1])+'</div><div class="pbody">'+esc(pBodies[1])+'</div></div>';
+  var plaques = '<div class="art-plaque" style="left:18.8%;top:87.3%;width:16%;height:8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[0])+'</div><div class="pbody">'+esc(pBodies[0])+'</div></div>'+
+    '<div class="art-plaque" style="left:80.4%;top:87.4%;width:16%;height:8%"'+(tapestryLang==="ur"?' lang="ur" dir="rtl"':'')+'><div class="ptitle">'+esc(pTitles[1])+'</div><div class="pbody">'+esc(pBodies[1])+'</div></div>';
   document.getElementById("tapestry-frame").innerHTML =
-    '<div class="tapestry-wrap ts-'+tapestryTextSize+'" style="--tfs:'+(TFS_STEPS[tapestryTextSize-1]||1)+'"><img src="tapestry-cameo-v1.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
+    '<div class="tapestry-wrap ts-'+tapestryTextSize+'" style="--tfs:'+(TFS_STEPS[tapestryTextSize-1]||1)+'"><img src="tapestry-cameo-v2.webp" alt="Shajra-e-Nasb tapestry">'+overlays+centre+plaques+'</div>';
   return;
   var c = centreCouple();
   var kids = centreChildren();
